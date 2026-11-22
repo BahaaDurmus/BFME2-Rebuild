@@ -111,7 +111,20 @@ def narrow(plan, native, old, new, work, git, tip, request, worker, out_root, bi
                               sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
             reply = request("compile", wire)
             found = (reply.get("results") or [{}])[0]
-            if found.get("tu") != candidate or found.get("status") != "compiled":
+            if found.get("tu") != candidate:
+                if includer is not None:
+                    raise Held(f"Layout probe for {header} returned an unexpected compiler result on the {side} side.")
+                continue
+            if found.get("status") != "compiled":
+                if includer is not None:
+                    diag = ""
+                    raw_diag = found.get("diagnostics") or ""
+                    if isinstance(raw_diag, str):
+                        first = next((ln.strip() for ln in raw_diag.splitlines() if ln.strip()), "")
+                        clean = "".join(ch if 32 <= ord(ch) < 127 else " " for ch in first)[:100].strip()
+                        if clean:
+                            diag = f" ({clean})"
+                    raise Held(f"Layout probe for {header} failed to compile on the {side} side{diag}.")
                 continue
             read = {tuple(item[:3]) for item in found.get("includes", []) if isinstance(item, (list, tuple))}
             if includer or ("source", header, hashlib.sha256(header_bytes).hexdigest()) in read:

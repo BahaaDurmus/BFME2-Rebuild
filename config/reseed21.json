@@ -2364,7 +2364,7 @@
       "map_object": "O00140C60"
     },
     {
-      "tu": "src/Code/Tools/WW3D/max2w3d/bchannel.cpp",
+      "tu": "src/unk/O00160110.cpp",
       "action": "apply-identical-row-contract",
       "map_object": "O00160110"
     },
@@ -3406,7 +3406,7 @@
     "src/Code/Libraries/Source/file/StreamingArchiveFile.cpp",
     "src/Code/Libraries/Source/partitionmanager/partitionmanager_filter.cpp",
     "src/Code/Libraries/Source/profile/profile_funclevel.cpp",
-    "src/Code/Tools/WW3D/max2w3d/bchannel.cpp",
+    "src/unk/O00160110.cpp",
     "src/unk/O000A9D36.cpp",
     "src/unk/O000CF074.cpp",
     "src/unk/O000CFF4C.cpp",

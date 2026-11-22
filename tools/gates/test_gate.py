@@ -717,6 +717,23 @@ int f() {
         self.assertIn('**INTERNAL**', result.stdout)
 
 
+
+    def test_g1_refuses_non_game_tools_paths(self):
+        # Both modifying and adding under src/Code/Tools/ (any case) must fail G1.
+        r_mod = self.compare(
+            {'src/Code/Tools/WW3D/max2w3d/bchannel.cpp': 'int f() { return 1; }\n'},
+            {'src/Code/Tools/WW3D/max2w3d/bchannel.cpp': 'int f() { return 2; }\n'},
+        )
+        f_mod = self.assert_gate('G1', 'fail', r_mod)
+        self.assertTrue(any('src/Code/Tools/' in f['message'] for f in f_mod))
+        r_add = self.compare(
+            {SEED: ''},
+            {SEED: '', 'src/code/tools/WW3D/pluglib/matrix4.cpp': 'int g() { return 0; }\n'},
+        )
+        f_add = self.assert_gate('G1', 'fail', r_add)
+        self.assertTrue(any('src/Code/Tools/' in f['message'] for f in f_add))
+
+
 if __name__ == '__main__':
     unittest.main()
 

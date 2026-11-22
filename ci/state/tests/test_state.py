@@ -391,5 +391,78 @@ class WorkflowRules(unittest.TestCase, WriteJobs):
             self.assertIn(item, text)
 
 
+
+
+class TuMoveMigrationTests(unittest.TestCase):
+    def test_pinned_tu_move_carries_untouched_units_and_survives_followup_edit(self):
+        from hashlib import sha256
+        from unittest import mock
+        for extra in (str(ROOT / "ci/managed-state"), str(ROOT / "ci/managed-check")):
+            if extra not in sys.path:
+                sys.path.insert(0, extra)
+        import state_delta
+
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td)
+            def git_cmd(*args):
+                subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True)
+            git_cmd("init", "-b", "main")
+            git_cmd("config", "user.name", "Test")
+            git_cmd("config", "user.email", "test@example.com")
+            for p, content in [
+                ("src/keep.cpp", b"int keep() { return 1; }\n"),
+                ("expected/keep.cpp.json", b"{}\n"),
+                ("src/Code/Tools/old.cpp", b"int moved() { return 2; }\n"),
+                ("expected/Code/Tools/old.cpp.json", b"{}\n"),
+                ("config/map.json", b'{"tu":"src/Code/Tools/old.cpp"}\n'),
+            ]:
+                fp = repo / p
+                fp.parent.mkdir(parents=True, exist_ok=True)
+                fp.write_bytes(content)
+            git_cmd("add", ".")
+            git_cmd("commit", "-m", "base")
+            parent = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
+
+            (repo / "src/Code/Tools/old.cpp").unlink()
+            (repo / "expected/Code/Tools/old.cpp.json").unlink()
+            for p, content in [
+                ("src/unk/O001.cpp", b"int moved() { return 2; }\n"),
+                ("expected/unk/O001.cpp.json", b"{}\n"),
+                ("config/map.json", b'{"tu":"src/unk/O001.cpp"}\n'),
+            ]:
+                fp = repo / p
+                fp.parent.mkdir(parents=True, exist_ok=True)
+                fp.write_bytes(content)
+            git_cmd("add", "-A")
+            git_cmd("commit", "-m", "move")
+            moved_sha = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
+
+            # Follow-up edit to the relocated TU before state publishes (Sol's P1 scenario)
+            (repo / "src/unk/O001.cpp").write_bytes(b"int moved() { return 3; }\n")
+            git_cmd("add", "src/unk/O001.cpp")
+            git_cmd("commit", "-m", "followup edit to relocated tu")
+            followup_sha = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
+
+            def bsha(rev, path):
+                r = subprocess.run(["git", "-C", str(repo), "show", f"{rev}:{path}"], capture_output=True)
+                return sha256(r.stdout).hexdigest() if r.returncode == 0 else None
+
+            mig = {
+                "old_tus": frozenset({"src/Code/Tools/old.cpp"}),
+                "new_tus": frozenset({"src/unk/O001.cpp"}),
+                "files": {
+                    p: (bsha(parent, p), bsha(moved_sha, p))
+                    for p in ("config/map.json", "src/Code/Tools/old.cpp",
+                              "expected/Code/Tools/old.cpp.json", "expected/unk/O001.cpp.json")
+                },
+            }
+            with mock.patch.object(state_delta, "TU_MOVE_MIGRATIONS", (mig,)):
+                self.assertEqual(state_delta.source_changes(repo, parent, moved_sha), {"src/unk/o001.cpp"})
+                self.assertEqual(state_delta.source_changes(repo, parent, followup_sha), {"src/unk/o001.cpp"})
+                bad = dict(mig, files=dict(mig["files"], **{"config/map.json": ("0" * 64, "1" * 64)}))
+                with mock.patch.object(state_delta, "TU_MOVE_MIGRATIONS", (bad,)):
+                    self.assertIsNone(state_delta.source_changes(repo, parent, moved_sha))
+
+
 if __name__ == "__main__":
     unittest.main()

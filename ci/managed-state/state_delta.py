@@ -329,6 +329,66 @@ GRAPH_CHANGES += (CUT13_HEADER_TRUSTED_GRAPH,) + tuple(
 )
 GRAPH_PATHS |= set(CUT13_HEADER_TRUSTED_GRAPH)
 
+CUT14_TOOLS_AND_H5_GRAPH = {
+    'tools/gates/config.json': ('286aead9e860221789552e00f620dd45e7a70b2e033c95b6799b171edac6cd44', 'b712b72efba3b027e6bc7d99a6da75c9decc100e78b28c9e385000082a64f2ce'),
+    'tools/gates/rules.py': ('abf702cf9409e67a51073cdb7bbf1851df6341b09868a9f4cc6ca7e1ed09022e', '6d404b8cea627498d7e36288f7c0f806b7debf1ec988eab1cec8d0f82e966459'),
+    'tools/gates/test_gate.py': ('3bd32d9e59a6d51fbc43648bd93d360f9f47b407e2852ecdda25e407f4aee0f5', 'd58da420612a4759917f742d7a8f9d97ff375e56594cf2d967ffce6c9806a8d0'),
+    'tools/gates/test_public_delivery.py': ('073710b7ff29eae5edeee8a3e7d67169387e44eadf06e1022443794c887e6e09', '5f74b7283f335e2f78bc5a74a669ab70f0aab051c9c1dbb4fa63d93741fcb30e'),
+    'ci/header-witness/h5_layout.py': ('4f03c1aeb9d33aa7a20e47e75e38cf8c4f3b20aebaf6fc5ddd58034a33e06780', 'a16e9682d8cee522682c6ab64d48ee0452b44c6d9a50ff5e8ce178b45169447e'),
+    'ci/header-witness/h5_witness.py': ('dbd0d86bb8ede7ff597f99f12ead6c3238b68a0cbba4594e8a1a6655bf0ff36b', '22e1c8e611137c2eab29cb4b09e1b7cba9a0044c8f507d34e8e7f5c96bdba586'),
+    'ci/header-witness/h5_evidence.py': ('13083a5505b0413a2857ce32d2b59b2dc2a8b2eccad8f7c3a1207f3191a024a5', '8854d1cfb797066b631266bfcc060572f23e4173b091b8391bc0313623998b93'),
+    'ci/header-witness/h5_bridge.py': ('e746dd464782f148f0316ba6b316abb7a10e24f8ae1f667cd617bd70c852cf22', '0c96ae93edce25dcff3d23cefb3603ffacc96b1ebf8ee13025dd69063b75deb8'),
+    'ci/header-witness/bundle.sha256': ('0ab62cc857cb9c52410261e82994bf74035873e1fbdc0233bbe07de1616a022f', '3b3aa6717248c971ddd903f30b71ddcb160c552d959bf98df669ca2f6928ebb2'),
+    'ci/header-witness/tests/test_h5_layout.py': ('387fa6f62e34f70a24a1698ef866fceb36c0e1089d5297213ec82368ac250984', '330c0a79578291a6b8d45d01c56054ab9d90f668878bdaa84649ad8c6a2c7d9e'),
+    'ci/header-witness/tests/test_h5_bridge.py': ('9307061c71645bbe4b936067dfe43fb42fb7474a41b3f401eb743e123092f663', 'e4f7dffe177a9df1da7ac24108c4691523cfca6a03a67c54151cd34acdb363b7'),
+}
+GRAPH_CHANGES += (CUT14_TOOLS_AND_H5_GRAPH,) + tuple(
+    advance_graph(previous, CUT14_TOOLS_AND_H5_GRAPH)
+    for previous in GRAPH_CHANGES
+    if BUNDLE in previous and previous[BUNDLE][1] == CUT13_HEADER_TRUSTED_GRAPH[BUNDLE][1]
+    and all(previous[path][1] == CUT14_TOOLS_AND_H5_GRAPH[path][0]
+            for path in previous.keys() & CUT14_TOOLS_AND_H5_GRAPH.keys())
+)
+GRAPH_PATHS |= set(CUT14_TOOLS_AND_H5_GRAPH)
+
+# Exact pinned TU-move migrations: carry untouched TUs across a maintainer TU relocation while
+# forcing every moved TU to be freshly compiled and verified at its new path.
+# `new_tus` require absent-at-parent and present-at-main (any regular blob) so a follow-up edit
+# to a relocated TU before state publishes remains incremental instead of stranding state.
+CUT14_TOOLS_TU_MOVE = {
+    "old_tus": frozenset({
+        "src/Code/Tools/WW3D/max2w3d/bchannel.cpp",
+        "src/Code/Tools/WW3D/pluglib/WWmatrix3.cpp",
+        "src/Code/Tools/WW3D/pluglib/matrix4.cpp",
+    }),
+    "new_tus": frozenset({
+        "src/unk/O00160110.cpp",
+        "src/unk/O00149310.cpp",
+        "src/unk/O00133510.cpp",
+    }),
+    "files": {
+        'config/map.json': ('d0e52437b4c09c6fb312e200482796ab9c0a7fe36100231f0a9fa4b645fa0688', '7a8856757c5332f522873643d8fae134616dc39a918f0f6156144fa8d7831bd0'),
+        'config/reseed21.json': ('0779a9dffaf972fe2fa5e90e0c67a56140e9e5e352dafc06c38e40e7b34a07a3', 'e6149d31b5942dee55ba6e48847d7081d5a658c87bdb9b80e763295612b1c604'),
+        'src/Code/Tools/WW3D/max2w3d/bchannel.cpp': ('87bf709550d65ccdb54ab10413da44af719fc934c7ce6a82ef7463a1c8fe68cf', None),
+        'src/Code/Tools/WW3D/pluglib/WWmatrix3.cpp': ('f99c7e56d0f9401b882f4c3b26a40806413e80bc7b0516bfce3545509d8a03d2', None),
+        'src/Code/Tools/WW3D/pluglib/matrix4.cpp': ('fbf266aff03e0090021f675108fa2ef71a05e1649e4db4afc7187a3bcf3c31e0', None),
+        'expected/Code/Tools/WW3D/max2w3d/bchannel.cpp.json': ('72021818bc36b4df2b430dddddf6312225fa2f172cc3d26366d55193bf989a98', None),
+        'expected/Code/Tools/WW3D/pluglib/WWmatrix3.cpp.json': ('bc2b76aaa7722695d1a27fa708893abaaea0139ba6a5f6aaf3aa898d49747784', None),
+        'expected/Code/Tools/WW3D/pluglib/matrix4.cpp.json': ('8f507a1fdec5aac325dda68d9fb6ff705c14b17e698dfe4be87b0e5ffea6cdd5', None),
+        'expected/Code/Tools/WW3D/max2w3d/bchannel.cpp.neighbours.json': ('f94ddb28a675fea366697bf3ce5a99d7f85a0e83e237753c4e943689ca04fb98', None),
+        'expected/Code/Tools/WW3D/pluglib/WWmatrix3.cpp.neighbours.json': ('c4bf57c1c3346277e82726a0b77fe08a23821c73305806da2ca1884493665bb8', None),
+        'expected/Code/Tools/WW3D/pluglib/matrix4.cpp.neighbours.json': ('5fdfa6fe0f0c39187d25e2cf148b3243d574719fa862bb7bb5e3c21caecd257b', None),
+        'expected/unk/O00160110.cpp.json': (None, '72021818bc36b4df2b430dddddf6312225fa2f172cc3d26366d55193bf989a98'),
+        'expected/unk/O00149310.cpp.json': (None, 'bc2b76aaa7722695d1a27fa708893abaaea0139ba6a5f6aaf3aa898d49747784'),
+        'expected/unk/O00133510.cpp.json': (None, '8f507a1fdec5aac325dda68d9fb6ff705c14b17e698dfe4be87b0e5ffea6cdd5'),
+        'expected/unk/O00160110.cpp.neighbours.json': (None, 'f94ddb28a675fea366697bf3ce5a99d7f85a0e83e237753c4e943689ca04fb98'),
+        'expected/unk/O00149310.cpp.neighbours.json': (None, 'c4bf57c1c3346277e82726a0b77fe08a23821c73305806da2ca1884493665bb8'),
+        'expected/unk/O00133510.cpp.neighbours.json': (None, '5fdfa6fe0f0c39187d25e2cf148b3243d574719fa862bb7bb5e3c21caecd257b'),
+    },
+}
+TU_MOVE_MIGRATIONS = (CUT14_TOOLS_TU_MOVE,)
+
+
 COMPACT_SCOPE = {"ci/managed-state/state_delta.py", "ci/managed-state/state_origin.py",
                  "ci/managed-state/bundle.sha256"}
 MAX_DIFF_BYTES = 4 * 1024**2
@@ -364,6 +424,19 @@ def graph_change(root, parent, main, paths=None):
     return best
 
 
+def tu_move_change(root, parent, main):
+    try:
+        for migration in TU_MOVE_MIGRATIONS:
+            if (all(tuple(graph_blob(root, rev, path) for rev in (parent, main)) == expected
+                    for path, expected in migration["files"].items())
+                    and all(graph_blob(root, parent, tu) is None and graph_blob(root, main, tu) is not None
+                            for tu in migration["new_tus"])):
+                return migration
+    except (OSError, ValueError, CalledProcessError):
+        return None
+    return None
+
+
 def publication_path(root, parent, main, file):
     if file in GRAPH_PATHS:
         transition = graph_change(root, parent, main)
@@ -385,13 +458,21 @@ def source_changes(root, parent, main):
     parts = data.split(b"\0")
     if parts.pop() != b"" or len(parts) % 2:
         return None
+    move = tu_move_change(root, parent, main)
+    move_files = move["files"] if move else {}
+    move_new = move["new_tus"] if move else frozenset()
     changed = set()
     for meta, name in zip(parts[::2], parts[1::2], strict=True):
         file = name.decode("utf-8", "strict")
         info = meta.split()
-        if (len(info) == 5 and info[0] in {b":100644", b":000000"}
-                and info[1] in {b"100644", b"000000"} and info[4] in {b"A", b"D", b"M"}
-                and publication_path(root, parent, main, file)):
+        regular = (len(info) == 5 and info[0] in {b":100644", b":000000"}
+                   and info[1] in {b"100644", b"000000"} and info[4] in {b"A", b"D", b"M"})
+        if regular and file in move_new:
+            changed.add(file.casefold())
+            continue
+        if regular and file in move_files:
+            continue
+        if regular and publication_path(root, parent, main, file):
             continue
         # New/deleted paths, configuration, ledgers, and name or mode changes
         # may alter symbolic lookup or introduce an earlier include candidate.
@@ -427,11 +508,18 @@ def inherited(root, main, snapshot, *, warn=print):
             return {}
         tree = git(root, "rev-parse", parent + "^{tree}").decode().strip()
         units = authoritative_units(root, main)
-        if set(old["evidence"]) != set(units):
+        move = tu_move_change(root, parent, main)
+        old_only = move["old_tus"] if move else frozenset()
+        new_only = move["new_tus"] if move else frozenset()
+        old_set, unit_set = set(old["evidence"]), set(units)
+        if (not (old_only <= old_set) or not (new_only <= unit_set)
+                or (old_only & unit_set) or (new_only & old_set)
+                or (old_set - old_only) != (unit_set - new_only)):
             return {}
+        kept = [name for name in units if name not in new_only]
         keys = ("source", "contract")
         requests = [{"tu": name, **{key: old["evidence"][name]["compiler"][key] for key in keys}}
-                    for name in units]
+                    for name in kept]
         if not all(safe_tu(item["tu"]) for item in requests):
             return {}
         identity = header(parent, tree)

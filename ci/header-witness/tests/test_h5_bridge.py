@@ -160,6 +160,34 @@ class Bridge(unittest.TestCase):
         self.assertEqual([row["rva"] for row in bridge.credited_rows(old, new)], [0x30])
 
 
+
+    def test_includer_compile_failure_reports_probe_compile_error_and_diagnostic(self):
+        head_hdr = FIXTURE["cases"]["split (compatible)"]["head"].encode()
+        head_obj = recorded(head_hdr, SOURCE)
+        plan = {"changed_paths": [H], "request_paths": [TU], "base": "base", "number": 9, "repo": 1}
+        native = {"profile_sha256": "p" * 64, "compile": {
+            side: [{"tu": TU, "source": "s", "contract": "c", "flags": [], "env": {}}] for side in ("base", "head")}}
+        with tempfile.TemporaryDirectory() as tmp:
+            for side in ("base", "head"):
+                (Path(tmp) / side / "obj").mkdir(parents=True)
+                (Path(tmp) / side / "obj" / "src_t.cpp.obj.includes.json").write_text(json.dumps(["/job/" + H]))
+            (Path(tmp) / "head/obj" / "src_t.cpp.obj").write_bytes(head_obj)
+            git = FakeGit(head_hdr)
+            w = SimpleNamespace(
+                projection=lambda g, r: ({TU: base64.b64encode(SOURCE).decode(), H: base64.b64encode(BASE if r == "base" else head_hdr).decode()}, {}),
+                encode=lambda b: base64.b64encode(b).decode(),
+                decode=lambda s, lim: base64.b64decode(s),
+                pack_sources=lambda d: d, MAX_OBJECT=10**7, MAX_SOURCE=10**7,
+            )
+            req = lambda op, wire: {"results": [{"tu": TU, "status": "error", "diagnostics": "error C2259: abstract\nmore"}]}
+            out = bridge.narrow(plan, native, {}, {}, tmp, git, "tip", req, w, Path(tmp) / "out", {"repo": 1})
+        held = out["headers"][H]["held"]
+        self.assertEqual(len(held), 1)
+        self.assertIn("failed to compile on the base side", held[0])
+        self.assertIn("error C2259: abstract", held[0])
+        self.assertNotIn("No translation unit", held[0])
+
+
 class FromCompare(unittest.TestCase):
     """The comparison-side entry: built from the comparison's own modules, bound to the run attempt, size-bounded."""
 

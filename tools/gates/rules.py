@@ -62,6 +62,7 @@ class Policy:
         self.source = tuple(values['source_extensions'])
         self.header = tuple(values['header_extensions'])
         self.vendored = tuple(values['vendored_prefixes'])
+        self.forbidden_source_prefixes = tuple(values.get('forbidden_source_prefixes', ()))
         self.annotations = re.compile(values['annotation_pattern'])
         self.compiler_controls = re.compile(values['compiler_directive_pattern'])
         self.addable_controls = frozenset(values.get('compiler_directive_additions', ()))
@@ -116,6 +117,9 @@ def g1(ctx):
         problem = None
         if kind is None:
             problem = 'This path is maintainer-owned or outside the eligible source and header roots.'
+        elif (matched := next((p for p in ctx.policy.forbidden_source_prefixes
+                               if path.casefold().startswith(p.casefold())), None)):
+            problem = f'This path is under a non-game tool tree ({matched}) and is not linked into game.dat.'
         elif not ctx.policy.valid_path(path):
             problem = 'The path does not follow compiler CI filename limits.'
         elif kind == 'source' and not old:

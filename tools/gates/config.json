@@ -137,5 +137,8 @@
   "compiler_directive_additions": [
     "// dxsdk",
     "// platformsdk"
+  ],
+  "forbidden_source_prefixes": [
+    "src/Code/Tools/"
   ]
 }

@@ -78,28 +78,43 @@ def _layout_risk(statement, class_name):
     return True
 
 
-def probe(header_bytes, header, class_name):
+def probe(header_bytes, header, class_name, *, abstract_safe=False):
     """(header with the friend line, probe source, inventory) for one side."""
     inv = inventory(header_bytes, class_name)
+    if abstract_safe and re.search(r"\bvirtual\b", inv["bases"]):
+        raise Held(f"{class_name} uses virtual inheritance; abstract layout alignment cannot be measured safely.")
     tag = witness.tag(header, class_name, "")
     helper = f"__bfme_layout_{tag}"
     text = header_bytes.decode("ascii")
     friended = text[:inv["open"] + 1] + f" friend struct {helper};" + text[inv["open"] + 1:]
     include = header.removeprefix("include/")
     lines = [f'#include "{include}"', "#include <stddef.h>", f"struct {helper} {{"]
-    names = ["size", "align"] + [f"o{i}" for i in range(len(inv["members"]))] + \
-            [f"w{i}" for i in range(len(inv["members"]))]
+    names = ["size", "align"] + (["tail_off"] if abstract_safe else []) + \
+            [f"o{i}" for i in range(len(inv["members"]))] + [f"w{i}" for i in range(len(inv["members"]))]
     lines.append("    static const unsigned " + ", ".join(names) + ";")
     lines.append("};")
     lines.append(f"const unsigned {helper}::size = sizeof({class_name});")
-    lines.append(f"const unsigned {helper}::align = __alignof({class_name});")
+    if abstract_safe:
+        # VC7.1 rejects __alignof(T) with C2259 on abstract classes. Reset ambient pack,
+        # derive one probe struct, and verify tail_off == sizeof(T) to reject indirect virtual bases / EBO.
+        a1 = f"__bfme_align1_{tag}"
+        lines.extend([
+            "#pragma pack(push)",
+            "#pragma pack()",
+            f"struct {a1} : {class_name} {{ char _bfme_tail_{tag}; }};",
+            "#pragma pack(pop)",
+            f"const unsigned {helper}::align = (unsigned)(sizeof({a1}) - sizeof({class_name}));",
+            f"const unsigned {helper}::tail_off = offsetof({a1}, _bfme_tail_{tag});",
+        ])
+    else:
+        lines.append(f"const unsigned {helper}::align = __alignof({class_name});")
     for i, (name, _) in enumerate(inv["members"]):
         lines.append(f"const unsigned {helper}::o{i} = offsetof({class_name}, {name});")
         lines.append(f"const unsigned {helper}::w{i} = sizeof((({class_name} *)0)->{name});")
     return friended.encode("ascii"), ("\n".join(lines) + "\n").encode("ascii"), inv
 
 
-def measure(obj, header, class_name, inv):
+def measure(obj, header, class_name, inv, *, abstract_safe=False):
     """Read the probe's constants back from its compiled object."""
     table, symbols, _ = witness._coff(obj)
     helper = f"__bfme_layout_{witness.tag(header, class_name, '')}"
@@ -112,10 +127,14 @@ def measure(obj, header, class_name, inv):
                 raise Held(f"The layout constant {match.group(1)} of {class_name} is not a compile-time constant "
                            "(a virtual base?).")
             values[match.group(1)] = struct.unpack_from("<I", obj, section["raw"] + value)[0]
-    wanted = ["size", "align"] + [f"{p}{i}" for i in range(len(inv["members"])) for p in "ow"]
+    wanted = ["size", "align"] + (["tail_off"] if abstract_safe else []) + \
+             [f"{p}{i}" for i in range(len(inv["members"])) for p in "ow"]
     missing = [name for name in wanted if name not in values]
     if missing:
         raise Held(f"The probe of {class_name} did not emit {', '.join(missing[:4])}: not compile-time constants.")
+    if abstract_safe and (values["tail_off"] != values["size"] or values["align"] == 0):
+        raise Held(f"Abstract alignment probe for {class_name} saw tail_off={values['tail_off']} != size={values['size']} "
+                   "(virtual base or empty-base layout); held for review.")
     return {"size": values["size"], "align": values["align"],
             "members": {name: {"offset": values[f"o{i}"], "width": values[f"w{i}"], "type": decl}
                         for i, (name, decl) in enumerate(inv["members"])}}

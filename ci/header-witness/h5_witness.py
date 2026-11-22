@@ -164,7 +164,7 @@ def _method_name(statement):
     return match.group(1) if match else None
 
 
-def plan(header_bytes, qualified_class, kind, identity, header=""):
+def plan(header_bytes, qualified_class, kind, identity, header="", *, abstract_safe=False):
     """Return (control_bytes, moved_bytes) for one layout atom, or raise Held."""
     if kind not in KINDS:
         raise Held(f"A {kind} change needs a witness form this check does not have.")
@@ -211,8 +211,18 @@ def plan(header_bytes, qualified_class, kind, identity, header=""):
     after_class = masked.find(";", close)
     if after_class < 0 or masked[close + 1:after_class].strip():
         raise Held(f"{qualified_class} is declared together with a variable; this check does not read that form.")
-    constants = (f'\nextern "C" const unsigned int {probe}_size = sizeof({qualified_class});'
-                 f'\nextern "C" const unsigned int {probe}_align = __alignof({qualified_class});\n')
+    if abstract_safe:
+        constants = (
+            f'\n#pragma pack(push)\n#pragma pack()\n'
+            f'struct {probe}_a : {qualified_class} {{ char _t; }};\n'
+            f'#pragma pack(pop)\n'
+            f'extern "C" const unsigned int {probe}_size = sizeof({qualified_class});\n'
+            f'extern "C" const unsigned int {probe}_align = (unsigned int)(sizeof({probe}_a) - sizeof({qualified_class}));\n'
+            f'extern "C" const unsigned int {probe}_tail = (unsigned int)(&(({probe}_a *)0)->_t);\n'
+        )
+    else:
+        constants = (f'\nextern "C" const unsigned int {probe}_size = sizeof({qualified_class});'
+                     f'\nextern "C" const unsigned int {probe}_align = __alignof({qualified_class});\n')
 
     def build(slot_text, tail):
         return (text[:start] + " " + slot_text + text[end:close]
@@ -357,6 +367,12 @@ def evaluate(atom, row, head_obj, control_obj, moved_obj, symbol):
     sizes = [(constant(obj, probe + "_size"), constant(obj, probe + "_align")) for obj in (control_obj, moved_obj)]
     if sizes[0] != sizes[1]:
         raise Held(f"The two variants do not have the same size and alignment: {sizes[0]} and {sizes[1]}.")
+    for obj, (sz, al) in zip((control_obj, moved_obj), sizes):
+        _, syms, _ = _coff(obj)
+        if any(item[1] == "_" + probe + "_tail" and item[3] > 0 for item in syms):
+            tail = constant(obj, probe + "_tail")
+            if tail != sz or al == 0:
+                raise Held(f"Abstract witness alignment probe for {atom['qualified_class']} saw tail={tail} != size={sz}.")
     head, first, second = (function(obj, symbol) for obj in (head_obj, control_obj, moved_obj))
     member = f"{atom['qualified_class']}::{atom['identity']}"
     if head != first:

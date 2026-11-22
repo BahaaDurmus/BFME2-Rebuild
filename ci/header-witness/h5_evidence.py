@@ -50,12 +50,23 @@ def evidence(header, before, after, rows, head_objects, probe_compile, tu_compil
         if before is None or after is None:
             held.append(f"{header}: {name} is new or removed; the declaration rules decide it.")
             continue
+        abstract_classes = locals().setdefault("_abstract_classes", set())
         try:
             measured = {}
             inventories = {}
             for side, text in (("base", before), ("head", after)):
                 friended, source, inv = layout.probe(text, header, name)
-                measured[side] = layout.measure(probe_compile(side, friended, source), header, name, inv)
+                try:
+                    obj = probe_compile(side, friended, source)
+                    measured[side] = layout.measure(obj, header, name, inv)
+                except Held as first_err:
+                    # VC7.1 throws C2259 on __alignof(AbstractClass); retry once with abstract_safe=True.
+                    if "not recorded" in str(first_err) or "No translation unit" in str(first_err):
+                        raise
+                    friended, source, inv = layout.probe(text, header, name, abstract_safe=True)
+                    obj = probe_compile(side, friended, source)
+                    measured[side] = layout.measure(obj, header, name, inv, abstract_safe=True)
+                    abstract_classes.add(name)
                 inventories[side] = inv
             record = layout.atoms(header, name, inventories["base"], measured["base"], inventories["head"],
                                   measured["head"])
@@ -73,8 +84,14 @@ def evidence(header, before, after, rows, head_objects, probe_compile, tu_compil
         if not credited:
             break
         try:
-            control, moved = witness.plan(after, atom["qualified_class"], "member", atom["identity"], header)
+            use_abs = atom["qualified_class"] in locals().get("_abstract_classes", set())
+            control, moved = witness.plan(after, atom["qualified_class"], "member", atom["identity"], header,
+                                          abstract_safe=use_abs)
             control_objs, moved_objs = tu_compile(control, paths), tu_compile(moved, paths)
+            if not use_abs and (not control_objs or not moved_objs):
+                control, moved = witness.plan(after, atom["qualified_class"], "member", atom["identity"], header,
+                                              abstract_safe=True)
+                control_objs, moved_objs = tu_compile(control, paths), tu_compile(moved, paths)
         except Held as reason:
             held.append(str(reason))
             continue
