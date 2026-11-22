@@ -300,6 +300,35 @@ GRAPH_CHANGES += (CUT12_GATES_AND_H2_GRAPH,) + tuple(
 )
 GRAPH_PATHS |= set(CUT12_GATES_AND_H2_GRAPH)
 
+CUT13_HEADER_TRUSTED_GRAPH = {
+    "tools/gates/header_trusted.py": (
+        None,
+        "0320445ce074e7919add15245e5d45fcd4996137ed6af2bd930814bf0efe0b00",
+    ),
+    "tools/gates/header_source_preview.py": (
+        "a09a7298441359f4f10303a2e8f012d0eed5f4bbde7f4a1623893f54c8d33ee3",
+        "8100ed15bbb2594d884e89a905f47387d07ced2520616f15449ae440bff17ab1",
+    ),
+    "tools/gates/test_header_trusted.py": (
+        None,
+        "b014ebf68d8f463ad8cd134c178021dbebf59b8834a8e86f22bf126b2a2b5b44",
+    ),
+    "ci/managed-check/header_trusted_action.py": (
+        None,
+        "f5a167c0cce414c80e10e6cf3188d30028298b15ff805c2592ad42117d926565",
+    ),
+    "ci/managed-check/bundle.sha256": (
+        "80a8de235d4824307e47fd693296ff4097947e2133c48f72ec2730ab7acaf8b0",
+        "af8387224c9d53242728b6e4b70aa1ca97567670c00b6a8a3a2527cd1a28f49a",
+    ),
+}
+GRAPH_CHANGES += (CUT13_HEADER_TRUSTED_GRAPH,) + tuple(
+    advance_graph(previous, CUT13_HEADER_TRUSTED_GRAPH)
+    for previous in GRAPH_CHANGES
+    if BUNDLE in previous and previous[BUNDLE][1] == CUT13_HEADER_TRUSTED_GRAPH[BUNDLE][0]
+)
+GRAPH_PATHS |= set(CUT13_HEADER_TRUSTED_GRAPH)
+
 COMPACT_SCOPE = {"ci/managed-state/state_delta.py", "ci/managed-state/state_origin.py",
                  "ci/managed-state/bundle.sha256"}
 MAX_DIFF_BYTES = 4 * 1024**2
