@@ -33,7 +33,7 @@ def changed_classes(before, after):
             except Held:
                 found[name] = None
                 continue
-            found[name] = " ".join(masked[open_:close + 1].split())
+            found[name] = " ".join(masked[match.start():close + 1].split())
         return found
     old, new = classes(before), classes(after)
     return sorted(name for name in old.keys() | new.keys() if old.get(name) != new.get(name))
@@ -68,8 +68,27 @@ def evidence(header, before, after, rows, head_objects, probe_compile, tu_compil
                     measured[side] = layout.measure(obj, header, name, inv, abstract_safe=True)
                     abstract_classes.add(name)
                 inventories[side] = inv
+            verified_overrides = False
+            if (inventories["base"]["virtuals"] != inventories["head"]["virtuals"]
+                    and inventories["base"]["bases"] == inventories["head"]["bases"]
+                    and (measured["base"]["size"], measured["base"]["align"]) ==
+                        (measured["head"]["size"], measured["head"]["align"])):
+                added_v = layout.added_virtual_overrides(inventories["base"], inventories["head"])
+                parsed_v = [layout.parse_virtual_override(s) for s in (added_v or ())]
+                if added_v and all(parsed_v):
+                    try:
+                        v_measured = {}
+                        for side, text in (("base", before), ("head", after)):
+                            v_hdr, v_src = layout.vslot_probe(text, header, name, parsed_v)
+                            v_obj = probe_compile(side, v_hdr, v_src)
+                            v_measured[side] = layout.measure_vslots(v_obj, header, name, len(parsed_v))
+                        verified_overrides = layout.verify_vslots(v_measured["base"], v_measured["head"])
+                    except Held as v_err:
+                        if "No translation unit" in str(v_err):
+                            raise
+                        verified_overrides = False
             record = layout.atoms(header, name, inventories["base"], measured["base"], inventories["head"],
-                                  measured["head"])
+                                  measured["head"], verified_overrides=verified_overrides)
         except Held as reason:
             held.append(str(reason))
             continue

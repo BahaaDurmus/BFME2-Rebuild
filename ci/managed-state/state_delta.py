@@ -10,7 +10,7 @@ from state_evidence import LIMIT, cached_pairs, header
 # implementation retain full-refresh semantics. state.yml can be carried only
 # across the reviewed producer-v2 to resume transport revision.
 REPORT_DIRS = ("docs/", "worklist/", "ci/state/", "ci/progress/", "ci/alarms/",
-               "ci/nightly/", "ci/landing/", "ci/admission/", "ci/header/", "ci/public-text/",
+               "ci/nightly/", "ci/landing/", "ci/admission/", "ci/header/", "ci/public-text/", "ci/maint/",
                "ci/managed-check/tests/", ".github/workflows/")
 STATE_FLOW = ".github/workflows/state.yml"
 TRANSPORT = {"ci/managed-state/state_delta.py", "ci/managed-state/state_fetch.py",
@@ -350,6 +350,22 @@ GRAPH_CHANGES += (CUT14_TOOLS_AND_H5_GRAPH,) + tuple(
             for path in previous.keys() & CUT14_TOOLS_AND_H5_GRAPH.keys())
 )
 GRAPH_PATHS |= set(CUT14_TOOLS_AND_H5_GRAPH)
+
+CUT15_H5_VSLOT_GRAPH = {
+    'ci/header-witness/h5_layout.py': ('a16e9682d8cee522682c6ab64d48ee0452b44c6d9a50ff5e8ce178b45169447e', '970efd403ac11fdeb13a208c48b15dc59481436c0697ecaf1faefc309f8b75fa'),
+    'ci/header-witness/h5_evidence.py': ('8854d1cfb797066b631266bfcc060572f23e4173b091b8391bc0313623998b93', 'a2a92d5551cc46fc1bfc9f6c37669d31f59fc437dba18bfb10843f83f825bcf8'),
+    'ci/header-witness/bundle.sha256': ('3b3aa6717248c971ddd903f30b71ddcb160c552d959bf98df669ca2f6928ebb2', '1b9db91931d7a2de32e6f6280a41fae2fcdb4dde47488446adf07603dedc7443'),
+    'ci/header-witness/tests/test_h5_layout.py': ('330c0a79578291a6b8d45d01c56054ab9d90f668878bdaa84649ad8c6a2c7d9e', '1d529e070a992a7d2efa1ba5e645d3d41fbcf9a896a93b25c8252ddd09328865'),
+}
+GRAPH_CHANGES += (CUT15_H5_VSLOT_GRAPH,) + tuple(
+    advance_graph(previous, CUT15_H5_VSLOT_GRAPH)
+    for previous in GRAPH_CHANGES
+    if (previous.keys() & CUT15_H5_VSLOT_GRAPH.keys())
+    and all(previous[path][1] == CUT15_H5_VSLOT_GRAPH[path][0]
+            for path in previous.keys() & CUT15_H5_VSLOT_GRAPH.keys())
+)
+GRAPH_PATHS |= set(CUT15_H5_VSLOT_GRAPH)
+
 
 # Exact pinned TU-move migrations: carry untouched TUs across a maintainer TU relocation while
 # forcing every moved TU to be freshly compiled and verified at its new path.

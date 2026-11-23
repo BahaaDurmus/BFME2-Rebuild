@@ -1,0 +1,12 @@
+[Unit]
+Description=BFME2-Rebuild Maintainer Sweeper & Triage Proposer (never approves)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/bfme2-rebuild
+# Default is dry-run (zero GitHub writes); add --live after operator verification.
+# For --allow-branch-update, use a non-owner bot token so synchronize does not set owner_origin.
+ExecStart=/usr/bin/python3 -B ci/maint/cli.py --state-dir /var/lib/bfme2-maint --once
+Nice=10
