@@ -81,32 +81,70 @@ Workflow:
 
 ---
 
-### Prompt B — Multi-Agent Swarm Lead (N parallel agents)
+### Prompt B — Parent Agent + Parallel Subagents Swarm (N workers in isolated worktrees)
 
 ```text
-You are leading a swarm of N autonomous coding agents contributing to
-https://github.com/Open-BFME/BFME2-Rebuild.
+You are the parent agent running a swarm of N parallel subagents contributing to
+https://github.com/Open-BFME/BFME2-Rebuild (a clean-room 1-to-1 C++ rebuild of
+Battle for Middle-earth II 1.06 compiling under Visual C++ 7.1).
 
-Read AGENTS.md, docs/swarm.md, and docs/agents.md first.
+First, read AGENTS.md, docs/swarm.md, docs/agents.md, and tools/README.md in full.
+Never run with the repository owner's GitHub token — always push from a non-owner
+contributor/bot fork.
 
-Swarm-lead rules:
-1. Fetch fresh upstream `main` and list all currently open PRs on
-   `Open-BFME/BFME2-Rebuild` (titles + bodies) to build a claimed-RVA and
-   claimed-file exclusion set.
-2. Partition worklist targets into N **strictly disjoint** TU/RVA assignments:
-   - Prefer 80% narrow `.cpp`-only targets (fast auto-land lane, higher daily budget)
-     and at most 20% clean header targets (missing declarations / supported virtual
-     overrides / Draft promotions) to stay well within wide daily limits (H10).
-   - Never assign two agents to the same `.cpp` file or the same `include/` header.
-3. Launch each worker in an isolated git branch/worktree with its exact assigned TU,
-   RVA(s), a unique gate report path `/tmp/gate-<worker>.json`, and Prompt A's rules.
-   Every worker MUST pass `tools/gates/gate.py` before pushing, enable
-   `maintainer_can_modify`, and cap Boat retries at 3 rounds.
-4. Track every worker PR through to one of three terminal states:
-   - **Auto-merged** (record PR # and merged SHA),
-   - **Waiting on automatic quota/retry** (do not push churn commits), or
-   - **Cleanly closed after <= 3 Boat rounds** with a structured blocker note.
-5. Before starting a second wave, re-fetch upstream `main` and re-scan open PRs.
+Setup (parent agent):
+1. Clone (or update) your fork locally alongside upstream `https://github.com/Open-BFME/BFME2-Rebuild.git`
+   and fetch fresh `upstream/main`.
+2. Query all currently open PRs on `Open-BFME/BFME2-Rebuild` (titles + bodies):
+   `gh pr list -R Open-BFME/BFME2-Rebuild --state open --limit 200 --json number,title,body,files`
+   Build an exclusion set of every claimed RVA, `.cpp` TU, and `include/` header.
+3. Select N strictly disjoint targets from `worklist/unwritten_with_zero_hour_counterpart.tsv`
+   (`ready_at_snapshot=yes`, `reference_kind=def`, `body_check=none-found`, `size_bytes <= 200`)
+   or `worklist/files.tsv`:
+   - Aim for ~80% narrow `.cpp`-only targets (high daily budget, fastest auto-land)
+     and at most ~20% clean header/Draft targets (wide budget H10).
+   - Never assign two subagents to the same `.cpp` file or the same `include/` header.
+4. Create ONE isolated git worktree & branch per subagent off `upstream/main`:
+   `git worktree add ../wt-<slug> -b swarm/<slug> upstream/main`
+
+Subagent instructions (pass one disjoint target + worktree path to each subagent):
+- Work ONLY inside your assigned worktree (`../wt-<slug>`). Keep any scratch scripts,
+  layout probes, or compile outputs in `/tmp/bfme-<slug>/` (never inside the repo).
+- Confirm the target RVA still has an empty body below its `// FUNCTION:` line and
+  claim it first (Draft PR with `Claim: <RVA>` and `Claim: <src/path/File.cpp>`).
+- Use local tools on this machine freely to verify before pushing:
+  * Disassemble `baseline/game.dat` at `VA = RVA + 0x400000` (`objdump`, Python, etc.)
+    and verify offsets, constants, vtable slots, and calling conventions; where Zero Hour
+    (`reference/`) disagrees with `baseline/game.dat`, follow `baseline/game.dat`.
+  * Run local compiler/layout sanity checks (`clang++ -m32`, `g++ -m32`, `cl.exe`, or
+    `tools/judge/bin/judge.py` if local VC7.1 is configured per `tools/README.md`) to
+    catch syntax, ABI, and byte mismatches before spending a hosted Boat run.
+- Write clean, idiomatic C++ (no inline asm, `__emit`, `#pragma optimize`, `void *`
+  stand-ins, duplicate class/global definitions, address/date/author comments, or
+  edits under `src/Code/Tools/`, `config/`, `expected/`, `tools/`, `ci/`).
+- Commit on top of `upstream/main` (imperative subject <= 72 chars; evidence in body,
+  no raw disassembly dumps; add `NOTICE` attribution if adapting Zero Hour code).
+- Run the local source gate on the committed tree until it exits 0 with `"status": "pass"`:
+  `python3 tools/gates/gate.py . upstream/main HEAD --json /tmp/gate-<slug>.json`
+- Push to your fork and mark the PR Ready for review (with `Allow edits by maintainers`).
+- Return a structured handoff to the parent agent containing:
+  `pr_url`, `head_sha`, `gate_status`, `gate_policy_digest`, `local_check_summary`,
+  and any CI status.
+
+Parent orchestration loop:
+1. Verify every subagent handoff reports `gate_status == pass` on its exact pushed
+   `head_sha` before monitoring Boat. (Hosted Boat remains the sole authoritative proof;
+   local checks only filter errors before spending Boat slots.)
+2. Poll PR statuses (`Admission`, `source rules`, `Boat`, `Header rules`, `Landing`):
+   - Wait on `Held: daily limit`, `checking the source rules`, or `runners unavailable`.
+   - If a green PR hits `Landing: Held: merge-forbidden` (HTTP 403), have its subagent
+     merge `upstream/main` and push once.
+   - If `Boat` refuses a PR, send the exact diff report back to that subagent for
+     refinement — cap at 3 Boat rounds per function. If still blocked after 3 rounds,
+     record the blocker in an issue or `docs/hard_rows.md` and close the PR.
+3. As subagents finish (auto-merged or cleanly closed), remove their worktrees
+   (`git worktree remove ../wt-<slug>`), re-fetch `upstream/main`, re-scan open PRs,
+   and launch the next wave until the target count or daily budget is reached.
 ```
 
 ---

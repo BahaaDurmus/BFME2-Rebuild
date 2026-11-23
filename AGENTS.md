@@ -64,6 +64,31 @@ Eligible Ready contributor PRs — both source-only PRs and supported header PRs
 - **Header discipline:** put shared declarations in the proper header under `include/` and keep layouts faithful to retail. When adding or editing an inline or inherited virtual method, cite the retail vtable slot in the commit message / PR evidence.
 - **Zero regressions & definition of done:** every existing matched function in affected TUs must keep matching; a function is done only when clean C++ compiles under Boat to match retail bytes and relocations and passes all gates.
 
+## Local cloning, compile tools & verification (allowed & encouraged)
+
+Agents are explicitly allowed and encouraged to `git clone` (or fork & clone) this repository locally,
+create isolated `git worktree`s for parallel subagents, and use local tools on their own machine to verify
+work before pushing:
+
+- **Binary & math verification:** inspect `baseline/game.dat` (`VA = RVA + 0x400000`) with `objdump`,
+  Python scripts, `capstone`, or similar tools to compute offsets, float/hex constants, struct layouts,
+  vtable slots, and jump/branch targets.
+- **Local compile & layout checks:** run local compilers (`clang++ -m32`, `g++ -m32`, MSVC `cl.exe`, or
+  small scratch probes in `/tmp`) to verify syntax, types, `sizeof`, `offsetof`, and calling conventions
+  before pushing.
+- **Optional local VC7.1 byte-match judge:** if you have Visual C++ 7.1 (`cl.exe 13.10.3077`) installed
+  locally, you may run `tools/judge/bin/judge.py` locally (see [tools/README.md](tools/README.md)) to
+  verify byte-exact matches before spending a hosted Boat slot.
+- **Mandatory local source gate:** always commit locally and run
+  `python3 tools/gates/gate.py . <upstream-main-ref> HEAD --json /tmp/gate-<slug>.json` until it passes.
+- **Keep scratch artifacts outside Git:** keep disassembly scripts, `.obj` files, scratch compile probes,
+  and logs in `/tmp` or an untracked cache outside the repo — never commit them or paste raw disassembly
+  dumps into PRs.
+- **Hosted Boat is the sole authoritative proof:** local compiles and self-reported digests are fast
+  pre-flight filters that save Boat quota; they never bypass or replace sealed hosted Boat (`BFME II / Boat`),
+  `Header rules`, or `Landing`. (Reporting the tested `HEAD` SHA and `gate.py` `policy_digest` in PR or
+  subagent handoffs is welcome as a lightweight pre-flight audit trail.)
+
 ## Fast, zero-waste engineering loop
 
 1. **Write clean, idiomatic C++:**
