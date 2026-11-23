@@ -105,8 +105,18 @@ Int SkirmishAI::resetMaster()
 // FUNCTION: BFME2 0x002C693B size=258 name=?updatePhase@SkirmishAI@@QAEXXZ evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x002C6A3D size=17 name=?rva002C6A3D@Rva002A8AB1Record@@QAEXPAVObject@@@Z evidence=?:placeholder tier=A
+void SkirmishAI::registerProducedObject(Object *object)
+{
+	if (!m_finished)
+		AIBuilder::registerProducedObject(object);
+}
 
 // FUNCTION: BFME2 0x002C6A4E size=17 name=?rva002C6A4E@Rva002A8AB1Record@@QAEXPAVObject@@@Z evidence=?:placeholder tier=A
+void SkirmishAI::unRegisterProducedObject(Object *object)
+{
+	if (!m_finished)
+		AIBuilder::unRegisterProducedObject(object);
+}
 
 // FUNCTION: BFME2 0x002C6A5F size=23 name=?Register@SkirmishAI@@QAEXPAVTeam@@@Z evidence=N:ledger tier=A
 
