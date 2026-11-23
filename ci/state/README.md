@@ -25,3 +25,12 @@ Failures open one issue each through `ci/alarms/alarm.py`: `state-measure`, `sta
 `state-stale`, `state-parity`. Each closes by itself when the same job next succeeds.
 To test the alarm, run "Publish main state" by hand with `drill` ticked: the run must fail and the
 issue "Alarm: Main state could not be published" must open; the next ordinary run closes it.
+
+## Recovery & alarms
+
+- Alarm issues are filed with the **`alarm`** label (not `ci-alarm`) and close automatically on the
+  next successful run of the corresponding workflow.
+- If a maintainer push changes global configuration or headers without a pinned incremental transition
+  in `ci/managed-state/state_delta.py` and hits `BFME_STATE_BUDGET_JOBS`, either add the pinned
+  transition (preferred, keeps the refresh incremental) or run `state.yml` via `workflow_dispatch`
+  with `seed=true` (temporarily raising `BFME_STATE_BUDGET_JOBS` if a full refresh is intentional).

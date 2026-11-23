@@ -370,7 +370,10 @@ CUT16_GATES_DXWRAPPER_GRAPH = {
     'tools/gates/config.json': ('b712b72efba3b027e6bc7d99a6da75c9decc100e78b28c9e385000082a64f2ce', '8efc59a0cd826377dc8b95515b6c7dfcbac9158e5bf7c03d3fa86a60f393c5c9'),
     'tools/gates/test_public_delivery.py': ('5f74b7283f335e2f78bc5a74a669ab70f0aab051c9c1dbb4fa63d93741fcb30e', 'a820399cfb7dbb644d50685605146c9b3ef11e08a2664c1edc90bee6d1211788'),
 }
-GRAPH_CHANGES += (CUT16_GATES_DXWRAPPER_GRAPH,) + tuple(
+GRAPH_CHANGES += (
+    CUT16_GATES_DXWRAPPER_GRAPH,
+    advance_graph(CUT15_H5_VSLOT_GRAPH, CUT16_GATES_DXWRAPPER_GRAPH),
+) + tuple(
     advance_graph(previous, CUT16_GATES_DXWRAPPER_GRAPH)
     for previous in GRAPH_CHANGES
     if (previous.keys() & CUT16_GATES_DXWRAPPER_GRAPH.keys())

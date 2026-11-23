@@ -92,6 +92,6 @@ Eligible Ready contributor PRs — both source-only PRs and supported header PRs
 - **G6 (Scope):** one logical item per PR (`<= 3` substantive source files, except Draft promotions).
 - **G7 (One definition):** never add a duplicate private copy of a class/struct/global already defined in `include/`.
 - **G8 (Address names):** no address-derived identifiers (`rva...`, `sub_...`, `g_00...`).
-- **H1–H10 (Headers):** wide Boat parity (H1), compiled symbol-to-ledger match (H2), qualified identities (H3), complete declaration comparison (H4), layout & virtual-slot proof (H5), inline-body rules (H6), Draft coverage & promotion hygiene (H7), inlining/macro controls (H8), and wide admission budget (H10).
+- **H1–H10 (Headers):** wide Boat parity (H1), compiled symbol-to-ledger match (H2), qualified identities (H3), complete declaration comparison (H4), layout & virtual-slot proof (H5), inline-body rules (H6), Draft coverage & promotion hygiene (H7), inlining/macro controls (H8), ledger-request hold (H9), and wide admission budget (H10).
 
 Full details: [RULES.md](RULES.md), [CONTRIBUTING.md](CONTRIBUTING.md), [docs/source-quality.md](docs/source-quality.md), [docs/recipes.md](docs/recipes.md), [docs/swarm.md](docs/swarm.md).

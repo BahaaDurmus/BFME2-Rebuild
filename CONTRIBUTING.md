@@ -173,8 +173,8 @@ failure triggers re-measurement)—alongside **BFME II / Admission** and
 **BFME II / Landing**.
 
 - **Ready source-only fork PRs** (1-8 eligible `src/` paths affecting at most 8
-  translation units, passing current source rules, within daily limits of 30
-  per author and 150 total): admitted automatically, compiled on Boat, and
+  translation units, passing current source rules, within daily limits of 250
+  per author and 1,200 total (`BFME_ADMISSION_DAILY_*`)): admitted automatically, compiled on Boat, and
   squash-merged to `main` automatically when current source rules and Boat pass
   against current `main` with a clean merge and no landing hold.
 - **Draft PRs:** source rules can run, while automatic Boat admission waits
@@ -182,8 +182,8 @@ failure triggers re-measurement)—alongside **BFME II / Admission** and
   comparisons are separate).
 - **Header PRs (`include/`):** ready fork pull requests changing `include/`
   (with or without `src/`, up to 60 files, passing current source rules) are
-  admitted automatically under the wide daily budget (currently 5/author and
-  20 total/day). Boat compares all affected translation units, including
+  admitted automatically under the wide daily budget (currently 30/author and
+  120 total/day, `BFME_ADMISSION_WIDE_DAILY_*`). Boat compares all affected translation units, including
   transitive includers (narrow for at most 8 affected units; wide for larger
   eligible sets). Keep function bodies out of shared headers unless supported
   by retail evidence. Header PRs auto-land once **BFME II / Header rules** pass on current `main`
