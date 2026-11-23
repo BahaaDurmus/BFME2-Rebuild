@@ -9100,7 +9100,7 @@
         }
       ]
     },
-    "?Ambient_Color@DX8Wrapper@@1VVector3@@A": {
+    "?Ambient_Color@DXWrapper@@1VVector3@@A": {
       "candidates": [
         {
           "rva": "0x009EDC70",
@@ -12206,7 +12206,7 @@
         }
       ]
     },
-    "?BitDepth@DX8Wrapper@@1HA": {
+    "?BitDepth@DXWrapper@@1HA": {
       "candidates": [
         {
           "rva": "0x009B5FDC",
@@ -12622,7 +12622,7 @@
         }
       ]
     },
-    "?CurRenderDevice@DX8Wrapper@@1HA": {
+    "?CurRenderDevice@DXWrapper@@1HA": {
       "candidates": [
         {
           "rva": "0x009B5FD0",
@@ -12634,7 +12634,7 @@
         }
       ]
     },
-    "?CurrentAdapterIdentifier@DX8Wrapper@@1U_D3DADAPTER_IDENTIFIER8@@A": {
+    "?CurrentAdapterIdentifier@DXWrapper@@1U_D3DADAPTER_IDENTIFIER8@@A": {
       "candidates": [
         {
           "rva": "0x009EC5E8",
@@ -12651,12 +12651,12 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind zero_init_unknown; 4 exact .text readers in 3 functions: Create_Device::DX8Wrapper; Rva0011C460Get; Rva001207B0Init; readers include methods of its class DX8Wrapper (Create_Device::DX8Wrapper); Zero Hour declares it too (dx8wrapper.cpp,dx8wrapper.h); existing spelling kept",
+          "why": "retail data row kind zero_init_unknown; 4 exact .text readers in 3 functions: Create_Device::DXWrapper; Rva0011C460Get; Rva001207B0Init; readers include methods of its class DXWrapper (Create_Device::DXWrapper); Zero Hour declares it too (dx8wrapper.cpp,dx8wrapper.h); existing spelling kept",
           "size": 1056
         }
       ]
     },
-    "?CurrentCaps@DX8Wrapper@@1PAVDX8Caps@@A": {
+    "?CurrentCaps@DXWrapper@@1PAVDX8Caps@@A": {
       "candidates": [
         {
           "rva": "0x009EDA7C",
@@ -12673,11 +12673,11 @@
           "proven": true,
           "confidence": "strong",
           "source": "CurrentCaps source pair",
-          "why": "vertex-split-currentcaps (strong): Existing DX8Wrapper static. Getter 0x42F6D reads VA 0xDEDA7C. DX8Caps ctor at 0x120819 calls 0x12C670 then stores the exact pointer at 0x12081E; shutdown deletes and nulls the same pointer at 0x121755. Vertex_Split reads Support_NPatches byte +0x13B at 0x1454E8. Four-byte zero-fill cell and one existing typed definition in dxwrapper.cpp."
+          "why": "vertex-split-currentcaps (strong): Existing DXWrapper static. Getter 0x42F6D reads VA 0xDEDA7C. DX8Caps ctor at 0x120819 calls 0x12C670 then stores the exact pointer at 0x12081E; shutdown deletes and nulls the same pointer at 0x121755. Vertex_Split reads Support_NPatches byte +0x13B at 0x1454E8. Four-byte zero-fill cell and one existing typed definition in dxwrapper.cpp."
         }
       ]
     },
-    "?CurrentDX8LightEnables@DX8Wrapper@@1PA_NA": {
+    "?CurrentDX8LightEnables@DXWrapper@@1PA_NA": {
       "candidates": [
         {
           "rva": "0x009ED5F0",
@@ -12694,12 +12694,12 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail readers (1): 0x0011C470+71 in ?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+84 in ?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+112 in ?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); the readers include methods of the owning class DX8Wrapper; Zero Hour declares the same static in dx8wrapper.c",
+          "why": "retail readers (1): 0x0011C470+71 in ?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+84 in ?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+112 in ?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); the readers include methods of the owning class DXWrapper; Zero Hour declares the same static in dx8wrapper.c",
           "size": 8
         }
       ]
     },
-    "?CurrentDepthBuffer@DX8Wrapper@@1PAUIDirect3DSurface8@@A": {
+    "?CurrentDepthBuffer@DXWrapper@@1PAUIDirect3DSurface8@@A": {
       "candidates": [
         {
           "rva": "0x009EDA3C",
@@ -12711,7 +12711,7 @@
         }
       ]
     },
-    "?CurrentRenderTarget@DX8Wrapper@@1PAUIDirect3DSurface8@@A": {
+    "?CurrentRenderTarget@DXWrapper@@1PAUIDirect3DSurface8@@A": {
       "candidates": [
         {
           "rva": "0x009EDA38",
@@ -12771,7 +12771,7 @@
         }
       ]
     },
-    "?D3DDevice@DX8Wrapper@@1PAUIDirect3DDevice8@@A": {
+    "?D3DDevice@DXWrapper@@1PAUIDirect3DDevice8@@A": {
       "candidates": [
         {
           "rva": "0x009EDA34",
@@ -12791,7 +12791,7 @@
         }
       ]
     },
-    "?D3DInterface@DX8Wrapper@@1PAUIDirect3D8@@A": {
+    "?D3DInterface@DXWrapper@@1PAUIDirect3D8@@A": {
       "candidates": [
         {
           "rva": "0x009EDA30",
@@ -12808,7 +12808,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 35 exact .text readers in 12 functions: Create_Device::DX8Wrapper; Enumerate_Devices::DX8Wrapper; Find_Color_And_Z_Mode::DX8Wrapper; Find_Color_Mode::DX8Wrapper; Find_Z_Mode::DX8Wrapper; Init::DX8Wrapper; Rva000752F2Get; Rva001207B0Init; Se; readers include methods of its class DX8Wrapper (Create_Device::DX8Wrapper, Enumerate_Devices::DX8W",
+          "why": "retail data row kind global_zero_init; 35 exact .text readers in 12 functions: Create_Device::DXWrapper; Enumerate_Devices::DXWrapper; Find_Color_And_Z_Mode::DXWrapper; Find_Color_Mode::DXWrapper; Find_Z_Mode::DXWrapper; Init::DXWrapper; Rva000752F2Get; Rva001207B0Init; Se; readers include methods of its class DXWrapper (Create_Device::DXWrapper, Enumerate_Devices::DX8W",
           "size": 4
         }
       ]
@@ -13242,7 +13242,7 @@
         }
       ]
     },
-    "?DefaultDepthBuffer@DX8Wrapper@@1PAUIDirect3DSurface8@@A": {
+    "?DefaultDepthBuffer@DXWrapper@@1PAUIDirect3DSurface8@@A": {
       "candidates": [
         {
           "rva": "0x009EDA44",
@@ -13290,7 +13290,7 @@
         }
       ]
     },
-    "?DefaultRenderTarget@DX8Wrapper@@1PAUIDirect3DSurface8@@A": {
+    "?DefaultRenderTarget@DXWrapper@@1PAUIDirect3DSurface8@@A": {
       "candidates": [
         {
           "rva": "0x009EDA40",
@@ -13314,7 +13314,7 @@
         }
       ]
     },
-    "?DeviceProjectionMatrix@DX8Wrapper@@1VMatrix4@@A": {
+    "?DeviceProjectionMatrix@DXWrapper@@1VMatrix4x4@@A": {
       "candidates": [
         {
           "rva": "0x009EDBF0",
@@ -13380,7 +13380,7 @@
         }
       ]
     },
-    "?DisplayFormat@DX8Wrapper@@1W4_D3DFORMAT@@A": {
+    "?DisplayFormat@DXWrapper@@1W4_D3DFORMAT@@A": {
       "candidates": [
         {
           "rva": "0x009EDA08",
@@ -13424,7 +13424,7 @@
         }
       ]
     },
-    "?DrawPolygonLowBoundLimit@DX8Wrapper@@1IA": {
+    "?DrawPolygonLowBoundLimit@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA80",
@@ -13820,7 +13820,7 @@
         }
       ]
     },
-    "?FogColor@DX8Wrapper@@1KA": {
+    "?FogColor@DXWrapper@@1KA": {
       "candidates": [
         {
           "rva": "0x009EDA24",
@@ -13840,7 +13840,7 @@
         }
       ]
     },
-    "?FogEnable@DX8Wrapper@@1_NA": {
+    "?FogEnable@DXWrapper@@1_NA": {
       "candidates": [
         {
           "rva": "0x009EDA21",
@@ -13872,7 +13872,7 @@
         }
       ]
     },
-    "?FrameCount@DX8Wrapper@@1KA": {
+    "?FrameCount@DXWrapper@@1KA": {
       "candidates": [
         {
           "rva": "0x009EDA84",
@@ -14421,7 +14421,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 13 exact .text readers in 11 functions: Clamp_Color::DX8Wrapper; Convert_Color_Clamp::DX8Wrapper; Has_CMOV_Instruction::CPUDetectClass; Init_Processor_Features::CPUDetectClass; Init_Processor_Log::CPUDetectClass; Render::Rva00177860; Render; readers include methods of its class CPUDetectClass (Has_CMOV_Instruction::CPUDetectClass, Init_Pro",
+          "why": "retail data row kind global_zero_init; 13 exact .text readers in 11 functions: Clamp_Color::DXWrapper; Convert_Color_Clamp::DXWrapper; Has_CMOV_Instruction::CPUDetectClass; Init_Processor_Features::CPUDetectClass; Init_Processor_Log::CPUDetectClass; Render::Rva00177860; Render; readers include methods of its class CPUDetectClass (Has_CMOV_Instruction::CPUDetectClass, Init_Pro",
           "size": 1
         }
       ]
@@ -14664,7 +14664,7 @@
         }
       ]
     },
-    "?IsDeviceLost@DX8Wrapper@@1_NA": {
+    "?IsDeviceLost@DXWrapper@@1_NA": {
       "candidates": [
         {
           "rva": "0x009EC4F8",
@@ -14688,7 +14688,7 @@
         }
       ]
     },
-    "?IsInitted@DX8Wrapper@@1_NA": {
+    "?IsInitted@DXWrapper@@1_NA": {
       "candidates": [
         {
           "rva": "0x009EDA04",
@@ -14705,7 +14705,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 6 exact .text readers in 6 functions: Do_Mappers_Need_Normals::MeshMatDescClass; Init::DX8Wrapper; Load_Texture; Reset_Device::DX8Wrapper; Rva00131068GetByte; Shutdown::DX8Wrapper; readers include methods of its class DX8Wrapper (Init::DX8Wrapper, Reset_Device::DX8Wrapper, Shutdown::DX8Wrapper); Zero Hour declares it too (ww3d.h,dx8wrapper",
+          "why": "retail data row kind global_zero_init; 6 exact .text readers in 6 functions: Do_Mappers_Need_Normals::MeshMatDescClass; Init::DXWrapper; Load_Texture; Reset_Device::DXWrapper; Rva00131068GetByte; Shutdown::DXWrapper; readers include methods of its class DXWrapper (Init::DXWrapper, Reset_Device::DXWrapper, Shutdown::DXWrapper); Zero Hour declares it too (ww3d.h,dx8wrapper",
           "size": 1
         }
       ]
@@ -14753,7 +14753,7 @@
         }
       ]
     },
-    "?IsRenderToTexture@DX8Wrapper@@1_NA": {
+    "?IsRenderToTexture@DXWrapper@@1_NA": {
       "candidates": [
         {
           "rva": "0x009EDA48",
@@ -14831,7 +14831,7 @@
         }
       ]
     },
-    "?IsWindowed@DX8Wrapper@@1_NA": {
+    "?IsWindowed@DXWrapper@@1_NA": {
       "candidates": [
         {
           "rva": "0x009EDA06",
@@ -14848,7 +14848,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 10 exact .text readers in 7 functions: Flip_To_Primary::DX8Wrapper; Get_Device_Resolution::DX8Wrapper; Get_Render_Target_Resolution::DX8Wrapper; Init::DX8Wrapper; Registry_Save_Render_Device::DX8Wrapper; Rva00116F70GetByte; Set_Render_Devi; readers include methods of its class DX8Wrapper (Flip_To_Primary::DX8Wrapper, Get_Device_Resolution:",
+          "why": "retail data row kind global_zero_init; 10 exact .text readers in 7 functions: Flip_To_Primary::DXWrapper; Get_Device_Resolution::DXWrapper; Get_Render_Target_Resolution::DXWrapper; Init::DXWrapper; Registry_Save_Render_Device::DXWrapper; Rva00116F70GetByte; Set_Render_Devi; readers include methods of its class DXWrapper (Flip_To_Primary::DXWrapper, Get_Device_Resolution:",
           "size": 2
         }
       ]
@@ -15913,7 +15913,7 @@
         }
       ]
     },
-    "?Light_Environment@DX8Wrapper@@1PAVLightEnvironmentClass@@A": {
+    "?Light_Environment@DXWrapper@@1PAVLightEnvironmentClass@@A": {
       "candidates": [
         {
           "rva": "0x009EDA14",
@@ -15930,7 +15930,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 16 exact .text readers in 14 functions: End_Scene::DX8Wrapper; Invalidate_Cached_Render_States::DX8Wrapper; Rva0014D241Get; Rva0014D595NumAmbientLights; Rva0014D64CNumDirectionalLights; Rva0014D7B1NumPointLights; SetPosition::Rva0014D887Thi; readers include methods of its class DX8Wrapper (End_Scene::DX8Wrapper, Invalidate_Cached_Render_St",
+          "why": "retail data row kind global_zero_init; 16 exact .text readers in 14 functions: End_Scene::DXWrapper; Invalidate_Cached_Render_States::DXWrapper; Rva0014D241Get; Rva0014D595NumAmbientLights; Rva0014D64CNumDirectionalLights; Rva0014D7B1NumPointLights; SetPosition::Rva0014D887Thi; readers include methods of its class DXWrapper (End_Scene::DXWrapper, Invalidate_Cached_Render_St",
           "size": 8
         }
       ]
@@ -17543,7 +17543,7 @@
         }
       ]
     },
-    "?Pixel_Shader_Constants@DX8Wrapper@@1PAVVector4@@A": {
+    "?Pixel_Shader_Constants@DXWrapper@@1PAVVector4@@A": {
       "candidates": [
         {
           "rva": "0x009EDF10",
@@ -17560,7 +17560,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail readers (1): 0x00075399+20 in ?Set_Pixel_Shader_Constant@DX8Wrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DX8Wrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h",
+          "why": "retail readers (1): 0x00075399+20 in ?Set_Pixel_Shader_Constant@DXWrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DXWrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h",
           "size": 128
         }
       ]
@@ -17787,7 +17787,7 @@
         }
       ]
     },
-    "?ProjectionMatrix@DX8Wrapper@@1VMatrix4@@A": {
+    "?ProjectionMatrix@DXWrapper@@1VMatrix4x4@@A": {
       "candidates": [
         {
           "rva": "0x009EDC30",
@@ -18137,7 +18137,7 @@
         }
       ]
     },
-    "?RenderStates@DX8Wrapper@@1PAIA": {
+    "?RenderStates@DXWrapper@@1PAIA": {
       "candidates": [
         {
           "rva": "0x009ED5F8",
@@ -18161,7 +18161,7 @@
         }
       ]
     },
-    "?ResolutionHeight@DX8Wrapper@@1HA": {
+    "?ResolutionHeight@DXWrapper@@1HA": {
       "candidates": [
         {
           "rva": "0x009B5FD8",
@@ -18178,12 +18178,12 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_scalar; 22 exact .text readers in 15 functions: Draw_Sentence::Render2DSentenceClass; Get_Device_Resolution::DX8Wrapper; Get_Device_Resolution_Width::DX8Wrapper; Get_Render_Target_Resolution::DX8Wrapper; Init::DX8Wrapper; Normalize_Coordinates::WW3; readers include methods of its class DX8Wrapper (Get_Device_Resolution::DX8Wrapper, Get_Device_Resolut",
+          "why": "retail data row kind global_scalar; 22 exact .text readers in 15 functions: Draw_Sentence::Render2DSentenceClass; Get_Device_Resolution::DXWrapper; Get_Device_Resolution_Width::DXWrapper; Get_Render_Target_Resolution::DXWrapper; Init::DXWrapper; Normalize_Coordinates::WW3; readers include methods of its class DXWrapper (Get_Device_Resolution::DXWrapper, Get_Device_Resolut",
           "size": 4
         }
       ]
     },
-    "?ResolutionWidth@DX8Wrapper@@1HA": {
+    "?ResolutionWidth@DXWrapper@@1HA": {
       "candidates": [
         {
           "rva": "0x009B5FD4",
@@ -18200,7 +18200,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "Retail .data 0x009B5FD4 (4B, init=640) matches Zero Hour DX8Wrapper::ResolutionWidth = 640; read/written by DX8Wrapper::Init, Set_Render_Device, Set_Device_Resolution, Get_Device_Resolution, WW3D::Normalize_Coordinates, and 0x00116E20.",
+          "why": "Retail .data 0x009B5FD4 (4B, init=640) matches Zero Hour DXWrapper::ResolutionWidth = 640; read/written by DXWrapper::Init, Set_Render_Device, Set_Device_Resolution, Get_Device_Resolution, WW3D::Normalize_Coordinates, and 0x00116E20.",
           "size": 4
         }
       ]
@@ -18959,7 +18959,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 318 exact .text readers in 39 functions: Activate_Snapshot::WW3D; Apply_Default_State::DX8Wrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; Draw::DX8Wrapper; End_Render::WW3D; Flush::RTS3DScene; Install_Materials::BfmeB; readers include methods of its class WW3D (Activate_Snapshot::WW3D, End_Render::WW3D, Is_Snapshot_",
+          "why": "retail data row kind global_zero_init; 318 exact .text readers in 39 functions: Activate_Snapshot::WW3D; Apply_Default_State::DXWrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; Draw::DXWrapper; End_Render::WW3D; Flush::RTS3DScene; Install_Materials::BfmeB; readers include methods of its class WW3D (Activate_Snapshot::WW3D, End_Render::WW3D, Is_Snapshot_",
           "size": 1
         }
       ]
@@ -19296,7 +19296,7 @@
         }
       ]
     },
-    "?TextureBitDepth@DX8Wrapper@@1HA": {
+    "?TextureBitDepth@DXWrapper@@1HA": {
       "candidates": [
         {
           "rva": "0x009B5FE0",
@@ -19313,7 +19313,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "Retail .data 0x009B5FE0 (4B, init=16) matches Zero Hour DX8Wrapper::TextureBitDepth = 16; read/written by DX8Wrapper::Registry_Load_Render_Device, Registry_Save_Render_Device, 0x00116E40, and 0x00117C30.",
+          "why": "Retail .data 0x009B5FE0 (4B, init=16) matches Zero Hour DXWrapper::TextureBitDepth = 16; read/written by DXWrapper::Registry_Load_Render_Device, Registry_Save_Render_Device, 0x00116E40, and 0x00117C30.",
           "size": 4
         }
       ]
@@ -19335,12 +19335,12 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_initialised; 4 exact .text readers in 3 functions: Do_Onetime_Device_Dependent_Inits::DX8Wrapper; Set_Texture_Filter::WW3D; getTextureFilter; readers include methods of its class WW3D (Set_Texture_Filter::WW3D); Zero Hour declares it too (ww3d.h,ww3d.cpp); existing spelling kept",
+          "why": "retail data row kind global_initialised; 4 exact .text readers in 3 functions: Do_Onetime_Device_Dependent_Inits::DXWrapper; Set_Texture_Filter::WW3D; getTextureFilter; readers include methods of its class WW3D (Set_Texture_Filter::WW3D); Zero Hour declares it too (ww3d.h,ww3d.cpp); existing spelling kept",
           "size": 4
         }
       ]
     },
-    "?TextureStageStates@DX8Wrapper@@1PAY0CA@IA": {
+    "?TextureStageStates@DXWrapper@@1PAY0CA@IA": {
       "candidates": [
         {
           "rva": "0x009ECA38",
@@ -19352,7 +19352,7 @@
         }
       ]
     },
-    "?Textures@DX8Wrapper@@1PAPAUIDirect3DBaseTexture8@@A": {
+    "?Textures@DXWrapper@@1PAPAUIDirect3DBaseTexture8@@A": {
       "candidates": [
         {
           "rva": "0x009EC4B0",
@@ -30421,7 +30421,7 @@
         }
       ]
     },
-    "?Vertex_Processing_Behavior@DX8Wrapper@@1KA": {
+    "?Vertex_Processing_Behavior@DXWrapper@@1KA": {
       "candidates": [
         {
           "rva": "0x009EDA1C",
@@ -30433,7 +30433,7 @@
         }
       ]
     },
-    "?Vertex_Shader_Constants@DX8Wrapper@@1PAVVector4@@A": {
+    "?Vertex_Shader_Constants@DXWrapper@@1PAVVector4@@A": {
       "candidates": [
         {
           "rva": "0x009EDFA8",
@@ -30450,7 +30450,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail readers (1): 0x00075343+20 in ?Set_Vertex_Shader_Constant@DX8Wrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DX8Wrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h",
+          "why": "retail readers (1): 0x00075343+20 in ?Set_Vertex_Shader_Constant@DXWrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DXWrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h",
           "size": 1536
         }
       ]
@@ -30714,7 +30714,7 @@
         }
       ]
     },
-    "?ZFar@DX8Wrapper@@1MA": {
+    "?ZFar@DXWrapper@@1MA": {
       "candidates": [
         {
           "rva": "0x009ED9F8",
@@ -30726,7 +30726,7 @@
         }
       ]
     },
-    "?ZNear@DX8Wrapper@@1MA": {
+    "?ZNear@DXWrapper@@1MA": {
       "candidates": [
         {
           "rva": "0x009EC4F0",
@@ -30798,7 +30798,7 @@
         }
       ]
     },
-    "?_EnableTriangleDraw@DX8Wrapper@@1_NA": {
+    "?_EnableTriangleDraw@DXWrapper@@1_NA": {
       "candidates": [
         {
           "rva": "0x009B5FCD",
@@ -30815,7 +30815,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_initialised; 10 exact .text readers in 8 functions: Draw::DX8Wrapper; Flush::SortingRendererClass; RenderDynamicMeshVolume::W3DVolumetricShadow; RenderMeshVolume::W3DVolumetricShadow; Rva0006E19BGetByte; _Enable_Triangle_Draw::DX8Wrapper; renderStencil; readers include methods of its class DX8Wrapper (Draw::DX8Wrapper, _Enable_Triangle_Draw::DX8Wrapp",
+          "why": "retail data row kind global_initialised; 10 exact .text readers in 8 functions: Draw::DXWrapper; Flush::SortingRendererClass; RenderDynamicMeshVolume::W3DVolumetricShadow; RenderMeshVolume::W3DVolumetricShadow; Rva0006E19BGetByte; _Enable_Triangle_Draw::DXWrapper; renderStencil; readers include methods of its class DXWrapper (Draw::DXWrapper, _Enable_Triangle_Draw::DX8Wrapp",
           "size": 3
         }
       ]
@@ -30972,7 +30972,7 @@
         }
       ]
     },
-    "?_MainThreadID@DX8Wrapper@@1IA": {
+    "?_MainThreadID@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA70",
@@ -31766,7 +31766,7 @@
         }
       ]
     },
-    "?_formats16@?1??Find_Color_And_Z_Mode@DX8Wrapper@@KA_NHHHPAW4_D3DFORMAT@@00@Z@4PAW43@A": {
+    "?_formats16@?1??Find_Color_And_Z_Mode@DXWrapper@@KA_NHHHPAW4_D3DFORMAT@@00@Z@4PAW43@A": {
       "candidates": [
         {
           "rva": "0x009B5FF4",
@@ -31778,7 +31778,7 @@
         }
       ]
     },
-    "?_formats32@?1??Find_Color_And_Z_Mode@DX8Wrapper@@KA_NHHHPAW4_D3DFORMAT@@00@Z@4PAW43@A": {
+    "?_formats32@?1??Find_Color_And_Z_Mode@DXWrapper@@KA_NHHHPAW4_D3DFORMAT@@00@Z@4PAW43@A": {
       "candidates": [
         {
           "rva": "0x009B5FE8",
@@ -35580,7 +35580,7 @@
         }
       ]
     },
-    "?draw_calls@DX8Wrapper@@1IA": {
+    "?draw_calls@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA6C",
@@ -59991,7 +59991,7 @@
         }
       ]
     },
-    "?index_buffer_changes@DX8Wrapper@@1IA": {
+    "?index_buffer_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA58",
@@ -62486,7 +62486,7 @@
         }
       ]
     },
-    "?light_changes@DX8Wrapper@@1IA": {
+    "?light_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA5C",
@@ -62582,7 +62582,7 @@
         }
       ]
     },
-    "?mWorld@?1??flushDecals@W3DProjectedShadowManager@@QAEXW4ShadowType@@PAVW3DShadowTexture@@1H@Z@4VMatrix4@@A": {
+    "?mWorld@?1??flushDecals@W3DProjectedShadowManager@@QAEXW4ShadowType@@PAVW3DShadowTexture@@1H@Z@4VMatrix4x4@@A": {
       "candidates": [
         {
           "rva": "0x009EC318",
@@ -63704,7 +63704,7 @@
         }
       ]
     },
-    "?m_pCleanupHook@DX8Wrapper@@1PAVDX8_CleanupHook@@A": {
+    "?m_pCleanupHook@DXWrapper@@1PAVDX8_CleanupHook@@A": {
       "candidates": [
         {
           "rva": "0x009EDA90",
@@ -64136,7 +64136,7 @@
         }
       ]
     },
-    "?material_changes@DX8Wrapper@@1IA": {
+    "?material_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA50",
@@ -64148,7 +64148,7 @@
         }
       ]
     },
-    "?matrix_changes@DX8Wrapper@@1IA": {
+    "?matrix_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA4C",
@@ -65124,7 +65124,7 @@
         }
       ]
     },
-    "?old_prj@DX8Wrapper@@1U_D3DMATRIX@@A": {
+    "?old_prj@DXWrapper@@1U_D3DMATRIX@@A": {
       "candidates": [
         {
           "rva": "0x009EC558",
@@ -65136,7 +65136,7 @@
         }
       ]
     },
-    "?old_view@DX8Wrapper@@1U_D3DMATRIX@@A": {
+    "?old_view@DXWrapper@@1U_D3DMATRIX@@A": {
       "candidates": [
         {
           "rva": "0x009EC5A0",
@@ -65148,7 +65148,7 @@
         }
       ]
     },
-    "?old_world@DX8Wrapper@@1U_D3DMATRIX@@A": {
+    "?old_world@DXWrapper@@1U_D3DMATRIX@@A": {
       "candidates": [
         {
           "rva": "0x009EC500",
@@ -65959,7 +65959,7 @@
         }
       ]
     },
-    "?render_state@DX8Wrapper@@1URenderStateStruct@@A": {
+    "?render_state@DXWrapper@@1URenderStateStruct@@A": {
       "candidates": [
         {
           "rva": "0x009EE5D8",
@@ -65979,7 +65979,7 @@
         }
       ]
     },
-    "?render_state_changed@DX8Wrapper@@1IA": {
+    "?render_state_changed@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EC4F4",
@@ -65999,7 +65999,7 @@
         }
       ]
     },
-    "?render_state_changes@DX8Wrapper@@1IA": {
+    "?render_state_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA64",
@@ -66016,7 +66016,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 164 exact .text readers in 35 functions: Apply_Default_State::DX8Wrapper; Begin_Statistics::DX8Wrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; End_Statistics::DX8Wrapper; Flush::RTS3DScene; Init::DX8Wrapper; Install_M; readers include methods of its class DX8Wrapper (Apply_Default_State::DX8Wrapper, Begin_Statistics",
+          "why": "retail data row kind global_zero_init; 164 exact .text readers in 35 functions: Apply_Default_State::DXWrapper; Begin_Statistics::DXWrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; End_Statistics::DXWrapper; Flush::RTS3DScene; Init::DXWrapper; Install_M; readers include methods of its class DXWrapper (Apply_Default_State::DXWrapper, Begin_Statistics",
           "size": 4
         }
       ]
@@ -70160,7 +70160,7 @@
         }
       ]
     },
-    "?texture_changes@DX8Wrapper@@1IA": {
+    "?texture_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA60",
@@ -70180,7 +70180,7 @@
         }
       ]
     },
-    "?texture_stage_state_changes@DX8Wrapper@@1IA": {
+    "?texture_stage_state_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA68",
@@ -70197,7 +70197,7 @@
           "proven": true,
           "confidence": "strong",
           "source": "review",
-          "why": "retail data row kind global_zero_init; 230 exact .text readers in 31 functions: Apply::TextureFilterClass; Apply_Default_State::DX8Wrapper; Begin_Statistics::DX8Wrapper; End_Statistics::DX8Wrapper; Init::DX8Wrapper; Install_Materials::BfmeB1137; Install_Materials::W3DGlowOutlineM; readers include methods of its class DX8Wrapper (Apply_Default_State::DX8Wrapper, Begin_Statistics",
+          "why": "retail data row kind global_zero_init; 230 exact .text readers in 31 functions: Apply::TextureFilterClass; Apply_Default_State::DXWrapper; Begin_Statistics::DXWrapper; End_Statistics::DXWrapper; Init::DXWrapper; Install_Materials::BfmeB1137; Install_Materials::W3DGlowOutlineM; readers include methods of its class DXWrapper (Apply_Default_State::DXWrapper, Begin_Statistics",
           "size": 4
         }
       ]
@@ -72578,7 +72578,7 @@
         }
       ]
     },
-    "?vertex_buffer_changes@DX8Wrapper@@1IA": {
+    "?vertex_buffer_changes@DXWrapper@@1IA": {
       "candidates": [
         {
           "rva": "0x009EDA54",
@@ -122635,7 +122635,7 @@
         }
       ]
     },
-    "?FogStart@DX8Wrapper@@1MA": {
+    "?FogStart@DXWrapper@@1MA": {
       "candidates": [
         {
           "rva": "0x009EDA28",
@@ -122647,7 +122647,7 @@
         }
       ]
     },
-    "?FogEnd@DX8Wrapper@@1MA": {
+    "?FogEnd@DXWrapper@@1MA": {
       "candidates": [
         {
           "rva": "0x009EDA2C",

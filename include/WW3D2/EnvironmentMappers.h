@@ -15,7 +15,7 @@ public:
 	virtual TextureMapperClass *Clone() const;
 	virtual void Apply(int uv_array_index);
 	virtual bool Needs_Normals() { return true; }						// slot 7
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 };
 
 class EnvironmentMapperClass : public TextureMapperClass
@@ -27,7 +27,7 @@ public:
 	virtual TextureMapperClass *Clone() const;
 	virtual void Apply(int uv_array_index);
 	virtual bool Needs_Normals() { return true; }						// slot 7
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 };
 
 typedef char ClassicEnvironmentMapperClassSize[(sizeof(ClassicEnvironmentMapperClass) == 0xC) ? 1 : -1];

@@ -2,7 +2,7 @@
 // dxsdk
 // stlport46
 #include "WW3D2/FXShaderRenderer.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/IDirect3DDevice9.h"
 
 struct IDirect3DVertexShader9;
@@ -56,18 +56,18 @@ FXShaderRenderer *TheFXShaderRenderer = NULL;
 void FXShaderRenderer::Flush(void)
 {
 	if (!HardwareSkinnedTasks.empty() || !SoftwareSkinnedTasks.empty() || !RigidTasks.empty()) {
-		DX8Wrapper::Set_Skip_Fixed_Function_State(true);
+		DXWrapper::Set_Skip_Fixed_Function_State(true);
 		FlushHardwareSkinnedRenderingTasks();
 		FlushSoftwareSkinnedRenderingTasks();
 		FlushRigidRenderingTasks();
-		DX8Wrapper::Set_Skip_Fixed_Function_State(false);
-		DX8Wrapper::Invalidate_Texture_Stages();
+		DXWrapper::Set_Skip_Fixed_Function_State(false);
+		DXWrapper::Invalidate_Texture_Stages();
 
 		// SetVertexShader and SetPixelShader are slots 92 and 107 on the D3D9 device.
-		IDirect3DDevice9 *device = DX8Wrapper::_Get_D3D_Device9();
+		IDirect3DDevice9 *device = DXWrapper::_Get_D3D_Device9();
 		device->SetVertexShader(NULL);
 		++number_of_DX8_calls;
-		device = DX8Wrapper::_Get_D3D_Device9();
+		device = DXWrapper::_Get_D3D_Device9();
 		device->SetPixelShader(NULL);
 		++number_of_DX8_calls;
 	}

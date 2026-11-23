@@ -28,7 +28,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual void Apply(int uv_array_index);
 	virtual bool Convert_To_FXShader(FXShaderParameterList *parameters);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 protected:
 	Vector2 Scale;		// +0x0C
@@ -46,7 +46,7 @@ public:
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual void Reset(void);
 	virtual bool Convert_To_FXShader(FXShaderParameterList *parameters);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 	void Set_Current_UV_Offset(const Vector2 &cur) { CurrentUVOffset = cur; }
 	void Set_UV_Offset_Delta(const Vector2 &per_sec) { UVOffsetDeltaPerMS = per_sec; UVOffsetDeltaPerMS.X *= -0.001f; UVOffsetDeltaPerMS.Y *= -0.001f; }
@@ -75,7 +75,7 @@ public:
 	virtual void Apply(int uv_array_index);
 	virtual void Reset(void);
 	virtual bool Convert_To_FXShader(FXShaderParameterList *parameters);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 	void Set_Frame(unsigned int frame) { CurrentFrame = frame; }
 	void Set_Frame_Per_Second(float fps);
@@ -107,7 +107,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual void Apply(int uv_array_index);
 	virtual bool Needs_Normals(void) { return true; }
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 };
 
 class GridEnvironmentMapperClass : public GridTextureMapperClass
@@ -118,7 +118,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual void Apply(int uv_array_index);
 	virtual bool Needs_Normals(void) { return true; }
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 };
 
 class RotateTextureMapperClass : public ScaleTextureMapperClass
@@ -132,7 +132,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual void Reset(void);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 private:
 	float CurrentAngle;
@@ -152,7 +152,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual void Reset(void);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 private:
 	Vector3 UAFP;			// U coordinate amplitude, frequency, phase
@@ -172,7 +172,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual void Reset(void);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 private:
 	Vector2 Step;
@@ -194,7 +194,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual void Reset(void);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 private:
 	Vector2 Speed;
@@ -217,7 +217,7 @@ public:
 	virtual void Reset(void);
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual bool Needs_Normals(void) { return true; }
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 protected:
 	unsigned int LastUsedSyncTime;
@@ -236,7 +236,7 @@ public:
 	virtual TextureMapperClass *Clone(void) const;
 	virtual bool Is_Time_Variant(void) { return true; }
 	virtual void Reset(void);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 protected:
 	void randomize(void);
@@ -259,7 +259,7 @@ public:
 	WSEnvMapperClass(const INIClass &ini, const char *section, unsigned int stage);	// 0x00183620
 
 	virtual bool Needs_Normals(void) { return true; }
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 
 protected:
 	AxisType Axis;	// +0x0C
@@ -301,7 +301,7 @@ public:
 	GridWSEnvMapperClass(float fps, unsigned int gridwidth_log2, unsigned int last_frame, unsigned int offset, AxisType axis, unsigned int stage);	// 0x00186DA0
 	GridWSEnvMapperClass(const GridWSEnvMapperClass &src);											// 0x00186E00
 	GridWSEnvMapperClass(const INIClass &ini, const char *section, unsigned int stage);				// 0x00186E30
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 	virtual bool Needs_Normals(void) { return true; }
 
 protected:
@@ -343,7 +343,7 @@ public:
 	virtual int Mapper_ID(void) const { return MAPPER_ID_SCREEN; }
 	virtual TextureMapperClass *Clone(void) const;
 	virtual void Apply(int uv_array_index);
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix);
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix);
 };
 
 // BumpEnv: Apply 0x00186A90 reads LastUsedSyncTime, CurrentAngle, RadiansPerSecond and ScaleFactor at +0x34..+0x40.

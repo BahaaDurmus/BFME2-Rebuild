@@ -7,7 +7,7 @@
 // Portions derived from Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
 #include <math.h>
 #include "WW3D2/mapper.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WWLib/ini.h"
 #include "WWLib/random.h"
@@ -71,16 +71,16 @@ ScaleTextureMapperClass::ScaleTextureMapperClass(const ScaleTextureMapperClass &
 
 
 
-// FUNCTION: BFME2 0x00182270 size=108 name=?Calculate_Texture_Matrix@ScaleTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void ScaleTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x00182270 size=108 name=?Calculate_Texture_Matrix@ScaleTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void ScaleTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	tex_matrix.Make_Identity();
 	tex_matrix[0].X = Scale.X;
 	tex_matrix[1].Y = Scale.Y;
 }
 
-// FUNCTION: BFME2 0x001822E0 size=337 name=?Calculate_Texture_Matrix@LinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void LinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x001822E0 size=337 name=?Calculate_Texture_Matrix@LinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void LinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int delta = WW3D::Get_Sync_Time() - LastUsedSyncTime;
 	float del = (float)delta;
@@ -230,8 +230,8 @@ void RotateTextureMapperClass::Reset(void)
 	LastUsedSyncTime = WW3D::Get_Sync_Time();
 }
 
-// FUNCTION: BFME2 0x00182800 size=416 name=?Calculate_Texture_Matrix@RotateTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void RotateTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x00182800 size=416 name=?Calculate_Texture_Matrix@RotateTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void RotateTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int now = WW3D::Get_Sync_Time();
 	unsigned int delta = now - LastUsedSyncTime;
@@ -301,8 +301,8 @@ void SineLinearOffsetTextureMapperClass::Reset(void)
 	LastUsedSyncTime = WW3D::Get_Sync_Time();
 }
 
-// FUNCTION: BFME2 0x00182BA0 size=226 name=?Calculate_Texture_Matrix@SineLinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void SineLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x00182BA0 size=226 name=?Calculate_Texture_Matrix@SineLinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void SineLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int now = WW3D::Get_Sync_Time();
 	unsigned int delta = now - LastUsedSyncTime;
@@ -375,8 +375,8 @@ void StepLinearOffsetTextureMapperClass::Reset(void)
 	Remainder = 0;
 }
 
-// FUNCTION: BFME2 0x00182E80 size=400 name=?Calculate_Texture_Matrix@StepLinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void StepLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x00182E80 size=400 name=?Calculate_Texture_Matrix@StepLinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void StepLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int now = WW3D::Get_Sync_Time();
 	unsigned int delta =  now - LastUsedSyncTime;
@@ -464,8 +464,8 @@ void ZigZagLinearOffsetTextureMapperClass::Reset(void)
 	Remainder = 0;
 }
 
-// FUNCTION: BFME2 0x00183240 size=248 name=?Calculate_Texture_Matrix@ZigZagLinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void ZigZagLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x00183240 size=248 name=?Calculate_Texture_Matrix@ZigZagLinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void ZigZagLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int now = WW3D::Get_Sync_Time();
 	unsigned int delta = now - LastUsedSyncTime;
@@ -544,8 +544,8 @@ void EdgeMapperClass::Reset(void)
 	VOffset = 0.0f;
 }
 
-// FUNCTION: BFME2 0x00183540 size=214 name=?Calculate_Texture_Matrix@EdgeMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void EdgeMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x00183540 size=214 name=?Calculate_Texture_Matrix@EdgeMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void EdgeMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int now = WW3D::Get_Sync_Time();
 
@@ -577,8 +577,8 @@ void RandomTextureMapperClass::Reset(void)
 	Remainder=0;
 }
 
-// FUNCTION: BFME2 0x001838B0 size=393 name=?Calculate_Texture_Matrix@RandomTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=L hypothesis:name:L
-void RandomTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x001838B0 size=393 name=?Calculate_Texture_Matrix@RandomTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=L hypothesis:name:L
+void RandomTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	unsigned int now = WW3D::Get_Sync_Time();
 	unsigned int delta = now - LastUsedSyncTime;
@@ -768,19 +768,19 @@ GridTextureMapperClass::GridTextureMapperClass(const GridTextureMapperClass &src
 void ScaleTextureMapperClass::Apply(int uv_array_index)
 {
 	// Set up the texture matrix
-	Matrix4 m;
+	Matrix4x4 m;
 	Calculate_Texture_Matrix(m);
-	DX8Wrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
+	DXWrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
 
 	// Disable Texgen
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_PASSTHRU | uv_array_index);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_PASSTHRU | uv_array_index);
 
 	// Tell rasterizer to expect 2D texture coordinates
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
 }
 
-// FUNCTION: BFME2 0x001849A0 size=267 name=?Calculate_Texture_Matrix@GridTextureMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
-void GridTextureMapperClass::Calculate_Texture_Matrix(Matrix4 &tex_matrix)
+// FUNCTION: BFME2 0x001849A0 size=267 name=?Calculate_Texture_Matrix@GridTextureMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
+void GridTextureMapperClass::Calculate_Texture_Matrix(Matrix4x4 &tex_matrix)
 {
 	update_temporal_state();
 
@@ -806,68 +806,68 @@ void GridTextureMapperClass::Set_Frame_Per_Second(float fps)
 void GridWSClassicEnvironmentMapperClass::Apply(int uv_array_index)
 {
 	// Set up the texture matrix
-	Matrix4 m;
+	Matrix4x4 m;
 	Calculate_Texture_Matrix(m);
-	DX8Wrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
+	DXWrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
 
 	// Get camera normals
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACENORMAL);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACENORMAL);
 
 	// Tell rasterizer to expect 2D matrices
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
 }
 
 // FUNCTION: BFME2 0x00184FD0 size=1288 name=?Apply@EdgeMapperClass@@UAEXH@Z evidence=N:ledger tier=B hypothesis:cohesion
 void EdgeMapperClass::Apply(int uv_array_index)
 {
 	// Set up the texture matrix
-	Matrix4 m;
+	Matrix4x4 m;
 	Calculate_Texture_Matrix(m);
-	DX8Wrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
+	DXWrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
 
 	// Get camera reflection vector
 	if (UseReflect)
-		DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEREFLECTIONVECTOR);
+		DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEREFLECTIONVECTOR);
 	else
-		DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACENORMAL);
+		DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACENORMAL);
 
 	// Tell rasterizer to expect 2D matrices
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
 }
 
-// FUNCTION: BFME2 0x001854E0 size=1174 name=?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
+// FUNCTION: BFME2 0x001854E0 size=1174 name=?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
 
 // FUNCTION: BFME2 0x00185980 size=1266 name=?Apply@GridWSEnvironmentMapperClass@@UAEXH@Z evidence=N:ledger tier=B hypothesis:cohesion
 void GridWSEnvironmentMapperClass::Apply(int uv_array_index)
 {
 	// Set up the texture matrix
-	Matrix4 m;
+	Matrix4x4 m;
 	Calculate_Texture_Matrix(m);
-	DX8Wrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
+	DXWrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
 
 	// Get camera space reflection
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEREFLECTIONVECTOR);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEREFLECTIONVECTOR);
 
 	// Tell rasterizer to expect 2D matrices
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_COUNT2);
 }
 
 // FUNCTION: BFME2 0x00185E80 size=1269 name=?Apply@ScreenMapperClass@@UAEXH@Z evidence=N:ledger tier=B hypothesis:cohesion
 void ScreenMapperClass::Apply(int uv_array_index)
 {
 	// Set up the texture matrix
-	Matrix4 m;
+	Matrix4x4 m;
 	Calculate_Texture_Matrix(m);
-	DX8Wrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
+	DXWrapper::Set_Transform((D3DTRANSFORMSTATETYPE)(D3DTS_TEXTURE0 + Stage), m);
 
 	// Get camera space position
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEPOSITION);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_CAMERASPACEPOSITION);
 
 	// Tell rasterizer what to expect
-	DX8Wrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_PROJECTED | D3DTTFF_COUNT3);
+	DXWrapper::Set_DX8_Texture_Stage_State(Stage, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_PROJECTED | D3DTTFF_COUNT3);
 }
 
-// FUNCTION: BFME2 0x00186380 size=823 name=?Calculate_Texture_Matrix@ScreenMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
+// FUNCTION: BFME2 0x00186380 size=823 name=?Calculate_Texture_Matrix@ScreenMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
 
 // FUNCTION: BFME2 0x001866C0 size=203 name=??0RandomTextureMapperClass@@QAE@MABVVector2@@I@Z evidence=N:ledger tier=B hypothesis:cohesion
 RandomTextureMapperClass::RandomTextureMapperClass(float fps, const Vector2 &scale, unsigned int stage) :
@@ -1006,7 +1006,7 @@ GridWSEnvMapperClass::GridWSEnvMapperClass(const INIClass &ini, const char *sect
 	}
 }
 
-// FUNCTION: BFME2 0x00186F10 size=1166 name=?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
+// FUNCTION: BFME2 0x00186F10 size=1166 name=?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:cohesion
 
 // FUNCTION: BFME2 0x001873A0 size=88 name=??0GridWSClassicEnvironmentMapperClass@@QAE@MIIIW4AxisType@GridWSEnvMapperClass@@I@Z evidence=N:ledger tier=B hypothesis:cohesion
 GridWSClassicEnvironmentMapperClass::GridWSClassicEnvironmentMapperClass(float fps, unsigned int gridwidth_log2, unsigned int last_frame, unsigned int offset, AxisType axis, unsigned int stage) :

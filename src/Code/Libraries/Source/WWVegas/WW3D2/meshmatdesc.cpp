@@ -16,7 +16,7 @@
 #include "WW3D2/TexBufferClass.h"
 #include "WW3D2/UVBufferClass.h"
 #include "WW3D2/VertexMaterialClass.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/DX8Caps.h"
 #include "WW3D2/WW3D.h"
 
@@ -299,7 +299,7 @@ void MeshMatDescClass::Configure_Material(VertexMaterialClass *mtl, int pass, bo
 // FUNCTION: BFME2 0x0015A9F0 size=271 name=?Do_Mappers_Need_Normals@MeshMatDescClass@@QAE_NXZ evidence=N:ledger tier=B hypothesis:K
 bool MeshMatDescClass::Do_Mappers_Need_Normals(void)
 {
-	if (DX8Wrapper::Is_Initted() && DX8Wrapper::Get_Current_Caps()->Support_NPatches() && WW3D::Get_NPatches_Level() > 1) return true;
+	if (DXWrapper::Is_Initted() && DXWrapper::Get_Current_Caps()->Support_NPatches() && WW3D::Get_NPatches_Level() > 1) return true;
 
 	for (int pass = 0; pass < PassCount; pass++) {
 		// Check the materials on this pass to see if any have mappers which require normals

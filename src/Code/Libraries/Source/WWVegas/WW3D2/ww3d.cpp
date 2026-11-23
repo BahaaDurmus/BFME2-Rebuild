@@ -11,7 +11,7 @@
 #include "WW3D2/framgrab.h"
 #include "WWLib/bound.h"
 #include "WW3D2/TextureFilterClass.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/PolyRenderTaskClass.h"
 #include "WW3D2/MatPassTaskClass.h"
 #include "WW3D2/MaterialPassClass.h"
@@ -103,19 +103,19 @@ void WW3D::Set_NPatches_Level(unsigned level)
 // FUNCTION: BFME2 0x00116F00 size=11 name=?Set_Any_Render_Device@WW3D@@SA_NXZ evidence=N:ledger tier=B hypothesis:Z
 bool WW3D::Set_Any_Render_Device(void)
 {
-	return DX8Wrapper::Set_Any_Render_Device() ? true : false;
+	return DXWrapper::Set_Any_Render_Device() ? true : false;
 }
 
 // FUNCTION: BFME2 0x00116F10 size=54 name=?Set_Render_Device@WW3D@@SA_NHHHHH_N00@Z evidence=N:ledger tier=B hypothesis:Z
 bool WW3D::Set_Render_Device(int dev, int resx, int resy, int bits, int windowed, bool resize_window, bool reset_device, bool restore_assets)
 {
-	return DX8Wrapper::Set_Render_Device(dev, resx, resy, bits, windowed, resize_window, reset_device, restore_assets) ? true : false;
+	return DXWrapper::Set_Render_Device(dev, resx, resy, bits, windowed, resize_window, reset_device, restore_assets) ? true : false;
 }
 
 // FUNCTION: BFME2 0x00116F50 size=11 name=?Set_Next_Render_Device@WW3D@@SA_NXZ evidence=N:ledger tier=B hypothesis:Z
 bool WW3D::Set_Next_Render_Device(void)
 {
-	return DX8Wrapper::Set_Next_Render_Device() ? true : false;
+	return DXWrapper::Set_Next_Render_Device() ? true : false;
 }
 
 // FUNCTION: BFME2 0x00116F60 size=6 name=?Get_Window@WW3D@@SAPAXXZ evidence=N:ledger tier=B hypothesis:Z
@@ -129,30 +129,30 @@ void *WW3D::Get_Window(void)
 // FUNCTION: BFME2 0x00116FC0 size=39 name=?Set_Device_Resolution@WW3D@@SA_NHHHH_N@Z evidence=N:ledger tier=B hypothesis:Z
 bool WW3D::Set_Device_Resolution(int w, int h, int bits, int windowed, bool resize_window)
 {
-	return DX8Wrapper::Set_Device_Resolution(w, h, bits, windowed, resize_window) ? true : false;
+	return DXWrapper::Set_Device_Resolution(w, h, bits, windowed, resize_window) ? true : false;
 }
 
 void WW3D::Get_Render_Target_Resolution(int &set_w, int &set_h, int &set_bits, bool &set_windowed)
 {
-	DX8Wrapper::Get_Render_Target_Resolution(set_w, set_h, set_bits, set_windowed);
+	DXWrapper::Get_Render_Target_Resolution(set_w, set_h, set_bits, set_windowed);
 }
 
 // FUNCTION: BFME2 0x00117010 size=19 name=?SaveRenderDeviceRegistry@@YA_NPBD@Z evidence=N:ledger tier=B hypothesis:Z
 bool SaveRenderDeviceRegistry(const char *sub_key)
 {
-	return DX8Wrapper::Registry_Save_Render_Device(sub_key) ? true : false;
+	return DXWrapper::Registry_Save_Render_Device(sub_key) ? true : false;
 }
 
 // FUNCTION: BFME2 0x00117030 size=49 name=?SaveRenderDeviceRegistrySettings@@YA_NPBDHHHH_NH@Z evidence=N:ledger tier=B hypothesis:Z
 bool SaveRenderDeviceRegistrySettings(const char *sub_key, int device, int width, int height, int depth, bool windowed, int texture_depth)
 {
-	return DX8Wrapper::Registry_Save_Render_Device(sub_key, device, width, height, depth, windowed, texture_depth) ? true : false;
+	return DXWrapper::Registry_Save_Render_Device(sub_key, device, width, height, depth, windowed, texture_depth) ? true : false;
 }
 
 // FUNCTION: BFME2 0x00117070 size=24 name=?LoadRenderDeviceRegistry@@YA_NPBD_N@Z evidence=N:ledger tier=B hypothesis:Z
 bool LoadRenderDeviceRegistry(const char *sub_key, bool resize_window)
 {
-	return DX8Wrapper::Registry_Load_Render_Device(sub_key, resize_window) ? true : false;
+	return DXWrapper::Registry_Load_Render_Device(sub_key, resize_window) ? true : false;
 }
 
 // FUNCTION: BFME2 0x001170A0 size=120 name=?_Invalidate_Mesh_Cache@WW3D@@SAXXZ evidence=N:ledger tier=B hypothesis:Z
@@ -196,7 +196,7 @@ bool WW3D::End_Render(bool flip_frame)
 
 	IsRendering = false;
 
-	DX8Wrapper::End_Scene(flip_frame);
+	DXWrapper::End_Scene(flip_frame);
 
 	FrameCount++;
 
@@ -207,7 +207,7 @@ bool WW3D::End_Render(bool flip_frame)
 
 	// (gth) I've found some cases where its not safe to rely on our "shadow" copy (of matrices for example) across multiple
 	// frames.  So even though this is slightly less "optimal", lets just reset the caches each frame.
-	DX8Wrapper::Invalidate_Cached_Render_States();
+	DXWrapper::Invalidate_Cached_Render_States();
 
 	return true;
 }
@@ -302,7 +302,7 @@ int WW3D::Get_Texture_Reduction(void)
 // FUNCTION: BFME2 0x00117C30 size=6 name=?getTextureBitDepth@@YAHXZ evidence=N:ledger tier=A
 int getTextureBitDepth(void)
 {
-	return DX8Wrapper::Get_Texture_Bit_Depth();
+	return DXWrapper::Get_Texture_Bit_Depth();
 }
 
 // FUNCTION: BFME2 0x00117C40 size=22 name=?Add_To_Static_Sort_List@WW3D@@SAXPAVRenderObjClass@@I@Z evidence=N:ledger tier=A
@@ -347,18 +347,18 @@ void WW3D::Reset_Current_Static_Sort_Lists_To_Default(void)
 // FUNCTION: BFME2 0x00117CD0 size=31 name=?Set_Gamma@WW3D@@SAXMMM_N@Z evidence=N:ledger tier=A
 void WW3D::Set_Gamma(float gamma, float bright, float contrast, bool calibrate)
 {
-	DX8Wrapper::Set_Gamma(gamma, bright, contrast, calibrate);
+	DXWrapper::Set_Gamma(gamma, bright, contrast, calibrate);
 }
 
 // FUNCTION: BFME2 0x00117DC0 size=330 name=?Execute@Rva007ACBC0CmdInterface@@UAE_NAAVDebug@@PBDW4CommandMode@DebugCmdInterface@@IPBQBD@Z evidence=?:placeholder tier=B hypothesis:K
 
 // FUNCTION: BFME2 0x00117F10 size=28 name=?Delete@Rva007ACBC0CmdInterface@@UAEXXZ evidence=?:placeholder tier=B hypothesis:K
 
-// FUNCTION: BFME2 0x00117F50 size=227 name=?Set_Ambient@DX8Wrapper@@SAXABVVector3@@@Z evidence=N:ledger tier=B hypothesis:K
-void DX8Wrapper::Set_Ambient(const Vector3 &color)
+// FUNCTION: BFME2 0x00117F50 size=227 name=?Set_Ambient@DXWrapper@@SAXABVVector3@@@Z evidence=N:ledger tier=B hypothesis:K
+void DXWrapper::Set_Ambient(const Vector3 &color)
 {
 	Ambient_Color = color;
-	Set_DX8_Render_State(D3DRS_AMBIENT, DX8Wrapper::Convert_Color(color, 0.0f));
+	Set_DX8_Render_State(D3DRS_AMBIENT, DXWrapper::Convert_Color(color, 0.0f));
 }
 
 
@@ -376,12 +376,12 @@ void DX8Wrapper::Set_Ambient(const Vector3 &color)
 void WW3D::Normalize_Coordinates(int x, int y, float &fx, float &fy)
 {
 	// clip the coordinates back into the resolution of the screen
-	x = Bound(x, 0, DX8Wrapper::Get_Device_Resolution_Width());
-	y = Bound(y, 0, DX8Wrapper::Get_Device_Resolution_Height());
+	x = Bound(x, 0, DXWrapper::Get_Device_Resolution_Width());
+	y = Bound(y, 0, DXWrapper::Get_Device_Resolution_Height());
 
 	// now that the coordinates are clipped convert them to their normalized values.
-	fx = (float)x / DX8Wrapper::Get_Device_Resolution_Width();
-	fy = (float)y / DX8Wrapper::Get_Device_Resolution_Height();
+	fx = (float)x / DXWrapper::Get_Device_Resolution_Width();
+	fy = (float)y / DXWrapper::Get_Device_Resolution_Height();
 }
 
 // FUNCTION: BFME2 0x00118530 size=213 name=?Start_Movie_Capture@WW3D@@SAXPBDMH_N@Z evidence=N:ledger tier=B hypothesis:Z

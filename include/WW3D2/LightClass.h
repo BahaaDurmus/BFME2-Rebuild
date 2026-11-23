@@ -56,7 +56,7 @@ public:
 	float Get_Intensity(void) const { return Intensity; }
 	void Get_Far_Attenuation_Range(float &start, float &end) const { start = FarAttenStart; end = FarAttenEnd; }
 	void Get_Far_Attenuation_Range(double &start, double &end) const { start = FarAttenStart; end = FarAttenEnd; }
-	// Zero Hour's inline accessors (DX8Wrapper::Set_Light 0x0011DD80 reads them).
+	// Zero Hour's inline accessors (DXWrapper::Set_Light 0x0011DD80 reads them).
 	void Get_Ambient(Vector3 *set_ambient) const { *set_ambient = Ambient; }
 	void Get_Diffuse(Vector3 *set_diffuse) const { *set_diffuse = Diffuse; }
 	void Get_Specular(Vector3 *set_specular) const { *set_specular = Specular; }

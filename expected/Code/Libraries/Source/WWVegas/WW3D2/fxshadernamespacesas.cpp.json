@@ -9,7 +9,7 @@
       "role": "comdat",
       "parent_rva": "",
       "fold_group": "",
-      "name": "?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z",
+      "name": "?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z",
       "name_evidence": "?:placeholder",
       "confidence": "high",
       "evidence": "N:template-instantiation",
@@ -22,7 +22,7 @@
       "parent": null,
       "object": "O0014DA92",
       "accepted_names": [
-        "?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z"
+        "?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z"
       ],
       "seed_tier": "B",
       "membership_hypothesis": "hypothesis:K"
@@ -788,7 +788,7 @@
       "role": "comdat",
       "parent_rva": "",
       "fold_group": "",
-      "name": "?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z",
+      "name": "?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z",
       "name_evidence": "N:ledger",
       "confidence": "high",
       "evidence": "N:template-instantiation",
@@ -801,7 +801,7 @@
       "parent": null,
       "object": "O0014DA92",
       "accepted_names": [
-        "?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z"
+        "?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z"
       ],
       "seed_tier": "B",
       "membership_hypothesis": "hypothesis:K"
@@ -1765,7 +1765,7 @@
       "role": "ehhandler",
       "parent_rva": "0x0014DA92",
       "fold_group": "",
-      "name": "__ehhandler$?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z",
+      "name": "__ehhandler$?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z",
       "name_evidence": "?:placeholder",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x0090AFF4;X:parent-by-prologue",
@@ -1778,7 +1778,7 @@
       "parent": "0x0014DA92",
       "object": "O0014DA92",
       "accepted_names": [
-        "__ehhandler$?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z"
+        "__ehhandler$?rva0014DA92@SourceNamespace_Shadow@FXShaderParameterSourceNamespaceSAS@@QAEXABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z"
       ],
       "seed_tier": "B",
       "membership_hypothesis": "hypothesis:K"
@@ -1965,7 +1965,7 @@
       "role": "ehhandler",
       "parent_rva": "0x0014F778",
       "fold_group": "",
-      "name": "__ehhandler$?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z",
+      "name": "__ehhandler$?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x0090B084;X:parent-by-prologue",
@@ -1978,7 +1978,7 @@
       "parent": "0x0014F778",
       "object": "O0014DA92",
       "accepted_names": [
-        "__ehhandler$?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4@@V?$RefCountPtr@VTextureClass@@@@@Z"
+        "__ehhandler$?SetShadowMapInfo@FXShaderParameterSourceNamespaceSAS@@QAEXHABVMatrix4x4@@V?$RefCountPtr@VTextureClass@@@@@Z"
       ],
       "seed_tier": "B",
       "membership_hypothesis": "hypothesis:K"

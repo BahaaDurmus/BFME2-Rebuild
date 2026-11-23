@@ -1,7 +1,7 @@
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
 // Vector4.h: WWMath's four-float vector (WWVegas/WWMath/vector4.h).
 // Target facts: class (map rows ??0Vector4@@QAE@MMMM@Z, ??4Vector4@@QAEAAV0@ABV0@@Z,
-// ?Set@Vector4@@QAEXMMMM@Z); X +0, Y +4, Z +8, W +0xC (DX8Wrapper::Convert_Color
+// ?Set@Vector4@@QAEXMMMM@Z); X +0, Y +4, Z +8, W +0xC (DXWrapper::Convert_Color
 // 0x00139290 and the colour arrays of PointGroupClass/StreakLineClass index it as
 // four floats). Every member is inline, as in WWMath: the retail bodies that
 // exist (the constructor COMDAT 0x006D8A30, assignment COMDAT 0x00133880, Set

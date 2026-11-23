@@ -137,7 +137,7 @@
       "role": "icf_fold",
       "parent_rva": "",
       "fold_group": "F00183340",
-      "name": "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
+      "name": "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
       "name_evidence": "N:ledger",
       "confidence": "medium",
       "evidence": "N:fold ledger-fold-proof",
@@ -150,8 +150,8 @@
       "parent": null,
       "object": "O00182120",
       "accepted_names": [
-        "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
-        "?Calculate_Texture_Matrix@EnvironmentMapperClass@@UAEXAAVMatrix4@@@Z"
+        "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
+        "?Calculate_Texture_Matrix@EnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z"
       ],
       "seed_tier": "L",
       "membership_hypothesis": "hypothesis:name:L"
@@ -213,7 +213,7 @@
       "role": "icf_fold",
       "parent_rva": "",
       "fold_group": "F00183740",
-      "name": "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
+      "name": "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
       "name_evidence": "N:ledger",
       "confidence": "medium",
       "evidence": "N:fold ledger-fold-proof",
@@ -226,8 +226,8 @@
       "parent": null,
       "object": "O00182120",
       "accepted_names": [
-        "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
-        "?Calculate_Texture_Matrix@GridEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z"
+        "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
+        "?Calculate_Texture_Matrix@GridEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z"
       ],
       "seed_tier": "L",
       "membership_hypothesis": "hypothesis:name:L"

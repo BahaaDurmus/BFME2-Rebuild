@@ -7,8 +7,8 @@
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=unknown-rows right=unknown-rows; proof_first=false
 // Hypothesis rules: hypothesis:invented, hypothesis:name:invented, hypothesis:padding
-// FUNCTION: BFME2 0x00133510 size=252 name=?Init_Ortho@Matrix4@@QAEXMMMMMM@Z evidence=N:ledger tier=B hypothesis:name:invented
-void Matrix4::Init_Ortho(float left, float right, float bottom, float top, float znear, float zfar)
+// FUNCTION: BFME2 0x00133510 size=252 name=?Init_Ortho@Matrix4x4@@QAEXMMMMMM@Z evidence=N:ledger tier=B hypothesis:name:invented
+void Matrix4x4::Init_Ortho(float left, float right, float bottom, float top, float znear, float zfar)
 {
 	Make_Identity();
 	Row[0][0] = 2.0f / (right - left);
@@ -19,8 +19,8 @@ void Matrix4::Init_Ortho(float left, float right, float bottom, float top, float
 	Row[2][3] = -(zfar + znear) / (zfar - znear);
 }
 
-// FUNCTION: BFME2 0x00133610 size=276 name=?Init_Perspective@Matrix4@@QAEXMMMMMM@Z evidence=N:ledger tier=B hypothesis:Z
-void Matrix4::Init_Perspective(float left, float right, float bottom, float top, float znear, float zfar)
+// FUNCTION: BFME2 0x00133610 size=276 name=?Init_Perspective@Matrix4x4@@QAEXMMMMMM@Z evidence=N:ledger tier=B hypothesis:Z
+void Matrix4x4::Init_Perspective(float left, float right, float bottom, float top, float znear, float zfar)
 {
 	Make_Identity();
 	Row[0][0] = 2.0 * znear / (right - left);

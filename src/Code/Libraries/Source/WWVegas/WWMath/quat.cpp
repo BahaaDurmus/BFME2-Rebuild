@@ -314,8 +314,8 @@ Quaternion Build_Quaternion(const Matrix3 &mat)
 	return q;
 }
 
-// FUNCTION: BFME2 0x00717E30 size=353 name=?Build_Quaternion@@YA?AVQuaternion@@ABVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:Z
-Quaternion Build_Quaternion(const Matrix4 &mat)
+// FUNCTION: BFME2 0x00717E30 size=353 name=?Build_Quaternion@@YA?AVQuaternion@@ABVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:Z
+Quaternion Build_Quaternion(const Matrix4x4 &mat)
 {
 	float tr, s;
 	int i, j, k;
@@ -357,7 +357,7 @@ Quaternion Build_Quaternion(const Matrix4 &mat)
 	return q;
 }
 
-// FUNCTION: BFME2 0x00717FA0 size=375 name=?Build_Matrix4@@YA?AVMatrix4@@ABVQuaternion@@@Z evidence=N:ledger tier=B hypothesis:Z
+// FUNCTION: BFME2 0x00717FA0 size=375 name=?Build_Matrix4@@YA?AVMatrix4x4@@ABVQuaternion@@@Z evidence=N:ledger tier=B hypothesis:Z
 // FUNCTION: BFME2 0x00718120 size=272 name=?Rotate_X@Quaternion@@QAEXM@Z evidence=N:ledger tier=B hypothesis:Z
 void Quaternion::Rotate_X(float theta)
 {

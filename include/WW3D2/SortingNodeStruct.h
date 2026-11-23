@@ -20,7 +20,7 @@
 #define BFME2_SORTINGNODESTRUCT_H
 
 #include "WW3D2/dllist.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 
 class SortingNodeStruct : public DLNodeClass<SortingNodeStruct>
 {

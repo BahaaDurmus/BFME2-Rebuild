@@ -67,7 +67,7 @@ void Release_Refs(SortingNodeStruct *state)
 		state->sorting_state.material->Release_Ref();
 		state->sorting_state.material = 0;
 	}
-	for (i = 0; i < DX8Wrapper::Get_Current_Caps()->Get_Max_Textures_Per_Pass(); ++i) {
+	for (i = 0; i < DXWrapper::Get_Current_Caps()->Get_Max_Textures_Per_Pass(); ++i) {
 		state->sorting_state.Textures[i].Clear();
 	}
 }

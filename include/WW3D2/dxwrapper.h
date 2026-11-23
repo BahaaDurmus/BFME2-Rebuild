@@ -1,5 +1,5 @@
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
-// DX8Wrapper.h: WW3D2's Direct3D wrapper (dx8wrapper.cpp, retail object 0x0011CC60 and the header's inlines).
+// dxwrapper.h: WW3D2's Direct3D wrapper (dx8wrapper.cpp, retail object 0x0011CC60 and the header's inlines).
 // Class list, member order and inline bodies from Zero Hour's dx8wrapper.h; retail differs in these recorded ways:
 // - MAX_TEXTURE_STAGES is 16, not 8: Set_DX8_Texture_Stage_State 0x000661DD guards the stage with `cmp ebx, 0x10`, and
 //   RenderStateStruct puts `world` at +0x1EC and `view` at +0x22C (Zero Hour's layout with eight stages has them at
@@ -14,13 +14,13 @@
 // - The device behind D3DDevice is a Direct3D 9 device with Direct3D 8's name: retail's SetTransform call goes through
 //   slot 44 (`call [edx+0xB0]`; d3d8.h has it at slot 37), SetRenderState through slot 57, SetTextureStageState slot 67,
 //   SetTexture slot 65. DX8Wrapper_SetTransform below calls by slot, with the argument types d3d8.h gives.
-// - Set_Transform(Matrix4) stores the projection arm twice: ProjectionMatrix (0x00DEDC30) and then the device copy
+// - Set_Transform(Matrix4x4) stores the projection arm twice: ProjectionMatrix (0x00DEDC30) and then the device copy
 //   DeviceProjectionMatrix (0x00DEDBF0), and uploads the second; its world and view arms clear the identity bit
 //   before they set the changed bit (retail's Apply rows 0x001844A0, 0x00184FD0, 0x00185E80, 0x00184AD0, 0x00185980).
 // Files that include this header need the DirectX opt-in line `// dxsdk` (it includes d3d8.h).
 #pragma once
-#ifndef BFME2_DX8WRAPPER_H
-#define BFME2_DX8WRAPPER_H
+#ifndef BFME2_DXWRAPPER_H
+#define BFME2_DXWRAPPER_H
 
 #include <d3d8.h>
 
@@ -96,8 +96,8 @@ struct RenderStateStruct
 	TextureAsset Textures[MAX_TEXTURE_STAGES];		// +0x08, owning texture handles
 	D3DLIGHT8 Lights[4];
 	bool LightEnable[4];
-	Matrix4 world;		// +0x1EC
-	Matrix4 view;		// +0x22C
+	Matrix4x4 world;		// +0x1EC
+	Matrix4x4 view;		// +0x22C
 	unsigned vertex_buffer_types[MAX_VERTEX_STREAMS];
 	unsigned index_buffer_type;
 	unsigned short vba_offset;
@@ -113,7 +113,7 @@ struct RenderStateStruct
 	RenderStateStruct &operator=(const RenderStateStruct &src);
 };
 
-class DX8Wrapper
+class DXWrapper
 {
 	enum ChangedStates {
 		WORLD_CHANGED = 1 << 0,
@@ -177,11 +177,11 @@ public:
 	static void Set_Gamma(float gamma, float bright, float contrast, bool calibrate = true, bool uselimit = true);	// 0x00120980
 
 	static void Set_DX8_ZBias(int zbias);													// out of line in retail (0x00905990 in BFME 1)
-	static void Set_Projection_Transform_With_Z_Bias(const Matrix4 &matrix, float znear, float zfar);	// 0x00120CD0
+	static void Set_Projection_Transform_With_Z_Bias(const Matrix4x4 &matrix, float znear, float zfar);	// 0x00120CD0
 
-	static void Set_Transform(D3DTRANSFORMSTATETYPE transform, const Matrix4 &m);			// inline here; out-of-line copy 0x000A68A7
+	static void Set_Transform(D3DTRANSFORMSTATETYPE transform, const Matrix4x4 &m);			// inline here; out-of-line copy 0x000A68A7
 	static void Set_Transform(D3DTRANSFORMSTATETYPE transform, const Matrix3D &m);			// out-of-line copy 0x0006A553
-	static void Get_Transform(D3DTRANSFORMSTATETYPE transform, Matrix4 &m);					// 0x000768FE
+	static void Get_Transform(D3DTRANSFORMSTATETYPE transform, Matrix4x4 &m);					// 0x000768FE
 	static void Set_World_Identity();														// 0x0010737E
 	static void Set_View_Identity();														// 0x001100E8
 
@@ -436,8 +436,8 @@ protected:
 	static float ZBias;													// 0x00DEDA74 (the float depth bias bfmeSetProjectionDepthBias stores)
 	static float ZNear;																		// 0x00DEC4F0
 	static float ZFar;																		// 0x00DED9F8
-	static Matrix4 ProjectionMatrix;														// 0x00DEDC30
-	static Matrix4 DeviceProjectionMatrix;													// 0x00DEDBF0 (retail's uploaded copy)
+	static Matrix4x4 ProjectionMatrix;														// 0x00DEDC30
+	static Matrix4x4 DeviceProjectionMatrix;													// 0x00DEDBF0 (retail's uploaded copy)
 
 	friend void DX8_Assert();
 	friend void bfmeSetProjectionDepthBias(float bias);
@@ -452,7 +452,7 @@ protected:
 };
 
 // SetTexture is slot 65 (+0x104).
-WWINLINE void DX8Wrapper::Set_Texture(unsigned int stage, IDirect3DBaseTexture8 *texture)
+WWINLINE void DXWrapper::Set_Texture(unsigned int stage, IDirect3DBaseTexture8 *texture)
 {
 	typedef HRESULT(__stdcall *DX8Wrapper_SetTextureFn)(IDirect3DDevice8 *, DWORD, IDirect3DBaseTexture8 *);
 	if (stage >= MAX_TEXTURE_STAGES) {
@@ -472,12 +472,12 @@ WWINLINE void DX8Wrapper::Set_Texture(unsigned int stage, IDirect3DBaseTexture8 
 }
 
 // evidence: retail 0x001844A0, 0x00184FD0, 0x00185E80, 0x00184AD0 and 0x00185980 (the mapper Apply rows) carry this
-// body expanded in place (1,266 to 1,288 bytes each, no call to DX8Wrapper::Set_Transform); the out-of-line copy is
+// body expanded in place (1,266 to 1,288 bytes each, no call to DXWrapper::Set_Transform); the out-of-line copy is
 // 0x000A68A7. The device call goes through slot 44 (+0xB0), then number_of_DX8_calls counts it.
 typedef HRESULT(__stdcall *DX8Wrapper_SetTransformFn)(IDirect3DDevice8 *, D3DTRANSFORMSTATETYPE, const D3DMATRIX *);
 #define DX8_SET_TRANSFORM(device, type, matrix) ((*(DX8Wrapper_SetTransformFn **)(device))[44])((device), (type), (const D3DMATRIX *)(matrix))
 
-WWINLINE void DX8Wrapper::Set_Transform(D3DTRANSFORMSTATETYPE transform, const Matrix4 &m)
+WWINLINE void DXWrapper::Set_Transform(D3DTRANSFORMSTATETYPE transform, const Matrix4x4 &m)
 {
 	switch ((int)transform) {
 	case D3DTS_WORLD:
@@ -497,7 +497,7 @@ WWINLINE void DX8Wrapper::Set_Transform(D3DTRANSFORMSTATETYPE transform, const M
 		break;
 	default:
 		matrix_changes++;
-		Matrix4 transposed = m.Transpose();
+		Matrix4x4 transposed = m.Transpose();
 		DX8_SET_TRANSFORM(_Get_D3D_Device8(), transform, &transposed);
 		number_of_DX8_calls++;
 		break;
@@ -508,7 +508,7 @@ WWINLINE void DX8Wrapper::Set_Transform(D3DTRANSFORMSTATETYPE transform, const M
 // the device's SetMaterial (slot 49, `call [edx+0xC4]`), then number_of_DX8_calls++; 0x0013C930 is the out-of-line copy.
 typedef HRESULT(__stdcall *DX8Wrapper_SetMaterialFn)(IDirect3DDevice8 *, const D3DMATERIAL8 *);
 
-WWINLINE void DX8Wrapper::Set_DX8_Material(const D3DMATERIAL8 *mat)
+WWINLINE void DXWrapper::Set_DX8_Material(const D3DMATERIAL8 *mat)
 {
 	material_changes++;
 	((*(DX8Wrapper_SetMaterialFn **)_Get_D3D_Device8())[49])(_Get_D3D_Device8(), mat);
@@ -517,7 +517,7 @@ WWINLINE void DX8Wrapper::Set_DX8_Material(const D3DMATERIAL8 *mat)
 
 // SceneClass::Render expands this setter with the same shader invalidation
 // as the Westwood implementation. BFME 2 also caches the two fog depths.
-WWINLINE void DX8Wrapper::Set_Fog(bool enable, const Vector3 &color, float start, float end)
+WWINLINE void DXWrapper::Set_Fog(bool enable, const Vector3 &color, float start, float end)
 {
 	FogEnable = enable;
 	FogColor = Convert_Color(color, 0.0f);
@@ -530,7 +530,7 @@ WWINLINE void DX8Wrapper::Set_Fog(bool enable, const Vector3 &color, float start
 
 // Decode the packed colour in place in the mesh loaders. Their colour-modulation
 // loops use the components before packing them back into D3DCOLOR.
-WWINLINE Vector4 DX8Wrapper::Convert_Color(unsigned color)
+WWINLINE Vector4 DXWrapper::Convert_Color(unsigned color)
 {
 	Vector4 col;
 	col[3]=((color&0xff000000)>>24)/255.0f;
@@ -543,12 +543,12 @@ WWINLINE Vector4 DX8Wrapper::Convert_Color(unsigned color)
 // Convert an RGBA colour from floats in [0, 1] to a 32-bit D3DCOLOR (Zero Hour's block, WWINLINE): the four products are
 // stored with fistp under the truncate rounding mode, which the block switches on and restores. Retail expands it in
 // place in the mesh colour readers and other renderer paths. The out-of-line copy uses the same rounding mode.
-WWINLINE unsigned int DX8Wrapper::Convert_Color(const Vector3 &color, float alpha)
+WWINLINE unsigned int DXWrapper::Convert_Color(const Vector3 &color, float alpha)
 {
 	const float scale = 255.0;
 	unsigned int col = 0;
 
-	// asm-evidence: DX8Wrapper::Convert_Color(const Vector3 &, float) 0x0006E1C0 fistp: the fstcw/fldcw rounding-mode switch around four fistp has no C++ form; retail 0x0006E1C0 is this block
+	// asm-evidence: DXWrapper::Convert_Color(const Vector3 &, float) 0x0006E1C0 fistp: the fstcw/fldcw rounding-mode switch around four fistp has no C++ form; retail 0x0006E1C0 is this block
 	__asm
 	{
 		sub	esp,20					// space for a, r, g and b float plus fpu rounding mode
@@ -610,7 +610,7 @@ not_changed:
 }
 
 // The Vector4 form forwards to it (Zero Hour); retail's 0x00139290 holds the expansion.
-WWINLINE unsigned int DX8Wrapper::Convert_Color(const Vector4 &color)
+WWINLINE unsigned int DXWrapper::Convert_Color(const Vector4 &color)
 {
 	return Convert_Color(reinterpret_cast<const Vector3 &>(color), color[3]);
 }

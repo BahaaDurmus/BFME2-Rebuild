@@ -34,7 +34,7 @@
       "role": "ehhandler",
       "parent_rva": "",
       "fold_group": "H0075E6C5",
-      "name": "__ehhandler$?Set_DX8_Texture_Stage_State@DX8Wrapper@@SAXIKI@Z",
+      "name": "__ehhandler$?Set_DX8_Texture_Stage_State@DXWrapper@@SAXIKI@Z",
       "name_evidence": "?:placeholder",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00900C90;X:parent-by-prologue;X:EH stub shared by 2 functions (ICF-folded handler and FuncInfo)",
@@ -47,7 +47,7 @@
       "parent": null,
       "object": "O0006615F",
       "accepted_names": [
-        "__ehhandler$?Set_DX8_Texture_Stage_State@DX8Wrapper@@SAXIKI@Z"
+        "__ehhandler$?Set_DX8_Texture_Stage_State@DXWrapper@@SAXIKI@Z"
       ],
       "seed_tier": "B",
       "membership_hypothesis": "hypothesis:name:invented"

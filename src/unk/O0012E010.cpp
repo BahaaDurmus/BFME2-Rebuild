@@ -8,14 +8,14 @@
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=unknown-rows right=unknown-rows; proof_first=false
 // Hypothesis rules: hypothesis:Z, hypothesis:name:invented, hypothesis:padding
-// FUNCTION: BFME2 0x0012E010 size=963 name=?Get_Render_State@DX8Wrapper@@SAXAAURenderStateStruct@@@Z evidence=N:ledger tier=B hypothesis:name:invented
-void DX8Wrapper::Get_Render_State(RenderStateStruct &state)
+// FUNCTION: BFME2 0x0012E010 size=963 name=?Get_Render_State@DXWrapper@@SAXAAURenderStateStruct@@@Z evidence=N:ledger tier=B hypothesis:name:invented
+void DXWrapper::Get_Render_State(RenderStateStruct &state)
 {
 	state = render_state;
 }
 
-// FUNCTION: BFME2 0x0012E3E0 size=1081 name=?Set_Render_State@DX8Wrapper@@SAXABURenderStateStruct@@@Z evidence=N:ledger tier=B hypothesis:Z
-void DX8Wrapper::Set_Render_State(const RenderStateStruct &state)
+// FUNCTION: BFME2 0x0012E3E0 size=1081 name=?Set_Render_State@DXWrapper@@SAXABURenderStateStruct@@@Z evidence=N:ledger tier=B hypothesis:Z
+void DXWrapper::Set_Render_State(const RenderStateStruct &state)
 {
 	int i;
 

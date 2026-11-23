@@ -3,7 +3,7 @@
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
 #include <stddef.h>
 #include "GameClient/W3DShaderManager.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 
 // The statics in retail address order (0x00DE1F1C..0x00DE1F80; see the header).
 static int W3DShadersPassCount[W3DShaderManager::ST_MAX] = { 0 };					// 0x00DE1F1C
@@ -68,7 +68,7 @@ IDirect3DTexture8 *W3DShaderManager::getRenderTexture(void)
 
 // FUNCTION: BFME2 0x00076629 size=184 name=?testMinimumRequirements@W3DShaderManager@@SA_NPAW4ChipsetType@@PAW4CpuType@@PAHPA_KPAM44@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00076735 size=91 name=?Make_Identity@Matrix4@@QAEXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00076735 size=91 name=?Make_Identity@Matrix4x4@@QAEXXZ evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x00076790 size=186 name=?releaseDependentResources@BfmeShaderShutdown@@SAXXZ evidence=N:ledger tier=A
 
@@ -76,8 +76,8 @@ IDirect3DTexture8 *W3DShaderManager::getRenderTexture(void)
 
 // FUNCTION: BFME2 0x000768F5 size=9 name=?Rva000768F5@@YA_NPAW4ChipsetType@@PAW4CpuType@@PAHPA_KPAM44@Z evidence=?:placeholder tier=A
 
-// FUNCTION: BFME2 0x000768FE size=790 name=?Get_Transform@DX8Wrapper@@SAXW4D3DTRANSFORMSTATETYPE@@AAVMatrix4@@@Z evidence=N:ledger tier=A
-void DX8Wrapper::Get_Transform(D3DTRANSFORMSTATETYPE transform, Matrix4 &m)
+// FUNCTION: BFME2 0x000768FE size=790 name=?Get_Transform@DXWrapper@@SAXW4D3DTRANSFORMSTATETYPE@@AAVMatrix4x4@@@Z evidence=N:ledger tier=A
+void DXWrapper::Get_Transform(D3DTRANSFORMSTATETYPE transform, Matrix4x4 &m)
 {
 	switch ((int)transform) {
 	case D3DTS_WORLD:

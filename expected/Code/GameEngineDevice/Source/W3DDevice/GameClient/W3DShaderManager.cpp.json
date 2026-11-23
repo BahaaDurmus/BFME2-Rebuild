@@ -62,7 +62,7 @@
       "name": "??0Rva0007671F@@QAE@XZ",
       "name_evidence": "N:ledger",
       "confidence": "low",
-      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-W3DShaderManager|Matrix4;N+O:special member placed in another class's object (implicit/inline)",
+      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-W3DShaderManager|Matrix4x4;N+O:special member placed in another class's object (implicit/inline)",
       "object_id": "O00075480",
       "object_evidence": "X:closure",
       "parent_rvas": "",

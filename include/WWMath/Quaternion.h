@@ -15,7 +15,7 @@
 
 class Matrix3;
 class Matrix3D;
-class Matrix4;
+class Matrix4x4;
 
 class Quaternion
 {
@@ -99,7 +99,7 @@ Quaternion Cached_Slerp(const Quaternion &p, const Quaternion &q, float alpha, S
 void Cached_Slerp(const Quaternion &p, const Quaternion &q, float alpha, SlerpInfoStruct *slerpinfo, Quaternion *set_q);	// 0x00717A40
 Quaternion Build_Quaternion(const Matrix3D &mat);					// 0x00717B40
 Quaternion Build_Quaternion(const Matrix3 &mat);					// 0x00717CB0
-Quaternion Build_Quaternion(const Matrix4 &mat);					// 0x00717E30
-Matrix4 Build_Matrix4(const Quaternion &quat);						// 0x00717FA0
+Quaternion Build_Quaternion(const Matrix4x4 &mat);					// 0x00717E30
+Matrix4x4 Build_Matrix4(const Quaternion &quat);						// 0x00717FA0
 
 #endif

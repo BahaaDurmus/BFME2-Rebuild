@@ -67680,9 +67680,9 @@
         {
           "slot": 9,
           "rva": "0x001822E0",
-          "name": "?Calculate_Texture_Matrix@LinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall LinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@LinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall LinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -76059,9 +76059,9 @@
         {
           "slot": 9,
           "rva": "0x00183340",
-          "name": "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall ClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall ClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -102145,9 +102145,9 @@
         {
           "slot": 9,
           "rva": "0x00183540",
-          "name": "?Calculate_Texture_Matrix@EdgeMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall EdgeMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@EdgeMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall EdgeMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -104577,9 +104577,9 @@
         {
           "slot": 9,
           "rva": "0x00183340",
-          "name": "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall ClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@ClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall ClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -133169,9 +133169,9 @@
         {
           "slot": 9,
           "rva": "0x00183740",
-          "name": "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall GridClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall GridClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -133386,9 +133386,9 @@
         {
           "slot": 9,
           "rva": "0x00183740",
-          "name": "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall GridClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@GridClassicEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall GridClassicEnvironmentMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -133530,9 +133530,9 @@
         {
           "slot": 9,
           "rva": "0x001849A0",
-          "name": "?Calculate_Texture_Matrix@GridTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall GridTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@GridTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall GridTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -133641,9 +133641,9 @@
         {
           "slot": 9,
           "rva": "0x00186F10",
-          "name": "?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall GridWSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall GridWSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -133751,9 +133751,9 @@
         {
           "slot": 9,
           "rva": "0x00186F10",
-          "name": "?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall GridWSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall GridWSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -133861,9 +133861,9 @@
         {
           "slot": 9,
           "rva": "0x00186F10",
-          "name": "?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall GridWSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@GridWSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall GridWSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -162430,9 +162430,9 @@
         {
           "slot": 9,
           "rva": "0x001822E0",
-          "name": "?Calculate_Texture_Matrix@LinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall LinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@LinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall LinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -205195,9 +205195,9 @@
         {
           "slot": 9,
           "rva": "0x001838B0",
-          "name": "?Calculate_Texture_Matrix@RandomTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall RandomTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@RandomTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall RandomTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -214005,9 +214005,9 @@
         {
           "slot": 9,
           "rva": "0x00182800",
-          "name": "?Calculate_Texture_Matrix@RotateTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall RotateTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@RotateTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall RotateTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -352882,9 +352882,9 @@
         {
           "slot": 9,
           "rva": "0x00182270",
-          "name": "?Calculate_Texture_Matrix@ScaleTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall ScaleTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@ScaleTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall ScaleTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -353952,9 +353952,9 @@
         {
           "slot": 9,
           "rva": "0x00186380",
-          "name": "?Calculate_Texture_Matrix@ScreenMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall ScreenMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@ScreenMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall ScreenMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -362136,9 +362136,9 @@
         {
           "slot": 9,
           "rva": "0x00182BA0",
-          "name": "?Calculate_Texture_Matrix@SineLinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall SineLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@SineLinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall SineLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -374856,9 +374856,9 @@
         {
           "slot": 9,
           "rva": "0x00182E80",
-          "name": "?Calculate_Texture_Matrix@StepLinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall StepLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@StepLinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall StepLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -428895,9 +428895,9 @@
         {
           "slot": 9,
           "rva": "0x001854E0",
-          "name": "?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall WSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall WSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -429007,9 +429007,9 @@
         {
           "slot": 9,
           "rva": "0x001854E0",
-          "name": "?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall WSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall WSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -429116,9 +429116,9 @@
         {
           "slot": 9,
           "rva": "0x001854E0",
-          "name": "?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall WSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@WSEnvMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall WSEnvMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],
@@ -440065,9 +440065,9 @@
         {
           "slot": 9,
           "rva": "0x00183240",
-          "name": "?Calculate_Texture_Matrix@ZigZagLinearOffsetTextureMapperClass@@UAEXAAVMatrix4@@@Z",
-          "demangled": "public: virtual void __thiscall ZigZagLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4 &)",
-          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4 &);",
+          "name": "?Calculate_Texture_Matrix@ZigZagLinearOffsetTextureMapperClass@@UAEXAAVMatrix4x4@@@Z",
+          "demangled": "public: virtual void __thiscall ZigZagLinearOffsetTextureMapperClass::Calculate_Texture_Matrix(class Matrix4x4 &)",
+          "declaration": "virtual void Calculate_Texture_Matrix(Matrix4x4 &);",
           "unresolved": null
         }
       ],

@@ -4,7 +4,7 @@
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=no-edge-evidence right=no-edge-evidence; proof_first=false
 // Hypothesis rules: hypothesis:K, hypothesis:name:invented, hypothesis:padding
-// FUNCTION: BFME2 0x007166D0 size=226 name=??8@YAHABVMatrix4@@0@Z evidence=N:ledger tier=B hypothesis:name:invented
+// FUNCTION: BFME2 0x007166D0 size=226 name=??8@YAHABVMatrix4x4@@0@Z evidence=N:ledger tier=B hypothesis:name:invented
 
-// FUNCTION: BFME2 0x007167C0 size=26 name=??9@YAHABVMatrix4@@0@Z evidence=N:ledger tier=B hypothesis:K
+// FUNCTION: BFME2 0x007167C0 size=26 name=??9@YAHABVMatrix4x4@@0@Z evidence=N:ledger tier=B hypothesis:K
 

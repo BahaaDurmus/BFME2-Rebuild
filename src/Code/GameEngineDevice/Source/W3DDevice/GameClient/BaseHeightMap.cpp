@@ -169,7 +169,7 @@
 
 // FUNCTION: BFME2 0x00068F68 size=126 name=?Init@AABoxClass@@QAEXABVMinMaxAABoxClass@@@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00068FEF size=108 name=?Init@Matrix4@@QAEXABVMatrix3D@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00068FEF size=108 name=?Init@Matrix4x4@@QAEXABVMatrix3D@@@Z evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x0006905B size=110 name=?Init@Matrix4x4@@QAEXABVVector4@@000@Z evidence=N:ledger tier=A
 
@@ -228,13 +228,13 @@ bool PlaneClass::Compute_Intersection(const Vector3 &p0, const Vector3 &p1, floa
 
 // FUNCTION: BFME2 0x0006A1E4 size=233 name=?recalculate@LineSegClass@@IAEXXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0006A2CD size=129 name=??0Matrix4@@QAE@ABVMatrix3D@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0006A2CD size=129 name=??0Matrix4x4@@QAE@ABVMatrix3D@@@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0006A34E size=131 name=??0Matrix4@@QAE@ABVVector4@@000@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0006A34E size=131 name=??0Matrix4x4@@QAE@ABVVector4@@000@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0006A3D1 size=350 name=?Transpose@Matrix4@@QBE?AV1@XZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0006A3D1 size=350 name=?Transpose@Matrix4x4@@QBE?AV1@XZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0006A553 size=1042 name=?Set_Transform@DX8Wrapper@@SAXW4_D3DTRANSFORMSTATETYPE@@ABVMatrix3D@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0006A553 size=1042 name=?Set_Transform@DXWrapper@@SAXW4_D3DTRANSFORMSTATETYPE@@ABVMatrix3D@@@Z evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x0006A965 size=183 name=?Normalized_Cross_Product@Vector3@@SAXABV1@0PAV1@@Z evidence=N:ledger tier=A
 

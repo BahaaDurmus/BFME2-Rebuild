@@ -11769,8 +11769,8 @@
     {
       "rva": "0x00134A80",
       "kind": "rename",
-      "old": "?rva00134A80@CameraClass@@QAEXPAVMatrix4@@@Z",
-      "name": "?Get_D3D_View_Projection_Matrix@CameraClass@@QAEXPAVMatrix4@@@Z",
+      "old": "?rva00134A80@CameraClass@@QAEXPAVMatrix4x4@@@Z",
+      "name": "?Get_D3D_View_Projection_Matrix@CameraClass@@QAEXPAVMatrix4x4@@@Z",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -58033,7 +58033,7 @@
       "rva": "0x0011CDB0",
       "kind": "rename",
       "old": "?Rva0011CDB0Get@@YAHXZ",
-      "name": "?_Get_D3D_Device8@DX8Wrapper@@SAPAUIDirect3DDevice8@@XZ",
+      "name": "?_Get_D3D_Device8@DXWrapper@@SAPAUIDirect3DDevice8@@XZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83699,7 +83699,7 @@
       "rva": "0x00116E20",
       "kind": "rename",
       "old": "?Rva00116E20Get@@YAHXZ",
-      "name": "?Get_Texture_Bit_Depth@DX8Wrapper@@SAHXZ",
+      "name": "?Get_Texture_Bit_Depth@DXWrapper@@SAHXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83709,7 +83709,7 @@
       "rva": "0x00116E30",
       "kind": "rename",
       "old": "?Rva00116E30Get@@YAHXZ",
-      "name": "?Get_Device_Resolution_Width@DX8Wrapper@@KAHXZ",
+      "name": "?Get_Device_Resolution_Width@DXWrapper@@KAHXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83719,7 +83719,7 @@
       "rva": "0x0011D200",
       "kind": "rename",
       "old": "?Rva0011D200Get@@YAHXZ",
-      "name": "?Get_FrameCount@DX8Wrapper@@SAKXZ",
+      "name": "?Get_FrameCount@DXWrapper@@SAKXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83729,7 +83729,7 @@
       "rva": "0x0011D210",
       "kind": "rename",
       "old": "?Rva0011D210Get@@YAHXZ",
-      "name": "?Get_Current_Caps@DX8Wrapper@@SAPBVDX8Caps@@XZ",
+      "name": "?Get_Current_Caps@DXWrapper@@SAPBVDX8Caps@@XZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83739,7 +83739,7 @@
       "rva": "0x0011D220",
       "kind": "rename",
       "old": "?Rva0011D220Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Matrix_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Matrix_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83749,7 +83749,7 @@
       "rva": "0x0011D230",
       "kind": "rename",
       "old": "?Rva0011D230Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Material_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Material_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83759,7 +83759,7 @@
       "rva": "0x0011D240",
       "kind": "rename",
       "old": "?Rva0011D240Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Vertex_Buffer_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Vertex_Buffer_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83769,7 +83769,7 @@
       "rva": "0x0011D250",
       "kind": "rename",
       "old": "?Rva0011D250Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Index_Buffer_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Index_Buffer_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83779,7 +83779,7 @@
       "rva": "0x0011D260",
       "kind": "rename",
       "old": "?Rva0011D260Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Light_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Light_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83789,7 +83789,7 @@
       "rva": "0x0011D270",
       "kind": "rename",
       "old": "?Rva0011D270Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Texture_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Texture_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83799,7 +83799,7 @@
       "rva": "0x0011D280",
       "kind": "rename",
       "old": "?Rva0011D280Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Render_State_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Render_State_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83809,7 +83809,7 @@
       "rva": "0x0011D290",
       "kind": "rename",
       "old": "?Rva0011D290Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Texture_Stage_State_Changes@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Texture_Stage_State_Changes@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83818,8 +83818,8 @@
     {
       "rva": "0x0011D2D0",
       "kind": "rename",
-      "old": "?Rva0011D2D0WaitForBackBuffer@DX8Wrapper@@SAXXZ",
-      "name": "?Wait_For_Back_Buffer@DX8Wrapper@@SAXXZ",
+      "old": "?Rva0011D2D0WaitForBackBuffer@DXWrapper@@SAXXZ",
+      "name": "?Wait_For_Back_Buffer@DXWrapper@@SAXXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83829,7 +83829,7 @@
       "rva": "0x0011F1B0",
       "kind": "rename",
       "old": "?Rva0011F1B0Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Number_Of_DX8_Calls@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Number_Of_DX8_Calls@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83869,7 +83869,7 @@
       "rva": "0x00120130",
       "kind": "rename",
       "old": "?Rva00120130Get@@YAHXZ",
-      "name": "?Get_Last_Frame_Draw_Calls@DX8Wrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Draw_Calls@DXWrapper@@SAIXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83879,7 +83879,7 @@
       "rva": "0x00120670",
       "kind": "rename",
       "old": "?rva00120670@@YAXII@Z",
-      "name": "?Draw_Line_List@DX8Wrapper@@SAXII@Z",
+      "name": "?Draw_Line_List@DXWrapper@@SAXII@Z",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83889,7 +83889,7 @@
       "rva": "0x00120690",
       "kind": "rename",
       "old": "?rva00120690@@YAXII@Z",
-      "name": "?Draw_Line_Strip@DX8Wrapper@@SAXII@Z",
+      "name": "?Draw_Line_Strip@DXWrapper@@SAXII@Z",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -83899,7 +83899,7 @@
       "rva": "0x001206B0",
       "kind": "rename",
       "old": "?rva001206B0@@YAXII@Z",
-      "name": "?Draw_Point_List@DX8Wrapper@@SAXII@Z",
+      "name": "?Draw_Point_List@DXWrapper@@SAXII@Z",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -95160,7 +95160,7 @@
       "rva": "0x0011CC60",
       "kind": "rename",
       "old": "?Rva0011CC60InvalidateTextureStages@DX8WrapperStageHelper@@SAXXZ",
-      "name": "?Invalidate_Texture_Stages@DX8Wrapper@@SAXXZ",
+      "name": "?Invalidate_Texture_Stages@DXWrapper@@SAXXZ",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -95170,7 +95170,7 @@
       "rva": "0x00125430",
       "kind": "rename",
       "old": "?Rva00125430@@YAX_N@Z",
-      "name": "?Set_Skip_Fixed_Function_State@DX8Wrapper@@SAX_N@Z",
+      "name": "?Set_Skip_Fixed_Function_State@DXWrapper@@SAX_N@Z",
       "source": "harvest",
       "confidence": "proven",
       "basis": "credited byte-exact body on main under this name",
@@ -112739,7 +112739,7 @@
       "source": "standalone ca6e45a3dd",
       "confidence": "strong",
       "basis": "fold-alias",
-      "evidence": "retail call sites bind it: 0x0011FD10+204 in ?Invalidate_Cached_Render_States@DX8Wrapper@@SAXXZ (dxwrapper.cpp); 0x001AC5D0+32 in ?Determine_Tail_Diffuse@ParticleBufferClass@@IAE?AW4TailDiffuseTypeEnum@1@XZ (part_buf.cpp) (9 link referrers compile this name; map row 0x0061ED10 holds ?Release_Ref@Tex"
+      "evidence": "retail call sites bind it: 0x0011FD10+204 in ?Invalidate_Cached_Render_States@DXWrapper@@SAXXZ (dxwrapper.cpp); 0x001AC5D0+32 in ?Determine_Tail_Diffuse@ParticleBufferClass@@IAE?AW4TailDiffuseTypeEnum@1@XZ (part_buf.cpp) (9 link referrers compile this name; map row 0x0061ED10 holds ?Release_Ref@Tex"
     },
     {
       "rva": "0x004D7C96",
@@ -118687,11 +118687,11 @@
       "rva": "0x00183340",
       "kind": "alias",
       "old": "",
-      "name": "?Calculate_Texture_Matrix@EnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
+      "name": "?Calculate_Texture_Matrix@EnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
       "source": "environment-matrix",
       "confidence": "strong",
       "basis": "fold-alias",
-      "evidence": "Environment table 0x7D31C0 and Classic table 0x7D3170 both select 0x183340 in slot 9. Existing Classic primary and real Environment override are paired typed Matrix4& members."
+      "evidence": "Environment table 0x7D31C0 and Classic table 0x7D3170 both select 0x183340 in slot 9. Existing Classic primary and real Environment override are paired typed Matrix4x4& members."
     },
     {
       "rva": "0x000387F0",
@@ -120286,7 +120286,7 @@
       "rva": "0x00183740",
       "kind": "alias",
       "old": "",
-      "name": "?Calculate_Texture_Matrix@GridEnvironmentMapperClass@@UAEXAAVMatrix4@@@Z",
+      "name": "?Calculate_Texture_Matrix@GridEnvironmentMapperClass@@UAEXAAVMatrix4x4@@@Z",
       "source": "-env",
       "confidence": "strong",
       "basis": "fold-alias",
@@ -121295,118 +121295,118 @@
     {
       "rva": "0x0011D200",
       "kind": "rename",
-      "old": "?Get_FrameCount@DX8Wrapper@@SAKXZ",
-      "name": "?Get_Last_Frame_Matrix_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_FrameCount@DXWrapper@@SAKXZ",
+      "name": "?Get_Last_Frame_Matrix_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D200 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a19cdade00c3 at 0x11D200; absolute data RVA 0x9EDA9C. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Matrix_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_matrix_changes@DX8Wrapper@@1IA. Established static definition and native data use mat"
+      "evidence": "Exact six-byte native a19cdade00c3 at 0x11D200; absolute data RVA 0x9EDA9C. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Matrix_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_matrix_changes@DXWrapper@@1IA. Established static definition and native data use mat"
     },
     {
       "rva": "0x0011D210",
       "kind": "rename",
-      "old": "?Get_Current_Caps@DX8Wrapper@@SAPBVDX8Caps@@XZ",
-      "name": "?Get_Last_Frame_Material_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Current_Caps@DXWrapper@@SAPBVDX8Caps@@XZ",
+      "name": "?Get_Last_Frame_Material_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D210 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1a0dade00c3 at 0x11D210; absolute data RVA 0x9EDAA0. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Material_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_material_changes@DX8Wrapper@@1IA. Established static definition and native data use"
+      "evidence": "Exact six-byte native a1a0dade00c3 at 0x11D210; absolute data RVA 0x9EDAA0. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Material_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_material_changes@DXWrapper@@1IA. Established static definition and native data use"
     },
     {
       "rva": "0x0011D220",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Matrix_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Vertex_Buffer_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Matrix_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Vertex_Buffer_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D220 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1a4dade00c3 at 0x11D220; absolute data RVA 0x9EDAA4. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Vertex_Buffer_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_vertex_buffer_changes@DX8Wrapper@@1IA. Established static definition and nativ"
+      "evidence": "Exact six-byte native a1a4dade00c3 at 0x11D220; absolute data RVA 0x9EDAA4. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Vertex_Buffer_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_vertex_buffer_changes@DXWrapper@@1IA. Established static definition and nativ"
     },
     {
       "rva": "0x0011D230",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Material_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Index_Buffer_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Material_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Index_Buffer_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D230 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1a8dade00c3 at 0x11D230; absolute data RVA 0x9EDAA8. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Index_Buffer_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_index_buffer_changes@DX8Wrapper@@1IA. Established static definition and native "
+      "evidence": "Exact six-byte native a1a8dade00c3 at 0x11D230; absolute data RVA 0x9EDAA8. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Index_Buffer_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_index_buffer_changes@DXWrapper@@1IA. Established static definition and native "
     },
     {
       "rva": "0x0011D240",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Vertex_Buffer_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Light_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Vertex_Buffer_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Light_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D240 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1acdade00c3 at 0x11D240; absolute data RVA 0x9EDAAC. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Light_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_light_changes@DX8Wrapper@@1IA. Established static definition and native data use match"
+      "evidence": "Exact six-byte native a1acdade00c3 at 0x11D240; absolute data RVA 0x9EDAAC. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Light_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_light_changes@DXWrapper@@1IA. Established static definition and native data use match"
     },
     {
       "rva": "0x0011D250",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Index_Buffer_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Texture_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Index_Buffer_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Texture_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D250 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1b0dade00c3 at 0x11D250; absolute data RVA 0x9EDAB0. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Texture_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_texture_changes@DX8Wrapper@@1IA. Established static definition and native data use m"
+      "evidence": "Exact six-byte native a1b0dade00c3 at 0x11D250; absolute data RVA 0x9EDAB0. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Texture_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_texture_changes@DXWrapper@@1IA. Established static definition and native data use m"
     },
     {
       "rva": "0x0011D260",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Light_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Render_State_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Light_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Render_State_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D260 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1b4dade00c3 at 0x11D260; absolute data RVA 0x9EDAB4. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Render_State_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_render_state_changes@DX8Wrapper@@1IA. Established static definition and native "
+      "evidence": "Exact six-byte native a1b4dade00c3 at 0x11D260; absolute data RVA 0x9EDAB4. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Render_State_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_render_state_changes@DXWrapper@@1IA. Established static definition and native "
     },
     {
       "rva": "0x0011D270",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Texture_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Texture_Stage_State_Changes@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Texture_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Texture_Stage_State_Changes@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D270 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1b8dade00c3 at 0x11D270; absolute data RVA 0x9EDAB8. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Texture_Stage_State_Changes@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_texture_stage_state_changes@DX8Wrapper@@1IA. Established static definiti"
+      "evidence": "Exact six-byte native a1b8dade00c3 at 0x11D270; absolute data RVA 0x9EDAB8. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Texture_Stage_State_Changes@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_texture_stage_state_changes@DXWrapper@@1IA. Established static definiti"
     },
     {
       "rva": "0x0011D280",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Render_State_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Number_Of_DX8_Calls@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Render_State_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Number_Of_DX8_Calls@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D280 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1bcdade00c3 at 0x11D280; absolute data RVA 0x9EDABC. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Number_Of_DX8_Calls@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_number_of_DX8_calls@DX8Wrapper@@1IA. Established static definition and native da"
+      "evidence": "Exact six-byte native a1bcdade00c3 at 0x11D280; absolute data RVA 0x9EDABC. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Number_Of_DX8_Calls@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_number_of_DX8_calls@DXWrapper@@1IA. Established static definition and native da"
     },
     {
       "rva": "0x0011D290",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Texture_Stage_State_Changes@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Last_Frame_Draw_Calls@DX8Wrapper@@SAIXZ",
+      "old": "?Get_Last_Frame_Texture_Stage_State_Changes@DXWrapper@@SAIXZ",
+      "name": "?Get_Last_Frame_Draw_Calls@DXWrapper@@SAIXZ",
       "source": "dx8-getter-11D290 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a1c0dade00c3 at 0x11D290; absolute data RVA 0x9EDAC0. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Draw_Calls@DX8Wrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_draw_calls@DX8Wrapper@@1IA. Established static definition and native data use match."
+      "evidence": "Exact six-byte native a1c0dade00c3 at 0x11D290; absolute data RVA 0x9EDAC0. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Last_Frame_Draw_Calls@DXWrapper@@SAIXZ, same opcode and one DIREL32 to ?last_frame_draw_calls@DXWrapper@@1IA. Established static definition and native data use match."
     },
     {
       "rva": "0x00042F6D",
       "kind": "rename",
       "old": "?Rva00042F6DGet@@YAHXZ",
-      "name": "?Get_Current_Caps@DX8Wrapper@@SAPBVDX8Caps@@XZ",
+      "name": "?Get_Current_Caps@DXWrapper@@SAPBVDX8Caps@@XZ",
       "source": "dx8-getter-42F6D (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Exact six-byte native a17cdade00c3 at 0x42F6D; absolute data RVA 0x9EDA7C. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Current_Caps@DX8Wrapper@@SAPBVDX8Caps@@XZ, same opcode and one DIREL32 to ?CurrentCaps@DX8Wrapper@@1PAVDX8Caps@@A. Established static definition and native data use match."
+      "evidence": "Exact six-byte native a17cdade00c3 at 0x42F6D; absolute data RVA 0x9EDA7C. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_Current_Caps@DXWrapper@@SAPBVDX8Caps@@XZ, same opcode and one DIREL32 to ?CurrentCaps@DXWrapper@@1PAVDX8Caps@@A. Established static definition and native data use match."
     },
     {
       "rva": "0x0011F1B0",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Number_Of_DX8_Calls@DX8Wrapper@@SAIXZ",
-      "name": "?Get_D3D_Back_Buffer_Format@DX8Wrapper@@SA?AW4_D3DFORMAT@@XZ",
+      "old": "?Get_Last_Frame_Number_Of_DX8_Calls@DXWrapper@@SAIXZ",
+      "name": "?Get_D3D_Back_Buffer_Format@DXWrapper@@SA?AW4_D3DFORMAT@@XZ",
       "source": "dx8-proven-getter-11F1B0 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
@@ -121415,8 +121415,8 @@
     {
       "rva": "0x00120130",
       "kind": "rename",
-      "old": "?Get_Last_Frame_Draw_Calls@DX8Wrapper@@SAIXZ",
-      "name": "?Get_Render_Device_Count@DX8Wrapper@@SAHXZ",
+      "old": "?Get_Last_Frame_Draw_Calls@DXWrapper@@SAIXZ",
+      "name": "?Get_Render_Device_Count@DXWrapper@@SAHXZ",
       "source": "dx8-proven-getter-120130 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "rename",
@@ -121426,16 +121426,16 @@
       "rva": "0x0011D2A0",
       "kind": "alias",
       "old": "",
-      "name": "?Get_FrameCount@DX8Wrapper@@SAKXZ",
+      "name": "?Get_FrameCount@DXWrapper@@SAKXZ",
       "source": "dx8-getter-11D2A0 (CurrentCaps paired transfer)",
       "confidence": "strong",
       "basis": "fold-alias",
-      "evidence": "Exact six-byte native a184dade00c3 at 0x11D2A0; absolute data RVA 0x9EDA84. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_FrameCount@DX8Wrapper@@SAKXZ, same opcode and one DIREL32 to ?FrameCount@DX8Wrapper@@1KA. Established static definition and native data use match."
+      "evidence": "Exact six-byte native a184dade00c3 at 0x11D2A0; absolute data RVA 0x9EDA84. Retained ada7d7d0f6 Boat dxwrapper COFF emits ?Get_FrameCount@DXWrapper@@SAKXZ, same opcode and one DIREL32 to ?FrameCount@DXWrapper@@1KA. Established static definition and native data use match."
     },
     {
       "rva": "0x0011CDB0",
       "kind": "rename",
-      "old": "?_Get_D3D_Device8@DX8Wrapper@@SAPAUIDirect3DDevice8@@XZ",
+      "old": "?_Get_D3D_Device8@DXWrapper@@SAPAUIDirect3DDevice8@@XZ",
       "name": "?Get_Presentation_Interval@@YAKXZ",
       "source": "present-interval",
       "confidence": "provisional",
@@ -121976,7 +121976,7 @@
     {
       "rva": "0x009EDA34",
       "kind": "data-identity",
-      "name": "?D3DDevice@DX8Wrapper@@1PAUIDirect3DDevice8@@A",
+      "name": "?D3DDevice@DXWrapper@@1PAUIDirect3DDevice8@@A",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -122165,7 +122165,7 @@
     {
       "rva": "0x009EDA60",
       "kind": "data-identity",
-      "name": "?texture_changes@DX8Wrapper@@1IA",
+      "name": "?texture_changes@DXWrapper@@1IA",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -122174,7 +122174,7 @@
     {
       "rva": "0x009EC4B0",
       "kind": "data-identity",
-      "name": "?Textures@DX8Wrapper@@1PAPAUIDirect3DBaseTexture8@@A",
+      "name": "?Textures@DXWrapper@@1PAPAUIDirect3DBaseTexture8@@A",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -122183,11 +122183,11 @@
     {
       "rva": "0x009EDA7C",
       "kind": "data-identity",
-      "name": "?CurrentCaps@DX8Wrapper@@1PAVDX8Caps@@A",
+      "name": "?CurrentCaps@DXWrapper@@1PAVDX8Caps@@A",
       "source": "datanames",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "Existing DX8Wrapper static. Getter 0x42F6D reads VA 0xDEDA7C. DX8Caps ctor at 0x120819 calls 0x12C670 then stores the exact pointer at 0x12081E; shutdown deletes and nulls the same pointer at 0x121755. Vertex_Split reads Support_NPatches byte +0x13B at 0x1454E8. Four-byte zero-fill cell and one exis"
+      "evidence": "Existing DXWrapper static. Getter 0x42F6D reads VA 0xDEDA7C. DX8Caps ctor at 0x120819 calls 0x12C670 then stores the exact pointer at 0x12081E; shutdown deletes and nulls the same pointer at 0x121755. Vertex_Split reads Support_NPatches byte +0x13B at 0x1454E8. Four-byte zero-fill cell and one exis"
     },
     {
       "rva": "0x00476749",
@@ -122681,7 +122681,7 @@
       "rva": "0x000768FE",
       "kind": "alias",
       "old": "",
-      "name": "?Get_Transform@DX8Wrapper@@SAXW4_D3DTRANSFORMSTATETYPE@@AAVMatrix4@@@Z",
+      "name": "?Get_Transform@DXWrapper@@SAXW4_D3DTRANSFORMSTATETYPE@@AAVMatrix4x4@@@Z",
       "source": "dx8-get-transform-sdk",
       "confidence": "strong",
       "basis": "fold-alias",
@@ -123070,7 +123070,7 @@
     {
       "rva": "0x009EDA21",
       "kind": "data-identity",
-      "name": "?FogEnable@DX8Wrapper@@1_NA",
+      "name": "?FogEnable@DXWrapper@@1_NA",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -123079,7 +123079,7 @@
     {
       "rva": "0x009EDA24",
       "kind": "data-identity",
-      "name": "?FogColor@DX8Wrapper@@1KA",
+      "name": "?FogColor@DXWrapper@@1KA",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -123088,7 +123088,7 @@
     {
       "rva": "0x009EDA28",
       "kind": "data-identity",
-      "name": "?FogStart@DX8Wrapper@@1MA",
+      "name": "?FogStart@DXWrapper@@1MA",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -123097,7 +123097,7 @@
     {
       "rva": "0x009EDA2C",
       "kind": "data-identity",
-      "name": "?FogEnd@DX8Wrapper@@1MA",
+      "name": "?FogEnd@DXWrapper@@1MA",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -123115,7 +123115,7 @@
     {
       "rva": "0x009EC4F4",
       "kind": "data-identity",
-      "name": "?render_state_changed@DX8Wrapper@@1IA",
+      "name": "?render_state_changed@DXWrapper@@1IA",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -123124,7 +123124,7 @@
     {
       "rva": "0x009EE5D8",
       "kind": "data-identity",
-      "name": "?render_state@DX8Wrapper@@1URenderStateStruct@@A",
+      "name": "?render_state@DXWrapper@@1URenderStateStruct@@A",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -123133,7 +123133,7 @@
     {
       "rva": "0x009EDBF0",
       "kind": "data-identity",
-      "name": "?DeviceProjectionMatrix@DX8Wrapper@@1VMatrix4@@A",
+      "name": "?DeviceProjectionMatrix@DXWrapper@@1VMatrix4x4@@A",
       "source": "R",
       "confidence": "proven",
       "basis": "rebuilt evidence",
@@ -125391,16 +125391,16 @@
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_initialised; 4 exact .text readers in 3 functions: Do_Onetime_Device_Dependent_Inits::DX8Wrapper; Set_Texture_Filter::WW3D; getTextureFilter; readers include methods of its class WW3D (Set_Texture_Filter::WW3D); Zero Hour declares it too (ww3d.h,ww3d.cpp); existing spelli"
+      "evidence": "retail data row kind global_initialised; 4 exact .text readers in 3 functions: Do_Onetime_Device_Dependent_Inits::DXWrapper; Set_Texture_Filter::WW3D; getTextureFilter; readers include methods of its class WW3D (Set_Texture_Filter::WW3D); Zero Hour declares it too (ww3d.h,ww3d.cpp); existing spelli"
     },
     {
       "rva": "0x009B5FD8",
       "kind": "data-identity",
-      "name": "?ResolutionHeight@DX8Wrapper@@1HA",
+      "name": "?ResolutionHeight@DXWrapper@@1HA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_scalar; 22 exact .text readers in 15 functions: Draw_Sentence::Render2DSentenceClass; Get_Device_Resolution::DX8Wrapper; Get_Device_Resolution_Width::DX8Wrapper; Get_Render_Target_Resolution::DX8Wrapper; Init::DX8Wrapper; Normalize_Coordinates::WW3; readers include method"
+      "evidence": "retail data row kind global_scalar; 22 exact .text readers in 15 functions: Draw_Sentence::Render2DSentenceClass; Get_Device_Resolution::DXWrapper; Get_Device_Resolution_Width::DXWrapper; Get_Render_Target_Resolution::DXWrapper; Init::DXWrapper; Normalize_Coordinates::WW3; readers include method"
     },
     {
       "rva": "0x009BD0F0",
@@ -125432,29 +125432,29 @@
     {
       "rva": "0x009EC5E8",
       "kind": "data-identity",
-      "name": "?CurrentAdapterIdentifier@DX8Wrapper@@1U_D3DADAPTER_IDENTIFIER8@@A",
+      "name": "?CurrentAdapterIdentifier@DXWrapper@@1U_D3DADAPTER_IDENTIFIER8@@A",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind zero_init_unknown; 4 exact .text readers in 3 functions: Create_Device::DX8Wrapper; Rva0011C460Get; Rva001207B0Init; readers include methods of its class DX8Wrapper (Create_Device::DX8Wrapper); Zero Hour declares it too (dx8wrapper.cpp,dx8wrapper.h); existing spelling kept"
+      "evidence": "retail data row kind zero_init_unknown; 4 exact .text readers in 3 functions: Create_Device::DXWrapper; Rva0011C460Get; Rva001207B0Init; readers include methods of its class DXWrapper (Create_Device::DXWrapper); Zero Hour declares it too (dx8wrapper.cpp,dx8wrapper.h); existing spelling kept"
     },
     {
       "rva": "0x009EDA14",
       "kind": "data-identity",
-      "name": "?Light_Environment@DX8Wrapper@@1PAVLightEnvironmentClass@@A",
+      "name": "?Light_Environment@DXWrapper@@1PAVLightEnvironmentClass@@A",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 16 exact .text readers in 14 functions: End_Scene::DX8Wrapper; Invalidate_Cached_Render_States::DX8Wrapper; Rva0014D241Get; Rva0014D595NumAmbientLights; Rva0014D64CNumDirectionalLights; Rva0014D7B1NumPointLights; SetPosition::Rva0014D887Thi; readers include met"
+      "evidence": "retail data row kind global_zero_init; 16 exact .text readers in 14 functions: End_Scene::DXWrapper; Invalidate_Cached_Render_States::DXWrapper; Rva0014D241Get; Rva0014D595NumAmbientLights; Rva0014D64CNumDirectionalLights; Rva0014D7B1NumPointLights; SetPosition::Rva0014D887Thi; readers include met"
     },
     {
       "rva": "0x009EDA30",
       "kind": "data-identity",
-      "name": "?D3DInterface@DX8Wrapper@@1PAUIDirect3D8@@A",
+      "name": "?D3DInterface@DXWrapper@@1PAUIDirect3D8@@A",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 35 exact .text readers in 12 functions: Create_Device::DX8Wrapper; Enumerate_Devices::DX8Wrapper; Find_Color_And_Z_Mode::DX8Wrapper; Find_Color_Mode::DX8Wrapper; Find_Z_Mode::DX8Wrapper; Init::DX8Wrapper; Rva000752F2Get; Rva001207B0Init; Se; readers include met"
+      "evidence": "retail data row kind global_zero_init; 35 exact .text readers in 12 functions: Create_Device::DXWrapper; Enumerate_Devices::DXWrapper; Find_Color_And_Z_Mode::DXWrapper; Find_Color_Mode::DXWrapper; Find_Z_Mode::DXWrapper; Init::DXWrapper; Rva000752F2Get; Rva001207B0Init; Se; readers include met"
     },
     {
       "rva": "0x00A032E0",
@@ -125513,29 +125513,29 @@
     {
       "rva": "0x009ED5F0",
       "kind": "data-identity",
-      "name": "?CurrentDX8LightEnables@DX8Wrapper@@1PA_NA",
+      "name": "?CurrentDX8LightEnables@DXWrapper@@1PA_NA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail readers (1): 0x0011C470+71 in ?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+84 in ?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+112 in ?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); the readers include methods of"
+      "evidence": "retail readers (1): 0x0011C470+71 in ?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+84 in ?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); 0x0011C470+112 in ?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z (O0011C470.cpp); the readers include methods of"
     },
     {
       "rva": "0x009EDF10",
       "kind": "data-identity",
-      "name": "?Pixel_Shader_Constants@DX8Wrapper@@1PAVVector4@@A",
+      "name": "?Pixel_Shader_Constants@DXWrapper@@1PAVVector4@@A",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail readers (1): 0x00075399+20 in ?Set_Pixel_Shader_Constant@DX8Wrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DX8Wrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h"
+      "evidence": "retail readers (1): 0x00075399+20 in ?Set_Pixel_Shader_Constant@DXWrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DXWrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h"
     },
     {
       "rva": "0x009EDFA8",
       "kind": "data-identity",
-      "name": "?Vertex_Shader_Constants@DX8Wrapper@@1PAVVector4@@A",
+      "name": "?Vertex_Shader_Constants@DXWrapper@@1PAVVector4@@A",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail readers (1): 0x00075343+20 in ?Set_Vertex_Shader_Constant@DX8Wrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DX8Wrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h"
+      "evidence": "retail readers (1): 0x00075343+20 in ?Set_Vertex_Shader_Constant@DXWrapper@@SAXHPBXH@Z (O00075343.cpp); the readers include methods of the owning class DXWrapper; Zero Hour declares the same static in dx8wrapper.cpp,dx8wrapper.h"
     },
     {
       "rva": "0x009F3040",
@@ -125630,11 +125630,11 @@
     {
       "rva": "0x009B5FCD",
       "kind": "data-identity",
-      "name": "?_EnableTriangleDraw@DX8Wrapper@@1_NA",
+      "name": "?_EnableTriangleDraw@DXWrapper@@1_NA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_initialised; 10 exact .text readers in 8 functions: Draw::DX8Wrapper; Flush::SortingRendererClass; RenderDynamicMeshVolume::W3DVolumetricShadow; RenderMeshVolume::W3DVolumetricShadow; Rva0006E19BGetByte; _Enable_Triangle_Draw::DX8Wrapper; renderStencil; readers include me"
+      "evidence": "retail data row kind global_initialised; 10 exact .text readers in 8 functions: Draw::DXWrapper; Flush::SortingRendererClass; RenderDynamicMeshVolume::W3DVolumetricShadow; RenderMeshVolume::W3DVolumetricShadow; Rva0006E19BGetByte; _Enable_Triangle_Draw::DXWrapper; renderStencil; readers include me"
     },
     {
       "rva": "0x009E1F60",
@@ -125661,25 +125661,25 @@
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 318 exact .text readers in 39 functions: Activate_Snapshot::WW3D; Apply_Default_State::DX8Wrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; Draw::DX8Wrapper; End_Render::WW3D; Flush::RTS3DScene; Install_Materials::BfmeB; readers include me"
+      "evidence": "retail data row kind global_zero_init; 318 exact .text readers in 39 functions: Activate_Snapshot::WW3D; Apply_Default_State::DXWrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; Draw::DXWrapper; End_Render::WW3D; Flush::RTS3DScene; Install_Materials::BfmeB; readers include me"
     },
     {
       "rva": "0x009EDA04",
       "kind": "data-identity",
-      "name": "?IsInitted@DX8Wrapper@@1_NA",
+      "name": "?IsInitted@DXWrapper@@1_NA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 6 exact .text readers in 6 functions: Do_Mappers_Need_Normals::MeshMatDescClass; Init::DX8Wrapper; Load_Texture; Reset_Device::DX8Wrapper; Rva00131068GetByte; Shutdown::DX8Wrapper; readers include methods of its class DX8Wrapper (Init::DX8Wrapper, Reset_Device:"
+      "evidence": "retail data row kind global_zero_init; 6 exact .text readers in 6 functions: Do_Mappers_Need_Normals::MeshMatDescClass; Init::DXWrapper; Load_Texture; Reset_Device::DXWrapper; Rva00131068GetByte; Shutdown::DXWrapper; readers include methods of its class DXWrapper (Init::DXWrapper, Reset_Device:"
     },
     {
       "rva": "0x009EDA06",
       "kind": "data-identity",
-      "name": "?IsWindowed@DX8Wrapper@@1_NA",
+      "name": "?IsWindowed@DXWrapper@@1_NA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 10 exact .text readers in 7 functions: Flip_To_Primary::DX8Wrapper; Get_Device_Resolution::DX8Wrapper; Get_Render_Target_Resolution::DX8Wrapper; Init::DX8Wrapper; Registry_Save_Render_Device::DX8Wrapper; Rva00116F70GetByte; Set_Render_Devi; readers include meth"
+      "evidence": "retail data row kind global_zero_init; 10 exact .text readers in 7 functions: Flip_To_Primary::DXWrapper; Get_Device_Resolution::DXWrapper; Get_Render_Target_Resolution::DXWrapper; Init::DXWrapper; Registry_Save_Render_Device::DXWrapper; Rva00116F70GetByte; Set_Render_Devi; readers include meth"
     },
     {
       "rva": "0x00A05F84",
@@ -125697,7 +125697,7 @@
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 13 exact .text readers in 11 functions: Clamp_Color::DX8Wrapper; Convert_Color_Clamp::DX8Wrapper; Has_CMOV_Instruction::CPUDetectClass; Init_Processor_Features::CPUDetectClass; Init_Processor_Log::CPUDetectClass; Render::Rva00177860; Render; readers include met"
+      "evidence": "retail data row kind global_zero_init; 13 exact .text readers in 11 functions: Clamp_Color::DXWrapper; Convert_Color_Clamp::DXWrapper; Has_CMOV_Instruction::CPUDetectClass; Init_Processor_Features::CPUDetectClass; Init_Processor_Log::CPUDetectClass; Render::Rva00177860; Render; readers include met"
     },
     {
       "rva": "0x009FE4CC",
@@ -125990,11 +125990,11 @@
     {
       "rva": "0x009EDA64",
       "kind": "data-identity",
-      "name": "?render_state_changes@DX8Wrapper@@1IA",
+      "name": "?render_state_changes@DXWrapper@@1IA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 164 exact .text readers in 35 functions: Apply_Default_State::DX8Wrapper; Begin_Statistics::DX8Wrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; End_Statistics::DX8Wrapper; Flush::RTS3DScene; Init::DX8Wrapper; Install_M; readers include me"
+      "evidence": "retail data row kind global_zero_init; 164 exact .text readers in 35 functions: Apply_Default_State::DXWrapper; Begin_Statistics::DXWrapper; CustomizedRender::Rva007406E1; Customized_Render::Rva0009AA0F; End_Statistics::DXWrapper; Flush::RTS3DScene; Init::DXWrapper; Install_M; readers include me"
     },
     {
       "rva": "0x009EC2D4",
@@ -126080,11 +126080,11 @@
     {
       "rva": "0x009EDA68",
       "kind": "data-identity",
-      "name": "?texture_stage_state_changes@DX8Wrapper@@1IA",
+      "name": "?texture_stage_state_changes@DXWrapper@@1IA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "retail data row kind global_zero_init; 230 exact .text readers in 31 functions: Apply::TextureFilterClass; Apply_Default_State::DX8Wrapper; Begin_Statistics::DX8Wrapper; End_Statistics::DX8Wrapper; Init::DX8Wrapper; Install_Materials::BfmeB1137; Install_Materials::W3DGlowOutlineM; readers include me"
+      "evidence": "retail data row kind global_zero_init; 230 exact .text readers in 31 functions: Apply::TextureFilterClass; Apply_Default_State::DXWrapper; Begin_Statistics::DXWrapper; End_Statistics::DXWrapper; Init::DXWrapper; Install_Materials::BfmeB1137; Install_Materials::W3DGlowOutlineM; readers include me"
     },
     {
       "rva": "0x00A06560",
@@ -126334,22 +126334,22 @@
     {
       "rva": "0x00116E30",
       "kind": "rename",
-      "old": "?Get_Device_Resolution_Width@DX8Wrapper@@KAHXZ",
-      "name": "?Get_Device_Resolution_Height@DX8Wrapper@@KAHXZ",
+      "old": "?Get_Device_Resolution_Width@DXWrapper@@KAHXZ",
+      "name": "?Get_Device_Resolution_Height@DXWrapper@@KAHXZ",
       "source": "review",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Retail 0x00116E30 (6B) reads 0x009B5FD8 (DX8Wrapper::ResolutionHeight, init=480), matching DX8Wrapper::Get_Device_Resolution_Height; release mis-placed ResolutionWidth getter key."
+      "evidence": "Retail 0x00116E30 (6B) reads 0x009B5FD8 (DXWrapper::ResolutionHeight, init=480), matching DXWrapper::Get_Device_Resolution_Height; release mis-placed ResolutionWidth getter key."
     },
     {
       "rva": "0x00116E20",
       "kind": "rename",
-      "old": "?Get_Texture_Bit_Depth@DX8Wrapper@@SAHXZ",
-      "name": "?Get_Device_Resolution_Width@DX8Wrapper@@KAHXZ",
+      "old": "?Get_Texture_Bit_Depth@DXWrapper@@SAHXZ",
+      "name": "?Get_Device_Resolution_Width@DXWrapper@@KAHXZ",
       "source": "review",
       "confidence": "strong",
       "basis": "rename",
-      "evidence": "Retail 0x00116E20 (6B) reads 0x009B5FD4 (DX8Wrapper::ResolutionWidth, init=640), matching DX8Wrapper::Get_Device_Resolution_Width; release mis-placed Get_Texture_Bit_Depth key."
+      "evidence": "Retail 0x00116E20 (6B) reads 0x009B5FD4 (DXWrapper::ResolutionWidth, init=640), matching DXWrapper::Get_Device_Resolution_Width; release mis-placed Get_Texture_Bit_Depth key."
     },
     {
       "rva": "0x00129450",
@@ -126365,11 +126365,11 @@
       "rva": "0x00117C30",
       "kind": "alias",
       "old": "",
-      "name": "?Get_Texture_Bit_Depth@DX8Wrapper@@SAHXZ",
+      "name": "?Get_Texture_Bit_Depth@DXWrapper@@SAHXZ",
       "source": "review",
       "confidence": "strong",
       "basis": "fold-alias",
-      "evidence": "Retail 0x00117C30 (6B) reads 0x009B5FE0 (DX8Wrapper::TextureBitDepth, init=16), matching ww3d.cpp:305 getTextureBitDepth -> DX8Wrapper::Get_Texture_Bit_Depth. Keep getTextureBitDepth."
+      "evidence": "Retail 0x00117C30 (6B) reads 0x009B5FE0 (DXWrapper::TextureBitDepth, init=16), matching ww3d.cpp:305 getTextureBitDepth -> DXWrapper::Get_Texture_Bit_Depth. Keep getTextureBitDepth."
     },
     {
       "rva": "0x009B5F94",
@@ -126383,20 +126383,20 @@
     {
       "rva": "0x009B5FD4",
       "kind": "data-identity",
-      "name": "?ResolutionWidth@DX8Wrapper@@1HA",
+      "name": "?ResolutionWidth@DXWrapper@@1HA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "Retail .data 0x009B5FD4 (4B, init=640) matches Zero Hour DX8Wrapper::ResolutionWidth = 640; read/written by DX8Wrapper::Init, Set_Render_Device, Set_Device_Resolution, Get_Device_Resolution, WW3D::Normalize_Coordinates, and 0x00116E20."
+      "evidence": "Retail .data 0x009B5FD4 (4B, init=640) matches Zero Hour DXWrapper::ResolutionWidth = 640; read/written by DXWrapper::Init, Set_Render_Device, Set_Device_Resolution, Get_Device_Resolution, WW3D::Normalize_Coordinates, and 0x00116E20."
     },
     {
       "rva": "0x009B5FE0",
       "kind": "data-identity",
-      "name": "?TextureBitDepth@DX8Wrapper@@1HA",
+      "name": "?TextureBitDepth@DXWrapper@@1HA",
       "source": "review",
       "confidence": "strong",
       "basis": "data-name",
-      "evidence": "Retail .data 0x009B5FE0 (4B, init=16) matches Zero Hour DX8Wrapper::TextureBitDepth = 16; read/written by DX8Wrapper::Registry_Load_Render_Device, Registry_Save_Render_Device, 0x00116E40, and 0x00117C30."
+      "evidence": "Retail .data 0x009B5FE0 (4B, init=16) matches Zero Hour DXWrapper::TextureBitDepth = 16; read/written by DXWrapper::Registry_Load_Render_Device, Registry_Save_Render_Device, 0x00116E40, and 0x00117C30."
     },
     {
       "rva": "0x00200BBA",

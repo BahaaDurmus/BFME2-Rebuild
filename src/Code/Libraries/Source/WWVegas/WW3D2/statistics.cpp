@@ -8,7 +8,7 @@
 #include "WWLib/vector.h"
 #include "WW3D2/TextureStatisticsStruct.h"
 #include "WW3D2/statistics.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/DX8Caps.h"
 #include "WW3D2/WW3D.h"
 
@@ -142,7 +142,7 @@ void Debug_Statistics::Record_DX8_Skin_Polys_And_Vertices(int pcount, int vcount
 // FUNCTION: BFME2 0x00129540 size=68 name=?Record_DX8_Polys_And_Vertices@Debug_Statistics@@YAXHHABVShaderClass@@@Z evidence=N:ledger
 void Debug_Statistics::Record_DX8_Polys_And_Vertices(int pcount, int vcount, const ShaderClass &shader)
 {
-	if (shader.Get_NPatch_Enable() == ShaderClass::NPATCH_ENABLE && DX8Wrapper::Get_Current_Caps()->Support_NPatches()) {
+	if (shader.Get_NPatch_Enable() == ShaderClass::NPATCH_ENABLE && DXWrapper::Get_Current_Caps()->Support_NPatches()) {
 		unsigned level = WW3D::Get_NPatches_Level();
 		level *= level;
 		pcount *= level;
@@ -325,7 +325,7 @@ void Debug_Statistics::Begin_Statistics()
 	RunningShaderChanges = 0;
 	DrawCallBatchCount = 0;
 	Record_Texture_Begin();
-	DX8Wrapper::Begin_Statistics();
+	DXWrapper::Begin_Statistics();
 }
 
 // FUNCTION: BFME2 0x0012A450 size=122 name=?End_Statistics@Debug_Statistics@@YAXXZ evidence=N:ledger
@@ -342,6 +342,6 @@ void Debug_Statistics::End_Statistics()
 	SortingVertices = RunningSortingVertices;
 	DrawCalls = RunningDrawCalls;
 	LastFrameShaderChanges = RunningShaderChanges;
-	DX8Wrapper::End_Statistics();
+	DXWrapper::End_Statistics();
 }
 

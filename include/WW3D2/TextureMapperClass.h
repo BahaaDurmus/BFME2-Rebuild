@@ -24,7 +24,7 @@
 
 #include "WWLib/RefCountClass.h"
 
-class Matrix4;
+class Matrix4x4;
 class FXShaderParameterList;
 
 class TextureMapperClass : public RefCountClass
@@ -70,7 +70,7 @@ public:
 	// Slot 8: converts the mapper to FXShader parameters (appends them to the list; true when it did). Retail's base is
 	// `xor al,al; ret 4` (0x00182150); the Scale, LinearOffset and Grid families override it (0x00187690, 0x00187850, 0x00187AD0).
 	virtual bool Convert_To_FXShader(FXShaderParameterList *parameters) { return false; }	// 8
-	virtual void Calculate_Texture_Matrix(Matrix4 &tex_matrix) = 0;				// 9
+	virtual void Calculate_Texture_Matrix(Matrix4x4 &tex_matrix) = 0;				// 9
 
 	unsigned int Get_Stage(void) const { return Stage; }
 

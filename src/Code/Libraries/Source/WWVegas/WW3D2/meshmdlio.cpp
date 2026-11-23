@@ -17,7 +17,7 @@
 #include "WWLib/chunkio.h"
 #include "WW3D2/VertexMaterialClass.h"
 
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/W3dUtilityClass.h"
 #define REF_PTR_RELEASE(x) { if (x) { (x)->Release_Ref(); (x) = NULL; } }
 
@@ -129,7 +129,7 @@ bool MeshModelClass::read_vertex_colors(ChunkLoadClass &cload, MeshLoadContextCl
 
 			Vector4 col;
 			col.Set((float)color.R / 255.0f, (float)color.G / 255.0f, (float)color.B / 255.0f, 1.0f);
-			dcg[i] = DX8Wrapper::Convert_Color(col);
+			dcg[i] = DXWrapper::Convert_Color(col);
 		}
 	}
 	CurMatDesc->Set_DCG_Source(context->CurPass, VertexMaterialClass::COLOR1);
@@ -249,9 +249,9 @@ bool MeshModelClass::read_dcg(ChunkLoadClass &cload, MeshLoadContextClass *conte
 		unsigned *dcg = matdesc->Get_Color_Array(0);
 		for (int i = 0; i < Get_Vertex_Count(); i++) {
 			cload.Read(&color, sizeof(color));
-			Vector4 col = DX8Wrapper::Convert_Color(dcg[i]);
+			Vector4 col = DXWrapper::Convert_Color(dcg[i]);
 			col.W = (float)color.A / 255.0f;
-			dcg[i] = DX8Wrapper::Convert_Color(col);
+			dcg[i] = DXWrapper::Convert_Color(col);
 		}
 	}
 
@@ -279,18 +279,18 @@ bool MeshModelClass::read_dig(ChunkLoadClass &cload, MeshLoadContextClass *conte
 			col.Y = (float)color.G * (1.0f / 255.0f);
 			col.Z = (float)color.B * (1.0f / 255.0f);
 			col.W = 1.0f;
-			dcg[i] = DX8Wrapper::Convert_Color(col);
+			dcg[i] = DXWrapper::Convert_Color(col);
 		}
 	} else {
 		W3dRGBAStruct color;
 		unsigned *dcg = matdesc->Get_Color_Array(0);
 		for (int i = 0; i < Get_Vertex_Count(); i++) {
 			cload.Read(&color, sizeof(color));
-			Vector4 col = DX8Wrapper::Convert_Color(dcg[i]);
+			Vector4 col = DXWrapper::Convert_Color(dcg[i]);
 			col.X *= (float)color.R * (1.0f / 255.0f);
 			col.Y *= (float)color.G * (1.0f / 255.0f);
 			col.Z *= (float)color.B * (1.0f / 255.0f);
-			dcg[i] = DX8Wrapper::Convert_Color(col);
+			dcg[i] = DXWrapper::Convert_Color(col);
 		}
 	}
 

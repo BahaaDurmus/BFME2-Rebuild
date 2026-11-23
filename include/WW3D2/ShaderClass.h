@@ -133,7 +133,7 @@ public:
 	bool operator==(const ShaderClass &that) const { return ShaderBits == that.ShaderBits; }
 	bool operator!=(const ShaderClass &that) const { return ShaderBits != that.ShaderBits; }
 
-	// Zero Hour's inline: the next Apply reloads every render state (DX8Wrapper::Invalidate_Cached_Render_States 0x0011FD10 stores
+	// Zero Hour's inline: the next Apply reloads every render state (DXWrapper::Invalidate_Cached_Render_States 0x0011FD10 stores
 	// 1 at 0x009B621C).
 	static void Invalidate(void) { ShaderDirty = true; }
 
@@ -156,7 +156,7 @@ private:
 		ShaderBits |= value << shift;
 	}
 
-	friend class DX8Wrapper;	// Set_Shader 0x000662E5 tests ShaderDirty
+	friend class DXWrapper;	// Set_Shader 0x000662E5 tests ShaderDirty
 protected:
 	unsigned long ShaderBits;		// +0x0
 	static bool ShaderDirty;		// RVA 0x009B621C (.data)

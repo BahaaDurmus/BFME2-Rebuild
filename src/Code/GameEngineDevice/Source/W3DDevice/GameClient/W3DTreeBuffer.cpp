@@ -76,7 +76,7 @@
 
 // FUNCTION: BFME2 0x000EDF40 size=6 name=?Rva000EDF40Get@@YAHXZ evidence=?:placeholder tier=A
 
-// FUNCTION: BFME2 0x000EDF46 size=136 name=?Convert_Color@DX8Wrapper@@SA?AVVector4@@I@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x000EDF46 size=136 name=?Convert_Color@DXWrapper@@SA?AVVector4@@I@Z evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x000EDFCE size=124 name=?removeProp@W3DPropBuffer@@QAEXH@Z evidence=N:ledger tier=A
 void W3DPropBuffer::removeProp(Int id)

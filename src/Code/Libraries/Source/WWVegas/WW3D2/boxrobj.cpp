@@ -7,7 +7,7 @@
 #include "WW3D2/VertexMaterialClass.h"
 #include "WW3D2/ShaderClass.h"
 #include "WW3D2/w3d_file.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/W3dUtilityClass.h"
 #include "WW3D2/AABoxRenderObjClass.h"
 #include "WW3D2/OBBoxRenderObjClass.h"

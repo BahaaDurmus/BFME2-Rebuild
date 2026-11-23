@@ -3,7 +3,7 @@
 // Target facts (retail game.dat): SIZE 0x2E4 (StringClass members inside). The D3D caps copy sits at +0x08 (the
 // first 0x2C bytes agree with D3DCAPS8: RasterCaps +0x24 inside it, tested by Set_Default_Global_Render_States 0x00122510 at
 // +0x2E for D3DPRASTERCAPS_FOGRANGE; MaxTextureWidth/Height at +0x60/+0x64 per AdjustTextureSize 0x0011E670). Support_Gamma
-// reads the byte at +0x13A (DX8Wrapper::Set_Gamma 0x00120980), Support_TnL the byte at +0x138 (the DX8IndexBufferClass constructor 0x00138980
+// reads the byte at +0x13A (DXWrapper::Set_Gamma 0x00120980), Support_TnL the byte at +0x138 (the DX8IndexBufferClass constructor 0x00138980
 // forces software vertex processing when it is clear) and Support_NPatches the byte at +0x13B
 // (Debug_Statistics::Record_DX8_Polys_And_Vertices 0x00129540, MeshMatDescClass::Do_Mappers_Need_Normals 0x0015A9F0).
 #pragma once

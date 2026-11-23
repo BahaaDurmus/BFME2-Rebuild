@@ -27,7 +27,7 @@
 #include "WW3D2/Vertex_Split_Table.h"
 #include "WW3D2/DX8MeshRendererClass.h"
 #include "WW3D2/WW3D.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/DX8Caps.h"
 #include "WWLib/mempool_block.h"
 
@@ -331,8 +331,8 @@ void DX8RigidFVFCategoryContainer::Render_Delayed_Procedural_Material_Passes()
 		return;
 	AnyDelayedPassesToRender = false;
 
-	DX8Wrapper::Set_Vertex_Buffer(VertexBuffer);
-	DX8Wrapper::Set_Index_Buffer(IndexBuffer, 0);
+	DXWrapper::Set_Vertex_Buffer(VertexBuffer);
+	DXWrapper::Set_Index_Buffer(IndexBuffer, 0);
 
 	MatPassTaskClass *task = DelayedMatPassHead;
 	while (task) {
@@ -414,7 +414,7 @@ Vertex_Split_Table::Vertex_Split_Table(MeshModelClass *model) :
 	NPatchEnable(false),
 	AllocatedPolygonArray(false)
 {
-	if (DX8Wrapper::Get_Current_Caps()->Support_NPatches() && Model->Needs_Vertex_Normals()) {
+	if (DXWrapper::Get_Current_Caps()->Support_NPatches() && Model->Needs_Vertex_Normals()) {
 		if (Model->Get_Flag(MeshGeometryClass::ALLOW_NPATCHES)) {
 			NPatchEnable = true;
 		}
@@ -613,11 +613,11 @@ void DX8MeshRendererClass::Flush(void)
 		Render_FVF_Category_Container_List_Delayed_Passes(*TextureCategoryContainerListsRigid[i]);
 	}
 
-	DX8Wrapper::Set_Vertex_Buffer(0);
-	DX8Wrapper::Set_Index_Buffer(0, 0);
-	DX8Wrapper::Apply_Render_State_Changes();
-	DX8Wrapper::Invalidate_Cached_Render_States();
-	DX8Wrapper::Apply_Default_State();
+	DXWrapper::Set_Vertex_Buffer(0);
+	DXWrapper::Set_Index_Buffer(0, 0);
+	DXWrapper::Apply_Render_State_Changes();
+	DXWrapper::Invalidate_Cached_Render_States();
+	DXWrapper::Apply_Default_State();
 }
 
 // FUNCTION: BFME2 0x00148100 size=124 name=?Render@DX8RigidFVFCategoryContainer@@UAEXXZ evidence=N:ledger tier=B hypothesis:cohesion
@@ -626,9 +626,9 @@ void DX8RigidFVFCategoryContainer::Render(void)
 	if (!AnythingToRender) return;
 	AnythingToRender = false;
 
-	DX8Wrapper::Set_Vertex_Buffer(VertexBuffer);
+	DXWrapper::Set_Vertex_Buffer(VertexBuffer);
 
-	DX8Wrapper::Set_Index_Buffer(IndexBuffer, 0);
+	DXWrapper::Set_Index_Buffer(IndexBuffer, 0);
 
 	for (unsigned p = 0; p < Passes; ++p) {
 		while (DX8TextureCategoryClass *tex = VisibleTextureCategoryList[p].Remove_Head()) {

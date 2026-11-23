@@ -8,7 +8,7 @@
 #include "WWLib/bound.h"
 #include <math.h>
 #include "WW3D2/DX8Caps.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/DX8WrapperRenderState.h"
 #include "WW3D2/VertexBufferClass.h"
 #include "WW3D2/IndexBufferClass.h"
@@ -73,67 +73,67 @@ static DynamicVectorClass<StringClass> _RenderDeviceNameTable;
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=unknown-rows right=unknown-rows; proof_first=false
 // Hypothesis rules: hypothesis:K, hypothesis:init-votes, hypothesis:padding
-// DX8Wrapper's statics, defined here in retail address order (the standalone link lists every one as unresolved).
+// DXWrapper's statics, defined here in retail address order (the standalone link lists every one as unresolved).
 // .data 0x00DB5FD0..E0, initial values from game.dat:
-bool DX8Wrapper::_EnableTriangleDraw = true;								// 0x00DB5FCD (game.dat: 1)
-int DX8Wrapper::CurRenderDevice = -1;										// 0x00DB5FD0
-int DX8Wrapper::ResolutionWidth = 640;										// 0x00DB5FD4
-int DX8Wrapper::ResolutionHeight = 480;										// 0x00DB5FD8
-int DX8Wrapper::BitDepth = 32;												// 0x00DB5FDC
-int DX8Wrapper::TextureBitDepth = 16;										// 0x00DB5FE0
+bool DXWrapper::_EnableTriangleDraw = true;								// 0x00DB5FCD (game.dat: 1)
+int DXWrapper::CurRenderDevice = -1;										// 0x00DB5FD0
+int DXWrapper::ResolutionWidth = 640;										// 0x00DB5FD4
+int DXWrapper::ResolutionHeight = 480;										// 0x00DB5FD8
+int DXWrapper::BitDepth = 32;												// 0x00DB5FDC
+int DXWrapper::TextureBitDepth = 16;										// 0x00DB5FE0
 // .bss, zero-initialised (explicit zeros keep definition order):
-IDirect3DBaseTexture8 *DX8Wrapper::Textures[MAX_TEXTURE_STAGES];					// 0x00DEC4B0
-float DX8Wrapper::ZNear = 0.0f;												// 0x00DEC4F0
-unsigned DX8Wrapper::render_state_changed = 0;								// 0x00DEC4F4
-bool DX8Wrapper::IsDeviceLost = false;										// 0x00DEC4F8
-unsigned DX8Wrapper::TextureStageStates[MAX_TEXTURE_STAGES][32] = { 0 };	// 0x00DECA38
-unsigned DX8Wrapper::RenderStates[256] = { 0 };								// 0x00DED5F8
-float DX8Wrapper::ZFar = 0.0f;												// 0x00DED9F8
-bool DX8Wrapper::IsInitted = false;										// 0x00DEDA04
+IDirect3DBaseTexture8 *DXWrapper::Textures[MAX_TEXTURE_STAGES];					// 0x00DEC4B0
+float DXWrapper::ZNear = 0.0f;												// 0x00DEC4F0
+unsigned DXWrapper::render_state_changed = 0;								// 0x00DEC4F4
+bool DXWrapper::IsDeviceLost = false;										// 0x00DEC4F8
+unsigned DXWrapper::TextureStageStates[MAX_TEXTURE_STAGES][32] = { 0 };	// 0x00DECA38
+unsigned DXWrapper::RenderStates[256] = { 0 };								// 0x00DED5F8
+float DXWrapper::ZFar = 0.0f;												// 0x00DED9F8
+bool DXWrapper::IsInitted = false;										// 0x00DEDA04
 bool DX8Wrapper_IsWindowed = true;					// 0x00DB5FCC
-bool DX8Wrapper::IsWindowed = false;										// 0x00DEDA06
-LightEnvironmentClass *DX8Wrapper::Light_Environment = 0;					// 0x00DEDA14
-bool DX8Wrapper::FogEnable = false;										// 0x00DEDA21
-D3DCOLOR DX8Wrapper::FogColor = 0;										// 0x00DEDA24
-float DX8Wrapper::FogStart = 0.0f;										// 0x00DEDA28
-float DX8Wrapper::FogEnd = 0.0f;											// 0x00DEDA2C
-IDirect3D8 *DX8Wrapper::D3DInterface = 0;									// 0x00DEDA30
-IDirect3DDevice8 *DX8Wrapper::D3DDevice = 0;								// 0x00DEDA34
-IDirect3DSurface8 *DX8Wrapper::CurrentRenderTarget = 0;						// 0x00DEDA38
-IDirect3DSurface8 *DX8Wrapper::CurrentDepthBuffer = 0;						// 0x00DEDA3C
-IDirect3DSurface8 *DX8Wrapper::DefaultRenderTarget = 0;						// 0x00DEDA40
-IDirect3DSurface8 *DX8Wrapper::DefaultDepthBuffer = 0;						// 0x00DEDA44
-bool DX8Wrapper::IsRenderToTexture = false;									// 0x00DEDA48
-unsigned DX8Wrapper::matrix_changes = 0;									// 0x00DEDA4C
-unsigned DX8Wrapper::material_changes = 0;									// 0x00DEDA50
-unsigned DX8Wrapper::vertex_buffer_changes = 0;								// 0x00DEDA54
-unsigned DX8Wrapper::index_buffer_changes = 0;								// 0x00DEDA58
-unsigned DX8Wrapper::light_changes = 0;										// 0x00DEDA5C
-unsigned DX8Wrapper::texture_changes = 0;									// 0x00DEDA60
-unsigned DX8Wrapper::render_state_changes = 0;								// 0x00DEDA64
-unsigned DX8Wrapper::texture_stage_state_changes = 0;						// 0x00DEDA68
-unsigned DX8Wrapper::draw_calls = 0;										// 0x00DEDA6C
-float DX8Wrapper::ZBias = 0.0f;												// 0x00DEDA74
-DX8Caps *DX8Wrapper::CurrentCaps = 0;										// 0x00DEDA7C
-unsigned long DX8Wrapper::FrameCount = 0;									// 0x00DEDA84
-unsigned DX8Wrapper::last_frame_matrix_changes = 0;							// 0x00DEDA9C
-unsigned DX8Wrapper::last_frame_material_changes = 0;						// 0x00DEDAA0
-unsigned DX8Wrapper::last_frame_vertex_buffer_changes = 0;					// 0x00DEDAA4
-unsigned DX8Wrapper::last_frame_index_buffer_changes = 0;					// 0x00DEDAA8
-unsigned DX8Wrapper::last_frame_light_changes = 0;							// 0x00DEDAAC
-unsigned DX8Wrapper::last_frame_texture_changes = 0;						// 0x00DEDAB0
-unsigned DX8Wrapper::last_frame_render_state_changes = 0;					// 0x00DEDAB4
-unsigned DX8Wrapper::last_frame_texture_stage_state_changes = 0;			// 0x00DEDAB8
-unsigned DX8Wrapper::last_frame_number_of_DX8_calls = 0;					// 0x00DEDABC
-unsigned DX8Wrapper::last_frame_draw_calls = 0;								// 0x00DEDAC0
-Matrix4 DX8Wrapper::DeviceProjectionMatrix;									// 0x00DEDBF0
-Matrix4 DX8Wrapper::ProjectionMatrix;										// 0x00DEDC30
-RenderStateStruct DX8Wrapper::render_state;									// 0x00DEE5D8
+bool DXWrapper::IsWindowed = false;										// 0x00DEDA06
+LightEnvironmentClass *DXWrapper::Light_Environment = 0;					// 0x00DEDA14
+bool DXWrapper::FogEnable = false;										// 0x00DEDA21
+D3DCOLOR DXWrapper::FogColor = 0;										// 0x00DEDA24
+float DXWrapper::FogStart = 0.0f;										// 0x00DEDA28
+float DXWrapper::FogEnd = 0.0f;											// 0x00DEDA2C
+IDirect3D8 *DXWrapper::D3DInterface = 0;									// 0x00DEDA30
+IDirect3DDevice8 *DXWrapper::D3DDevice = 0;								// 0x00DEDA34
+IDirect3DSurface8 *DXWrapper::CurrentRenderTarget = 0;						// 0x00DEDA38
+IDirect3DSurface8 *DXWrapper::CurrentDepthBuffer = 0;						// 0x00DEDA3C
+IDirect3DSurface8 *DXWrapper::DefaultRenderTarget = 0;						// 0x00DEDA40
+IDirect3DSurface8 *DXWrapper::DefaultDepthBuffer = 0;						// 0x00DEDA44
+bool DXWrapper::IsRenderToTexture = false;									// 0x00DEDA48
+unsigned DXWrapper::matrix_changes = 0;									// 0x00DEDA4C
+unsigned DXWrapper::material_changes = 0;									// 0x00DEDA50
+unsigned DXWrapper::vertex_buffer_changes = 0;								// 0x00DEDA54
+unsigned DXWrapper::index_buffer_changes = 0;								// 0x00DEDA58
+unsigned DXWrapper::light_changes = 0;										// 0x00DEDA5C
+unsigned DXWrapper::texture_changes = 0;									// 0x00DEDA60
+unsigned DXWrapper::render_state_changes = 0;								// 0x00DEDA64
+unsigned DXWrapper::texture_stage_state_changes = 0;						// 0x00DEDA68
+unsigned DXWrapper::draw_calls = 0;										// 0x00DEDA6C
+float DXWrapper::ZBias = 0.0f;												// 0x00DEDA74
+DX8Caps *DXWrapper::CurrentCaps = 0;										// 0x00DEDA7C
+unsigned long DXWrapper::FrameCount = 0;									// 0x00DEDA84
+unsigned DXWrapper::last_frame_matrix_changes = 0;							// 0x00DEDA9C
+unsigned DXWrapper::last_frame_material_changes = 0;						// 0x00DEDAA0
+unsigned DXWrapper::last_frame_vertex_buffer_changes = 0;					// 0x00DEDAA4
+unsigned DXWrapper::last_frame_index_buffer_changes = 0;					// 0x00DEDAA8
+unsigned DXWrapper::last_frame_light_changes = 0;							// 0x00DEDAAC
+unsigned DXWrapper::last_frame_texture_changes = 0;						// 0x00DEDAB0
+unsigned DXWrapper::last_frame_render_state_changes = 0;					// 0x00DEDAB4
+unsigned DXWrapper::last_frame_texture_stage_state_changes = 0;			// 0x00DEDAB8
+unsigned DXWrapper::last_frame_number_of_DX8_calls = 0;					// 0x00DEDABC
+unsigned DXWrapper::last_frame_draw_calls = 0;								// 0x00DEDAC0
+Matrix4x4 DXWrapper::DeviceProjectionMatrix;									// 0x00DEDBF0
+Matrix4x4 DXWrapper::ProjectionMatrix;										// 0x00DEDC30
+RenderStateStruct DXWrapper::render_state;									// 0x00DEE5D8
 
 // FUNCTION: BFME2 0x0011CC60 size=215 name=?Rva0011CC60InvalidateTextureStages@DX8WrapperStageHelper@@SAXXZ evidence=?:placeholder tier=A
 typedef HRESULT(__stdcall *DX8Wrapper_InvalidateSetTextureFn)(IDirect3DDevice8 *, DWORD, void *);
 
-void DX8Wrapper::Invalidate_Texture_Stages(void)
+void DXWrapper::Invalidate_Texture_Stages(void)
 {
 	unsigned a;
 	for (a = 0; a < MAX_TEXTURE_STAGES; ++a) {
@@ -160,22 +160,22 @@ unsigned long Get_Presentation_Interval(void)
 }
 
 
-// FUNCTION: BFME2 0x0011CDC0 size=21 name=?Has_Stencil@DX8Wrapper@@SA_NXZ evidence=N:ledger tier=A
-bool DX8Wrapper::Has_Stencil(void)
+// FUNCTION: BFME2 0x0011CDC0 size=21 name=?Has_Stencil@DXWrapper@@SA_NXZ evidence=N:ledger tier=A
+bool DXWrapper::Has_Stencil(void)
 {
 	bool has_stencil = (_PresentParameters.AutoDepthStencilFormat == D3DFMT_D24S8 ||
 						_PresentParameters.AutoDepthStencilFormat == D3DFMT_D24X4S4);
 	return has_stencil;
 }
 
-// FUNCTION: BFME2 0x0011CDE0 size=6 name=?Get_Render_Device@DX8Wrapper@@KAHXZ evidence=N:ledger tier=A
-int DX8Wrapper::Get_Render_Device(void)
+// FUNCTION: BFME2 0x0011CDE0 size=6 name=?Get_Render_Device@DXWrapper@@KAHXZ evidence=N:ledger tier=A
+int DXWrapper::Get_Render_Device(void)
 {
 	return CurRenderDevice;
 }
 
-// FUNCTION: BFME2 0x0011CDF0 size=48 name=?Get_Device_Resolution@DX8Wrapper@@KAXAAH00AA_N@Z evidence=N:ledger tier=A
-void DX8Wrapper::Get_Device_Resolution(int &set_w, int &set_h, int &set_bits, bool &set_windowed)
+// FUNCTION: BFME2 0x0011CDF0 size=48 name=?Get_Device_Resolution@DXWrapper@@KAXAAH00AA_N@Z evidence=N:ledger tier=A
+void DXWrapper::Get_Device_Resolution(int &set_w, int &set_h, int &set_bits, bool &set_windowed)
 {
 	set_w = ResolutionWidth;
 	set_h = ResolutionHeight;
@@ -183,8 +183,8 @@ void DX8Wrapper::Get_Device_Resolution(int &set_w, int &set_h, int &set_bits, bo
 	set_windowed = IsWindowed;
 }
 
-// FUNCTION: BFME2 0x0011CE40 size=314 name=?Registry_Load_Render_Device@DX8Wrapper@@KA_NPBDPADHAAH2222@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Registry_Load_Render_Device(const char *sub_key, char *device, int device_len, int &width, int &height, int &depth, int &windowed, int &texture_depth)
+// FUNCTION: BFME2 0x0011CE40 size=314 name=?Registry_Load_Render_Device@DXWrapper@@KA_NPBDPADHAAH2222@Z evidence=N:ledger tier=A
+bool DXWrapper::Registry_Load_Render_Device(const char *sub_key, char *device, int device_len, int &width, int &height, int &depth, int &windowed, int &texture_depth)
 {
 	RegistryClass registry(sub_key);
 
@@ -207,14 +207,14 @@ bool DX8Wrapper::Registry_Load_Render_Device(const char *sub_key, char *device, 
 	return false;
 }
 
-// FUNCTION: BFME2 0x0011CF80 size=248 name=?Find_Color_Mode@DX8Wrapper@@KA_NW4_D3DFORMAT@@HHPAI@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011CF80 size=248 name=?Find_Color_Mode@DXWrapper@@KA_NW4_D3DFORMAT@@HHPAI@Z evidence=N:ledger tier=A
 // The Direct3D 9 interface behind IDirect3D8: GetAdapterModeCount is slot 6 (+0x18), EnumAdapterModes slot 7 (+0x1C), CheckDeviceType slot 9 (+0x24).
 typedef UINT(__stdcall *DX8Wrapper_GetAdapterModeCountFn)(IDirect3D8 *, UINT, UINT);
 typedef HRESULT(__stdcall *DX8Wrapper_EnumAdapterModesFn)(IDirect3D8 *, UINT, UINT, UINT, D3DDISPLAYMODE *);
 typedef HRESULT(__stdcall *DX8Wrapper_CheckDeviceTypeFn)(IDirect3D8 *, UINT, D3DDEVTYPE, UINT, UINT, BOOL);
 
 // Find the resolution mode with at least resx,resy with the highest supported refresh rate.
-bool DX8Wrapper::Find_Color_Mode(D3DFORMAT colorbuffer, int resx, int resy, UINT *mode)
+bool DXWrapper::Find_Color_Mode(D3DFORMAT colorbuffer, int resx, int resy, UINT *mode)
 {
 	UINT i, j, modemax;
 	UINT rx, ry;
@@ -264,12 +264,12 @@ bool DX8Wrapper::Find_Color_Mode(D3DFORMAT colorbuffer, int resx, int resy, UINT
 	return true;
 }
 
-// FUNCTION: BFME2 0x0011D080 size=70 name=?Test_Z_Mode@DX8Wrapper@@KA_NW4_D3DFORMAT@@00@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011D080 size=70 name=?Test_Z_Mode@DXWrapper@@KA_NW4_D3DFORMAT@@00@Z evidence=N:ledger tier=A
 // Retail's IDirect3D8 is a Direct3D 9 interface: CheckDeviceFormat is slot 10 (+0x28), CheckDepthStencilMatch slot 12 (+0x30).
 typedef HRESULT(__stdcall *DX8Wrapper_CheckDeviceFormatFn)(IDirect3D8 *, UINT, D3DDEVTYPE, D3DFORMAT, DWORD, D3DRESOURCETYPE, D3DFORMAT);
 typedef HRESULT(__stdcall *DX8Wrapper_CheckDepthStencilMatchFn)(IDirect3D8 *, UINT, D3DDEVTYPE, D3DFORMAT, D3DFORMAT, D3DFORMAT);
 
-bool DX8Wrapper::Test_Z_Mode(D3DFORMAT colorbuffer, D3DFORMAT backbuffer, D3DFORMAT zmode)
+bool DXWrapper::Test_Z_Mode(D3DFORMAT colorbuffer, D3DFORMAT backbuffer, D3DFORMAT zmode)
 {
 	// See if we have this mode first
 	if (FAILED(((*(DX8Wrapper_CheckDeviceFormatFn **)D3DInterface)[10])(D3DInterface, D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
@@ -286,8 +286,8 @@ bool DX8Wrapper::Test_Z_Mode(D3DFORMAT colorbuffer, D3DFORMAT backbuffer, D3DFOR
 	return true;
 }
 
-// FUNCTION: BFME2 0x0011D0D0 size=103 name=?Reset_Statistics@DX8Wrapper@@KAXXZ evidence=N:ledger tier=A
-void DX8Wrapper::Reset_Statistics()
+// FUNCTION: BFME2 0x0011D0D0 size=103 name=?Reset_Statistics@DXWrapper@@KAXXZ evidence=N:ledger tier=A
+void DXWrapper::Reset_Statistics()
 {
 	matrix_changes = 0;
 	material_changes = 0;
@@ -312,8 +312,8 @@ void DX8Wrapper::Reset_Statistics()
 	last_frame_draw_calls = 0;
 }
 
-// FUNCTION: BFME2 0x0011D140 size=53 name=?Begin_Statistics@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
-void DX8Wrapper::Begin_Statistics()
+// FUNCTION: BFME2 0x0011D140 size=53 name=?Begin_Statistics@DXWrapper@@SAXXZ evidence=N:ledger tier=A
+void DXWrapper::Begin_Statistics()
 {
 	matrix_changes = 0;
 	material_changes = 0;
@@ -327,8 +327,8 @@ void DX8Wrapper::Begin_Statistics()
 	draw_calls = 0;
 }
 
-// FUNCTION: BFME2 0x0011D180 size=113 name=?End_Statistics@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
-void DX8Wrapper::End_Statistics()
+// FUNCTION: BFME2 0x0011D180 size=113 name=?End_Statistics@DXWrapper@@SAXXZ evidence=N:ledger tier=A
+void DXWrapper::End_Statistics()
 {
 	last_frame_matrix_changes = matrix_changes;
 	last_frame_material_changes = material_changes;
@@ -343,46 +343,46 @@ void DX8Wrapper::End_Statistics()
 }
 
 // FUNCTION: BFME2 0x0011D200 size=6 name=?Rva0011D200Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Matrix_Changes() { return last_frame_matrix_changes; }
+unsigned DXWrapper::Get_Last_Frame_Matrix_Changes() { return last_frame_matrix_changes; }
 
 // FUNCTION: BFME2 0x0011D210 size=6 name=?Rva0011D210Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Material_Changes() { return last_frame_material_changes; }
+unsigned DXWrapper::Get_Last_Frame_Material_Changes() { return last_frame_material_changes; }
 
 // FUNCTION: BFME2 0x0011D220 size=6 name=?Rva0011D220Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Vertex_Buffer_Changes() { return last_frame_vertex_buffer_changes; }
+unsigned DXWrapper::Get_Last_Frame_Vertex_Buffer_Changes() { return last_frame_vertex_buffer_changes; }
 
 // FUNCTION: BFME2 0x0011D230 size=6 name=?Rva0011D230Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Index_Buffer_Changes() { return last_frame_index_buffer_changes; }
+unsigned DXWrapper::Get_Last_Frame_Index_Buffer_Changes() { return last_frame_index_buffer_changes; }
 
 // FUNCTION: BFME2 0x0011D240 size=6 name=?Rva0011D240Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Light_Changes() { return last_frame_light_changes; }
+unsigned DXWrapper::Get_Last_Frame_Light_Changes() { return last_frame_light_changes; }
 
 // FUNCTION: BFME2 0x0011D250 size=6 name=?Rva0011D250Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Texture_Changes() { return last_frame_texture_changes; }
+unsigned DXWrapper::Get_Last_Frame_Texture_Changes() { return last_frame_texture_changes; }
 
 // FUNCTION: BFME2 0x0011D260 size=6 name=?Rva0011D260Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Render_State_Changes() { return last_frame_render_state_changes; }
+unsigned DXWrapper::Get_Last_Frame_Render_State_Changes() { return last_frame_render_state_changes; }
 
 // FUNCTION: BFME2 0x0011D270 size=6 name=?Rva0011D270Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Texture_Stage_State_Changes() { return last_frame_texture_stage_state_changes; }
+unsigned DXWrapper::Get_Last_Frame_Texture_Stage_State_Changes() { return last_frame_texture_stage_state_changes; }
 
 // FUNCTION: BFME2 0x0011D280 size=6 name=?Rva0011D280Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Number_Of_DX8_Calls() { return last_frame_number_of_DX8_calls; }
+unsigned DXWrapper::Get_Last_Frame_Number_Of_DX8_Calls() { return last_frame_number_of_DX8_calls; }
 
 // FUNCTION: BFME2 0x0011D290 size=6 name=?Rva0011D290Get@@YAHXZ evidence=?:placeholder tier=A
-unsigned DX8Wrapper::Get_Last_Frame_Draw_Calls() { return last_frame_draw_calls; }
+unsigned DXWrapper::Get_Last_Frame_Draw_Calls() { return last_frame_draw_calls; }
 
 // FUNCTION: BFME2 0x0011D2A0 size=6 name=?getDX8FrameCount@@YAHXZ evidence=N:ledger tier=A
 int getDX8FrameCount(void)
 {
-	return DX8Wrapper::Get_FrameCount();
+	return DXWrapper::Get_FrameCount();
 }
 
-// FUNCTION: BFME2 0x0011D2B0 size=31 name=?Begin_Scene_Inner@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011D2B0 size=31 name=?Begin_Scene_Inner@DXWrapper@@SAXXZ evidence=N:ledger tier=A
 // The device is a Direct3D 9 device behind Direct3D 8's name: BeginScene is slot 41 (+0xA4).
 typedef HRESULT(__stdcall *DX8Wrapper_BeginSceneFn)(IDirect3DDevice8 *);
 
-void DX8Wrapper::Begin_Scene_Inner(void)
+void DXWrapper::Begin_Scene_Inner(void)
 {
 	bfmeDebugTouch009588e0();
 	((*(DX8Wrapper_BeginSceneFn **)D3DDevice)[41])(D3DDevice);
@@ -390,14 +390,14 @@ void DX8Wrapper::Begin_Scene_Inner(void)
 	bfmeDebugTouch009588e0();
 }
 
-// FUNCTION: BFME2 0x0011D2D0 size=87 name=?Rva0011D2D0WaitForBackBuffer@DX8Wrapper@@SAXXZ evidence=?:placeholder tier=A
+// FUNCTION: BFME2 0x0011D2D0 size=87 name=?Rva0011D2D0WaitForBackBuffer@DXWrapper@@SAXXZ evidence=?:placeholder tier=A
 // GetBackBuffer is slot 18 (+0x48), the surface's LockRect slot 13 (+0x34), UnlockRect slot 14 (+0x38), Release slot 2 (+0x08).
 typedef HRESULT(__stdcall *DX8Wrapper_GetBackBufferFn)(IDirect3DDevice8 *, UINT, UINT, UINT, void **);
 typedef HRESULT(__stdcall *DX8Wrapper_LockRectFn)(void *, D3DLOCKED_RECT *, const RECT *, DWORD);
 typedef HRESULT(__stdcall *DX8Wrapper_UnlockRectFn)(void *);
 typedef ULONG(__stdcall *DX8Wrapper_ReleaseFn)(void *);
 
-void DX8Wrapper::Wait_For_Back_Buffer(void)
+void DXWrapper::Wait_For_Back_Buffer(void)
 {
 	if (D3DDevice) {
 		void *surface = 0;
@@ -411,14 +411,14 @@ void DX8Wrapper::Wait_For_Back_Buffer(void)
 	}
 }
 
-// FUNCTION: BFME2 0x0011D330 size=329 name=?Clear@DX8Wrapper@@SAX_N00ABVVector3@@MMI@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011D330 size=329 name=?Clear@DXWrapper@@SAX_N00ABVVector3@@MMI@Z evidence=N:ledger tier=A
 // The device is a Direct3D 9 device behind Direct3D 8's name: GetDepthStencilSurface is slot 40 (+0xA0), Clear slot 43
 // (+0xAC); the surface's GetDesc is slot 12 (+0x30) and Release slot 2 (+0x08).
 typedef HRESULT(__stdcall *DX8Wrapper_GetDepthStencilSurfaceFn)(IDirect3DDevice8 *, void **);
 typedef HRESULT(__stdcall *DX8Wrapper_GetDescFn)(void *, D3DSURFACE_DESC *);
 typedef HRESULT(__stdcall *DX8Wrapper_ClearFn)(IDirect3DDevice8 *, DWORD, const D3DRECT *, DWORD, D3DCOLOR, float, DWORD);
 
-void DX8Wrapper::Clear(bool clear_color, bool clear_z_stencil, bool clear_stencil, const Vector3 &color, float dest_alpha, float z, unsigned int stencil)
+void DXWrapper::Clear(bool clear_color, bool clear_z_stencil, bool clear_stencil, const Vector3 &color, float dest_alpha, float z, unsigned int stencil)
 {
 	// Clearing a stencil buffer that is not there fails the whole call, so the format of the depth buffer decides.
 	bool has_stencil = false;
@@ -448,17 +448,17 @@ void DX8Wrapper::Clear(bool clear_color, bool clear_z_stencil, bool clear_stenci
 }
 
 
-// FUNCTION: BFME2 0x0011D480 size=27 name=?Set_Viewport@DX8Wrapper@@SAXPBU_D3DVIEWPORT8@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011D480 size=27 name=?Set_Viewport@DXWrapper@@SAXPBU_D3DVIEWPORT8@@@Z evidence=N:ledger tier=A
 typedef HRESULT(__stdcall *DX8Wrapper_SetViewportFn)(IDirect3DDevice8 *, CONST D3DVIEWPORT8 *);
 
-void DX8Wrapper::Set_Viewport(CONST D3DVIEWPORT8 *pViewport)
+void DXWrapper::Set_Viewport(CONST D3DVIEWPORT8 *pViewport)
 {
 	((*(DX8Wrapper_SetViewportFn **)_Get_D3D_Device8())[47])(_Get_D3D_Device8(), pViewport);
 	number_of_DX8_calls++;
 }
 
-// FUNCTION: BFME2 0x0011D4A0 size=132 name=?Set_Vertex_Buffer@DX8Wrapper@@SAXPBVVertexBufferClass@@I@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Vertex_Buffer(const VertexBufferClass *vb, unsigned stream)
+// FUNCTION: BFME2 0x0011D4A0 size=132 name=?Set_Vertex_Buffer@DXWrapper@@SAXPBVVertexBufferClass@@I@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Vertex_Buffer(const VertexBufferClass *vb, unsigned stream)
 {
 	render_state.vba_offset = 0;
 	render_state.vba_count = 0;
@@ -481,8 +481,8 @@ void DX8Wrapper::Set_Vertex_Buffer(const VertexBufferClass *vb, unsigned stream)
 	render_state_changed |= VERTEX_BUFFER_CHANGED;
 }
 
-// FUNCTION: BFME2 0x0011D530 size=136 name=?Set_Index_Buffer@DX8Wrapper@@SAXPBVIndexBufferClass@@G@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Index_Buffer(const IndexBufferClass *ib, unsigned short index_base_offset)
+// FUNCTION: BFME2 0x0011D530 size=136 name=?Set_Index_Buffer@DXWrapper@@SAXPBVIndexBufferClass@@G@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Index_Buffer(const IndexBufferClass *ib, unsigned short index_base_offset)
 {
 	render_state.iba_offset = 0;
 	if (render_state.index_buffer) {
@@ -505,8 +505,8 @@ void DX8Wrapper::Set_Index_Buffer(const IndexBufferClass *ib, unsigned short ind
 	render_state_changed |= INDEX_BUFFER_CHANGED;
 }
 
-// FUNCTION: BFME2 0x0011D5C0 size=197 name=?Set_Vertex_Buffer@DX8Wrapper@@SAXABVDynamicVBAccessClass@@@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Vertex_Buffer(const DynamicVBAccessClass &vba_)
+// FUNCTION: BFME2 0x0011D5C0 size=197 name=?Set_Vertex_Buffer@DXWrapper@@SAXABVDynamicVBAccessClass@@@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Vertex_Buffer(const DynamicVBAccessClass &vba_)
 {
 	render_state.vba_offset = 0;
 	render_state.vba_count = 0;
@@ -534,8 +534,8 @@ void DX8Wrapper::Set_Vertex_Buffer(const DynamicVBAccessClass &vba_)
 	render_state_changed |= INDEX_BUFFER_CHANGED;
 }
 
-// FUNCTION: BFME2 0x0011D690 size=116 name=?Set_Index_Buffer@DX8Wrapper@@SAXABVDynamicIBAccessClass@@G@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Index_Buffer(const DynamicIBAccessClass &iba_, unsigned short index_base_offset)
+// FUNCTION: BFME2 0x0011D690 size=116 name=?Set_Index_Buffer@DXWrapper@@SAXABVDynamicIBAccessClass@@G@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Index_Buffer(const DynamicIBAccessClass &iba_, unsigned short index_base_offset)
 {
 	if (render_state.index_buffer) render_state.index_buffer->Release_Engine_Ref();
 
@@ -550,16 +550,16 @@ void DX8Wrapper::Set_Index_Buffer(const DynamicIBAccessClass &iba_, unsigned sho
 	render_state_changed |= INDEX_BUFFER_CHANGED;
 }
 
-// FUNCTION: BFME2 0x0011D710 size=539 name=?Draw_Sorting_IB_VB@DX8Wrapper@@CAXIIIII@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011D710 size=539 name=?Draw_Sorting_IB_VB@DXWrapper@@CAXIIIII@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0011D930 size=746 name=?Apply_Render_State_Changes@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011D930 size=746 name=?Apply_Render_State_Changes@DXWrapper@@SAXXZ evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x0011DC20 size=58 name=?bfmeStepTDB@@YAXXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0011DC60 size=62 name=?_Create_DX8_Surface@DX8Wrapper@@SAPAVIDirect3DSurface9@@IIW4WW3DFormat@@W4_D3DPOOL@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011DC60 size=62 name=?_Create_DX8_Surface@DXWrapper@@SAPAVIDirect3DSurface9@@IIW4WW3DFormat@@W4_D3DPOOL@@@Z evidence=N:ledger tier=A
 typedef HRESULT(__stdcall *DX8Wrapper_CreateOffscreenPlainSurface9Fn)(IDirect3DDevice8 *, UINT, UINT, UINT, UINT, void **, void *);
 
-IDirect3DSurface9 *DX8Wrapper::_Create_DX8_Surface(unsigned int width, unsigned int height, WW3DFormat format, D3DPOOL pool)
+IDirect3DSurface9 *DXWrapper::_Create_DX8_Surface(unsigned int width, unsigned int height, WW3DFormat format, D3DPOOL pool)
 {
 	IDirect3DSurface9 *surface = NULL;
 	((*(DX8Wrapper_CreateOffscreenPlainSurface9Fn **)_Get_D3D_Device8())[36])(_Get_D3D_Device8(), width, height, format, pool, (void **)&surface, NULL);
@@ -569,8 +569,8 @@ IDirect3DSurface9 *DX8Wrapper::_Create_DX8_Surface(unsigned int width, unsigned 
 
 // FUNCTION: BFME2 0x0011DCA0 size=120 name=?copySurfaceRects006e@@YAXVW3DRadarResetSurface@@PBUBfmeRect@@01H@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0011DD20 size=90 name=?Set_Light@DX8Wrapper@@SAXIPBU_D3DLIGHT8@@@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Light(unsigned index, const D3DLIGHT8 *light)
+// FUNCTION: BFME2 0x0011DD20 size=90 name=?Set_Light@DXWrapper@@SAXIPBU_D3DLIGHT8@@@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Light(unsigned index, const D3DLIGHT8 *light)
 {
 	if (light) {
 		render_state.Lights[index] = *light;
@@ -582,8 +582,8 @@ void DX8Wrapper::Set_Light(unsigned index, const D3DLIGHT8 *light)
 	render_state_changed |= (LIGHT0_CHANGED << index);
 }
 
-// FUNCTION: BFME2 0x0011DD80 size=595 name=?Set_Light@DX8Wrapper@@SAXIABVLightClass@@@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Light(unsigned index, const LightClass &light)
+// FUNCTION: BFME2 0x0011DD80 size=595 name=?Set_Light@DXWrapper@@SAXIABVLightClass@@@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Light(unsigned index, const LightClass &light)
 {
 	D3DLIGHT8 dlight;
 	Vector3 temp;
@@ -654,13 +654,13 @@ void DX8Wrapper::Set_Light(unsigned index, const LightClass &light)
 	Set_Light(index, &dlight);
 }
 
-// FUNCTION: BFME2 0x0011DFE0 size=112 name=?_Get_DX8_Front_Buffer@DX8Wrapper@@SAPAVIDirect3DSurface9@@XZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011DFE0 size=112 name=?_Get_DX8_Front_Buffer@DXWrapper@@SAPAVIDirect3DSurface9@@XZ evidence=N:ledger tier=A
 // The device's GetDisplayMode is slot 8 (+0x20), CreateOffscreenPlainSurface slot 36 (+0x90), GetFrontBufferData slot 33 (+0x84).
 typedef HRESULT(__stdcall *DX8Wrapper_GetDisplayModeFn)(IDirect3DDevice8 *, UINT, D3DDISPLAYMODE *);
 typedef HRESULT(__stdcall *DX8Wrapper_CreateOffscreenPlainSurfaceFn)(IDirect3DDevice8 *, UINT, UINT, UINT, UINT, void **, void *);
 typedef HRESULT(__stdcall *DX8Wrapper_GetFrontBufferDataFn)(IDirect3DDevice8 *, UINT, void *);
 
-IDirect3DSurface9 *DX8Wrapper::_Get_DX8_Front_Buffer()
+IDirect3DSurface9 *DXWrapper::_Get_DX8_Front_Buffer()
 {
 	D3DDISPLAYMODE mode;
 	((*(DX8Wrapper_GetDisplayModeFn **)D3DDevice)[8])(D3DDevice, 0, &mode);
@@ -677,7 +677,7 @@ IDirect3DSurface9 *DX8Wrapper::_Get_DX8_Front_Buffer()
 
 // FUNCTION: BFME2 0x0011E050 size=195 name=?getBackBufferSurface006e@@YA?AVW3DRadarResetSurface@@H@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0011E250 size=400 name=?Set_Render_Target@DX8Wrapper@@SAXPAUIDirect3DSurface8@@_N@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011E250 size=400 name=?Set_Render_Target@DXWrapper@@SAXPAUIDirect3DSurface8@@_N@Z evidence=N:ledger tier=A
 // The device's SetRenderTarget is slot 37 (+0x94), GetRenderTarget slot 38 (+0x98), SetDepthStencilSurface slot 39 (+0x9C),
 // GetDepthStencilSurface slot 40 (+0xA0); a surface's AddRef is slot 1 and Release slot 2.
 typedef HRESULT(__stdcall *DX8Wrapper_SetRenderTargetFn)(IDirect3DDevice8 *, UINT, void *);
@@ -686,7 +686,7 @@ typedef HRESULT(__stdcall *DX8Wrapper_SetDepthStencilFn)(IDirect3DDevice8 *, voi
 typedef HRESULT(__stdcall *DX8Wrapper_GetDepthStencilFn)(IDirect3DDevice8 *, void **);
 typedef ULONG(__stdcall *DX8Wrapper_AddRefFn)(void *);
 
-void DX8Wrapper::Set_Render_Target(IDirect3DSurface8 *render_target, bool use_default_depth_buffer)
+void DXWrapper::Set_Render_Target(IDirect3DSurface8 *render_target, bool use_default_depth_buffer)
 {
 	// Should we restore the default render target, or set a new one?
 	if (render_target == NULL || render_target == DefaultRenderTarget) {
@@ -752,8 +752,8 @@ void DX8Wrapper::Set_Render_Target(IDirect3DSurface8 *render_target, bool use_de
 	IsRenderToTexture = false;
 }
 
-// FUNCTION: BFME2 0x0011E3E0 size=415 name=?Set_Render_Target@DX8Wrapper@@SAXPAUIDirect3DSurface8@@0@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Render_Target(IDirect3DSurface8 *render_target, IDirect3DSurface8 *depth_buffer)
+// FUNCTION: BFME2 0x0011E3E0 size=415 name=?Set_Render_Target@DXWrapper@@SAXPAUIDirect3DSurface8@@0@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Render_Target(IDirect3DSurface8 *render_target, IDirect3DSurface8 *depth_buffer)
 {
 	// Should we restore the default render target, or set a new one?
 	if (render_target == NULL || render_target == DefaultRenderTarget) {
@@ -817,10 +817,10 @@ void DX8Wrapper::Set_Render_Target(IDirect3DSurface8 *render_target, IDirect3DSu
 
 	IsRenderToTexture = true;
 }
-// FUNCTION: BFME2 0x0011E580 size=132 name=?Create_Additional_Swap_Chain@DX8Wrapper@@SAPAUIDirect3DSwapChain8@@PAX@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011E580 size=132 name=?Create_Additional_Swap_Chain@DXWrapper@@SAPAUIDirect3DSwapChain8@@PAX@Z evidence=N:ledger tier=A
 typedef HRESULT(__stdcall *DX8Wrapper_CreateAdditionalSwapChainFn)(IDirect3DDevice8 *, _D3DPRESENT_PARAMETERS *, IDirect3DSwapChain8 **);
 
-IDirect3DSwapChain8 *DX8Wrapper::Create_Additional_Swap_Chain(void *render_window)
+IDirect3DSwapChain8 *DXWrapper::Create_Additional_Swap_Chain(void *render_window)
 {
 	_D3DPRESENT_PARAMETERS params = { 0 };
 	params.BackBufferFormat = _PresentParameters.BackBufferFormat;
@@ -846,14 +846,14 @@ typedef HRESULT(__stdcall *DX8Wrapper_EvictFn)(IDirect3DDevice8 *);
 
 void bfmeEvictManagedResources(void)
 {
-	((*(DX8Wrapper_EvictFn **)DX8Wrapper::_Get_D3D_Device8())[5])(DX8Wrapper::_Get_D3D_Device8());
+	((*(DX8Wrapper_EvictFn **)DXWrapper::_Get_D3D_Device8())[5])(DXWrapper::_Get_D3D_Device8());
 	number_of_DX8_calls++;
 }
 
-// FUNCTION: BFME2 0x0011E630 size=19 name=?Get_Free_Texture_RAM@DX8Wrapper@@SAIXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x0011E630 size=19 name=?Get_Free_Texture_RAM@DXWrapper@@SAIXZ evidence=N:ledger tier=A
 typedef unsigned(__stdcall *DX8Wrapper_GetAvailableTextureMemFn)(IDirect3DDevice8 *);
 
-unsigned int DX8Wrapper::Get_Free_Texture_RAM()
+unsigned int DXWrapper::Get_Free_Texture_RAM()
 {
 	number_of_DX8_calls++;
 	return ((*(DX8Wrapper_GetAvailableTextureMemFn **)_Get_D3D_Device8())[4])(_Get_D3D_Device8());
@@ -869,8 +869,8 @@ static unsigned ClampedPowerOfTwo009056F0(unsigned dimension, unsigned maximum)
 	return (result < maximum) ? result : maximum;
 }
 
-// FUNCTION: BFME2 0x0011E670 size=81 name=?AdjustTextureSize@DX8Wrapper@@SAXAAI0@Z evidence=N:ledger tier=A
-void DX8Wrapper::AdjustTextureSize(unsigned &width, unsigned &height)
+// FUNCTION: BFME2 0x0011E670 size=81 name=?AdjustTextureSize@DXWrapper@@SAXAAI0@Z evidence=N:ledger tier=A
+void DXWrapper::AdjustTextureSize(unsigned &width, unsigned &height)
 {
 	const DX8Caps *caps = Get_Current_Caps();
 	if (caps == NULL) {
@@ -881,8 +881,8 @@ void DX8Wrapper::AdjustTextureSize(unsigned &width, unsigned &height)
 	height = ClampedPowerOfTwo009056F0(height, dx8caps.MaxTextureHeight);
 }
 
-// FUNCTION: BFME2 0x0011E6D0 size=452 name=?Get_DX8_Render_State_Name@DX8Wrapper@@SAPBDK@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Render_State_Name(unsigned long state)
+// FUNCTION: BFME2 0x0011E6D0 size=452 name=?Get_DX8_Render_State_Name@DXWrapper@@SAPBDK@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Render_State_Name(unsigned long state)
 {
 	switch (state) {
 	case D3DRS_ZENABLE: return "D3DRS_ZENABLE";
@@ -958,8 +958,8 @@ const char *DX8Wrapper::Get_DX8_Render_State_Name(unsigned long state)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EA70 size=136 name=?Get_DX8_Texture_Stage_State_Name@DX8Wrapper@@SAPBDK@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Texture_Stage_State_Name(unsigned long state)
+// FUNCTION: BFME2 0x0011EA70 size=136 name=?Get_DX8_Texture_Stage_State_Name@DXWrapper@@SAPBDK@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Texture_Stage_State_Name(unsigned long state)
 {
 	switch (state) {
 	case D3DTSS_COLOROP: return "D3DTSS_COLOROP";
@@ -983,8 +983,8 @@ const char *DX8Wrapper::Get_DX8_Texture_Stage_State_Name(unsigned long state)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EB60 size=188 name=?Get_DX8_Texture_Op_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Texture_Op_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EB60 size=188 name=?Get_DX8_Texture_Op_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Texture_Op_Name(unsigned value)
 {
 	switch (value) {
 	case D3DTOP_DISABLE                      : return "D3DTOP_DISABLE";
@@ -1017,8 +1017,8 @@ const char *DX8Wrapper::Get_DX8_Texture_Op_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EC90 size=84 name=?Get_DX8_Texture_Arg_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Texture_Arg_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EC90 size=84 name=?Get_DX8_Texture_Arg_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Texture_Arg_Name(unsigned value)
 {
 	switch (value) {
 	case D3DTA_CURRENT			: return "D3DTA_CURRENT";
@@ -1034,8 +1034,8 @@ const char *DX8Wrapper::Get_DX8_Texture_Arg_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011ED30 size=48 name=?Get_DX8_Texture_Filter_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Texture_Filter_Name(unsigned value)
+// FUNCTION: BFME2 0x0011ED30 size=48 name=?Get_DX8_Texture_Filter_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Texture_Filter_Name(unsigned value)
 {
 	switch (value) {
 	case D3DTEXF_NONE				: return "D3DTEXF_NONE";
@@ -1046,8 +1046,8 @@ const char *DX8Wrapper::Get_DX8_Texture_Filter_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011ED70 size=56 name=?Get_DX8_Texture_Address_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Texture_Address_Name(unsigned value)
+// FUNCTION: BFME2 0x0011ED70 size=56 name=?Get_DX8_Texture_Address_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Texture_Address_Name(unsigned value)
 {
 	switch (value) {
 	case D3DTADDRESS_WRAP		: return "D3DTADDRESS_WRAP";
@@ -1059,8 +1059,8 @@ const char *DX8Wrapper::Get_DX8_Texture_Address_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EDC0 size=68 name=?Get_DX8_Texture_Transform_Flag_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Texture_Transform_Flag_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EDC0 size=68 name=?Get_DX8_Texture_Transform_Flag_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Texture_Transform_Flag_Name(unsigned value)
 {
 	switch (value) {
 	case D3DTTFF_DISABLE			: return "D3DTTFF_DISABLE";
@@ -1073,8 +1073,8 @@ const char *DX8Wrapper::Get_DX8_Texture_Transform_Flag_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EE20 size=43 name=?Get_DX8_ZBuffer_Type_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_ZBuffer_Type_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EE20 size=43 name=?Get_DX8_ZBuffer_Type_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_ZBuffer_Type_Name(unsigned value)
 {
 	switch (value) {
 	case D3DZB_FALSE				: return "D3DZB_FALSE";
@@ -1084,8 +1084,8 @@ const char *DX8Wrapper::Get_DX8_ZBuffer_Type_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EE50 size=43 name=?Get_DX8_Fill_Mode_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Fill_Mode_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EE50 size=43 name=?Get_DX8_Fill_Mode_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Fill_Mode_Name(unsigned value)
 {
 	switch (value) {
 	case D3DFILL_POINT			: return "D3DFILL_POINT";
@@ -1095,8 +1095,8 @@ const char *DX8Wrapper::Get_DX8_Fill_Mode_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EE80 size=43 name=?Get_DX8_Shade_Mode_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Shade_Mode_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EE80 size=43 name=?Get_DX8_Shade_Mode_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Shade_Mode_Name(unsigned value)
 {
 	switch (value) {
 	case D3DSHADE_FLAT			: return "D3DSHADE_FLAT";
@@ -1106,8 +1106,8 @@ const char *DX8Wrapper::Get_DX8_Shade_Mode_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EEB0 size=104 name=?Get_DX8_Blend_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Blend_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EEB0 size=104 name=?Get_DX8_Blend_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Blend_Name(unsigned value)
 {
 	switch (value) {
 	case D3DBLEND_ZERO                : return "D3DBLEND_ZERO";
@@ -1127,8 +1127,8 @@ const char *DX8Wrapper::Get_DX8_Blend_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EF50 size=43 name=?Get_DX8_Cull_Mode_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Cull_Mode_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EF50 size=43 name=?Get_DX8_Cull_Mode_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Cull_Mode_Name(unsigned value)
 {
 	switch (value) {
 	case D3DCULL_NONE				: return "D3DCULL_NONE";
@@ -1138,8 +1138,8 @@ const char *DX8Wrapper::Get_DX8_Cull_Mode_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EF80 size=76 name=?Get_DX8_Cmp_Func_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Cmp_Func_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EF80 size=76 name=?Get_DX8_Cmp_Func_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Cmp_Func_Name(unsigned value)
 {
 	switch (value) {
 	case D3DCMP_NEVER          : return "D3DCMP_NEVER";
@@ -1154,8 +1154,8 @@ const char *DX8Wrapper::Get_DX8_Cmp_Func_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011EFF0 size=48 name=?Get_DX8_Fog_Mode_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Fog_Mode_Name(unsigned value)
+// FUNCTION: BFME2 0x0011EFF0 size=48 name=?Get_DX8_Fog_Mode_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Fog_Mode_Name(unsigned value)
 {
 	switch (value) {
 	case D3DFOG_NONE				: return "D3DFOG_NONE";
@@ -1166,8 +1166,8 @@ const char *DX8Wrapper::Get_DX8_Fog_Mode_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011F030 size=76 name=?Get_DX8_Stencil_Op_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Stencil_Op_Name(unsigned value)
+// FUNCTION: BFME2 0x0011F030 size=76 name=?Get_DX8_Stencil_Op_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Stencil_Op_Name(unsigned value)
 {
 	switch (value) {
 	case D3DSTENCILOP_KEEP		: return "D3DSTENCILOP_KEEP";
@@ -1182,8 +1182,8 @@ const char *DX8Wrapper::Get_DX8_Stencil_Op_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011F0A0 size=43 name=?Get_DX8_Material_Source_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Material_Source_Name(unsigned value)
+// FUNCTION: BFME2 0x0011F0A0 size=43 name=?Get_DX8_Material_Source_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Material_Source_Name(unsigned value)
 {
 	switch (value) {
 	case D3DMCS_MATERIAL			: return "D3DMCS_MATERIAL";
@@ -1193,8 +1193,8 @@ const char *DX8Wrapper::Get_DX8_Material_Source_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011F0D0 size=80 name=?Get_DX8_Vertex_Blend_Flag_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Vertex_Blend_Flag_Name(unsigned value)
+// FUNCTION: BFME2 0x0011F0D0 size=80 name=?Get_DX8_Vertex_Blend_Flag_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Vertex_Blend_Flag_Name(unsigned value)
 {
 	switch (value) {
 	case D3DVBF_DISABLE			: return "D3DVBF_DISABLE";
@@ -1207,8 +1207,8 @@ const char *DX8Wrapper::Get_DX8_Vertex_Blend_Flag_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011F120 size=32 name=?Get_DX8_Patch_Edge_Style_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Patch_Edge_Style_Name(unsigned value)
+// FUNCTION: BFME2 0x0011F120 size=32 name=?Get_DX8_Patch_Edge_Style_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Patch_Edge_Style_Name(unsigned value)
 {
 	switch (value) {
 	case D3DPATCHEDGE_DISCRETE	: return "D3DPATCHEDGE_DISCRETE";
@@ -1217,8 +1217,8 @@ const char *DX8Wrapper::Get_DX8_Patch_Edge_Style_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011F140 size=32 name=?Get_DX8_Debug_Monitor_Token_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Debug_Monitor_Token_Name(unsigned value)
+// FUNCTION: BFME2 0x0011F140 size=32 name=?Get_DX8_Debug_Monitor_Token_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Debug_Monitor_Token_Name(unsigned value)
 {
 	switch (value) {
 	case D3DDMT_ENABLE			: return "D3DDMT_ENABLE";
@@ -1227,8 +1227,8 @@ const char *DX8Wrapper::Get_DX8_Debug_Monitor_Token_Name(unsigned value)
 	}
 }
 
-// FUNCTION: BFME2 0x0011F160 size=56 name=?Get_DX8_Blend_Op_Name@DX8Wrapper@@SAPBDI@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_DX8_Blend_Op_Name(unsigned value)
+// FUNCTION: BFME2 0x0011F160 size=56 name=?Get_DX8_Blend_Op_Name@DXWrapper@@SAPBDI@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_DX8_Blend_Op_Name(unsigned value)
 {
 	switch (value) {
 	case D3DBLENDOP_ADD			: return "D3DBLENDOP_ADD";
@@ -1241,7 +1241,7 @@ const char *DX8Wrapper::Get_DX8_Blend_Op_Name(unsigned value)
 }
 
 // FUNCTION: BFME2 0x0011F1B0 size=6 name=?Rva0011F1B0Get@@YAHXZ evidence=?:placeholder tier=A
-D3DFORMAT DX8Wrapper::Get_D3D_Back_Buffer_Format(void)
+D3DFORMAT DXWrapper::Get_D3D_Back_Buffer_Format(void)
 {
 	return _PresentParameters.BackBufferFormat;
 }
@@ -1250,15 +1250,15 @@ D3DFORMAT DX8Wrapper::Get_D3D_Back_Buffer_Format(void)
 // The Direct3D 9 device has no D3DRS_ZBIAS: the bias is a float applied to the projection matrix instead.
 void bfmeSetProjectionDepthBias(float bias)
 {
-	if (bias == DX8Wrapper::ZBias) return;
-	DX8Wrapper::ZBias = bias;
-	DX8Wrapper::DeviceProjectionMatrix = DX8Wrapper::ProjectionMatrix;
-	if (DX8Wrapper::ZNear != DX8Wrapper::ZFar) {
+	if (bias == DXWrapper::ZBias) return;
+	DXWrapper::ZBias = bias;
+	DXWrapper::DeviceProjectionMatrix = DXWrapper::ProjectionMatrix;
+	if (DXWrapper::ZNear != DXWrapper::ZFar) {
 		float scaled = bias * 0.000625f;
-		DX8Wrapper::DeviceProjectionMatrix[3][2] -= (DX8Wrapper::ZFar * DX8Wrapper::ZNear /
-			(DX8Wrapper::ZFar - DX8Wrapper::ZNear)) * scaled;
+		DXWrapper::DeviceProjectionMatrix[3][2] -= (DXWrapper::ZFar * DXWrapper::ZNear /
+			(DXWrapper::ZFar - DXWrapper::ZNear)) * scaled;
 	}
-	DX8_SET_TRANSFORM(DX8Wrapper::_Get_D3D_Device8(), D3DTS_PROJECTION, &DX8Wrapper::DeviceProjectionMatrix);
+	DX8_SET_TRANSFORM(DXWrapper::_Get_D3D_Device8(), D3DTS_PROJECTION, &DXWrapper::DeviceProjectionMatrix);
 	number_of_DX8_calls++;
 }
 
@@ -1382,8 +1382,8 @@ unsigned DX8_Thread_Recursion_Depth()
 
 // FUNCTION: BFME2 0x0011FC20 size=228 name=?bfmeDX8HResultTranslator@@YA_NAAVBfmeResetDebug@@JPAX@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x0011FD10 size=226 name=?Invalidate_Cached_Render_States@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
-void DX8Wrapper::Invalidate_Cached_Render_States(void)
+// FUNCTION: BFME2 0x0011FD10 size=226 name=?Invalidate_Cached_Render_States@DXWrapper@@SAXXZ evidence=N:ledger tier=A
+void DXWrapper::Invalidate_Cached_Render_States(void)
 {
 	unsigned zero = 0;
 	render_state_changed = zero;
@@ -1425,8 +1425,8 @@ void DX8Wrapper::Invalidate_Cached_Render_States(void)
 	}
 }
 
-// FUNCTION: BFME2 0x0011FE20 size=600 name=?Get_Format_Name@DX8Wrapper@@SAXIPAVStringClass@@@Z evidence=N:ledger tier=A
-void DX8Wrapper::Get_Format_Name(unsigned int format, StringClass *tex_format)
+// FUNCTION: BFME2 0x0011FE20 size=600 name=?Get_Format_Name@DXWrapper@@SAXIPAVStringClass@@@Z evidence=N:ledger tier=A
+void DXWrapper::Get_Format_Name(unsigned int format, StringClass *tex_format)
 {
 	*tex_format = "Unknown";
 	switch (format) {
@@ -1470,13 +1470,13 @@ void DX8Wrapper::Get_Format_Name(unsigned int format, StringClass *tex_format)
 }
 
 // FUNCTION: BFME2 0x00120130 size=6 name=?Rva00120130Get@@YAHXZ evidence=?:placeholder tier=A
-int DX8Wrapper::Get_Render_Device_Count(void)
+int DXWrapper::Get_Render_Device_Count(void)
 {
 	return _RenderDeviceNameTable.Count();
 }
 
-// FUNCTION: BFME2 0x00120140 size=55 name=?Get_Render_Device_Desc@DX8Wrapper@@KAABVRenderDeviceDescClass@@H@Z evidence=N:ledger tier=A
-const RenderDeviceDescClass &DX8Wrapper::Get_Render_Device_Desc(int deviceidx)
+// FUNCTION: BFME2 0x00120140 size=55 name=?Get_Render_Device_Desc@DXWrapper@@KAABVRenderDeviceDescClass@@H@Z evidence=N:ledger tier=A
+const RenderDeviceDescClass &DXWrapper::Get_Render_Device_Desc(int deviceidx)
 {
 	if ((deviceidx == -1) && (CurRenderDevice == -1)) {
 		CurRenderDevice = 0;
@@ -1491,15 +1491,15 @@ const RenderDeviceDescClass &DX8Wrapper::Get_Render_Device_Desc(int deviceidx)
 	return _RenderDeviceDescriptionTable[deviceidx];
 }
 
-// FUNCTION: BFME2 0x00120180 size=20 name=?Get_Render_Device_Name@DX8Wrapper@@KAPBDH@Z evidence=N:ledger tier=A
-const char *DX8Wrapper::Get_Render_Device_Name(int device_index)
+// FUNCTION: BFME2 0x00120180 size=20 name=?Get_Render_Device_Name@DXWrapper@@KAPBDH@Z evidence=N:ledger tier=A
+const char *DXWrapper::Get_Render_Device_Name(int device_index)
 {
 	device_index = device_index % _RenderDeviceShortNameTable.Count();
 	return _RenderDeviceShortNameTable[device_index];
 }
 
-// FUNCTION: BFME2 0x001201A0 size=262 name=?Registry_Save_Render_Device@DX8Wrapper@@KA_NPBDHHHH_NH@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Registry_Save_Render_Device(const char *sub_key, int device, int width, int height, int depth, bool windowed, int texture_depth)
+// FUNCTION: BFME2 0x001201A0 size=262 name=?Registry_Save_Render_Device@DXWrapper@@KA_NPBDHHHH_NH@Z evidence=N:ledger tier=A
+bool DXWrapper::Registry_Save_Render_Device(const char *sub_key, int device, int width, int height, int depth, bool windowed, int texture_depth)
 {
 	RegistryClass *registry = new RegistryClass(sub_key);
 	if (!registry->Is_Valid()) {
@@ -1517,8 +1517,8 @@ bool DX8Wrapper::Registry_Save_Render_Device(const char *sub_key, int device, in
 	return true;
 }
 
-// FUNCTION: BFME2 0x001202B0 size=267 name=?Find_Z_Mode@DX8Wrapper@@KA_NW4_D3DFORMAT@@0PAW42@@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Find_Z_Mode(D3DFORMAT colorbuffer, D3DFORMAT backbuffer, D3DFORMAT *zmode)
+// FUNCTION: BFME2 0x001202B0 size=267 name=?Find_Z_Mode@DXWrapper@@KA_NW4_D3DFORMAT@@0PAW42@@Z evidence=N:ledger tier=A
+bool DXWrapper::Find_Z_Mode(D3DFORMAT colorbuffer, D3DFORMAT backbuffer, D3DFORMAT *zmode)
 {
 	// MW: Swapped the next 2 tests so that Stencil modes get tested first.
 	if (Test_Z_Mode(colorbuffer, backbuffer, D3DFMT_D24S8))
@@ -1561,12 +1561,12 @@ bool DX8Wrapper::Find_Z_Mode(D3DFORMAT colorbuffer, D3DFORMAT backbuffer, D3DFOR
 	return false;
 }
 
-// FUNCTION: BFME2 0x001203C0 size=452 name=?Draw@DX8Wrapper@@CAXIIIII_N@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x001203C0 size=452 name=?Draw@DXWrapper@@CAXIIIII_N@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x001205B0 size=111 name=?Draw_Triangles@DX8Wrapper@@SAXIIIII@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x001205B0 size=111 name=?Draw_Triangles@DXWrapper@@SAXIIIII@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00120620 size=33 name=?Draw_Triangles@DX8Wrapper@@SAXIIII@Z evidence=N:ledger tier=A
-void DX8Wrapper::Draw_Triangles(unsigned start_index, unsigned polygon_count, unsigned min_vertex_index, unsigned vertex_count)
+// FUNCTION: BFME2 0x00120620 size=33 name=?Draw_Triangles@DXWrapper@@SAXIIII@Z evidence=N:ledger tier=A
+void DXWrapper::Draw_Triangles(unsigned start_index, unsigned polygon_count, unsigned min_vertex_index, unsigned vertex_count)
 {
 	unsigned vertexCount = vertex_count;
 	unsigned minVertexIndex = min_vertex_index;
@@ -1574,32 +1574,32 @@ void DX8Wrapper::Draw_Triangles(unsigned start_index, unsigned polygon_count, un
 	Draw(4, start_index, polygonCount, minVertexIndex, vertexCount, true);
 }
 
-// FUNCTION: BFME2 0x00120650 size=29 name=?bfmeRva00120650@DX8Wrapper@@SAXII@Z evidence=N:ledger tier=A
-void DX8Wrapper::bfmeRva00120650(unsigned start_vertex, unsigned polygon_count)
+// FUNCTION: BFME2 0x00120650 size=29 name=?bfmeRva00120650@DXWrapper@@SAXII@Z evidence=N:ledger tier=A
+void DXWrapper::bfmeRva00120650(unsigned start_vertex, unsigned polygon_count)
 {
 	Draw(D3DPT_TRIANGLELIST, 0, polygon_count, start_vertex, polygon_count * 3, false);
 }
 
 // FUNCTION: BFME2 0x00120670 size=29 name=?rva00120670@@YAXII@Z evidence=?:placeholder tier=A
-void DX8Wrapper::Draw_Line_List(unsigned start_vertex, unsigned line_count)
+void DXWrapper::Draw_Line_List(unsigned start_vertex, unsigned line_count)
 {
 	Draw(D3DPT_LINELIST, 0, line_count, start_vertex, line_count * 2, false);
 }
 
 // FUNCTION: BFME2 0x00120690 size=29 name=?rva00120690@@YAXII@Z evidence=?:placeholder tier=A
-void DX8Wrapper::Draw_Line_Strip(unsigned start_vertex, unsigned line_count)
+void DXWrapper::Draw_Line_Strip(unsigned start_vertex, unsigned line_count)
 {
 	Draw(D3DPT_LINESTRIP, 0, line_count, start_vertex, line_count + 1, false);
 }
 
 // FUNCTION: BFME2 0x001206B0 size=26 name=?rva001206B0@@YAXII@Z evidence=?:placeholder tier=A
-void DX8Wrapper::Draw_Point_List(unsigned start_vertex, unsigned point_count)
+void DXWrapper::Draw_Point_List(unsigned start_vertex, unsigned point_count)
 {
 	Draw(D3DPT_POINTLIST, 0, point_count, start_vertex, point_count, false);
 }
 
-// FUNCTION: BFME2 0x001206D0 size=33 name=?Draw_Strip@DX8Wrapper@@SAXIIII@Z evidence=N:ledger tier=A
-void DX8Wrapper::Draw_Strip(unsigned start_index, unsigned index_count, unsigned min_vertex_index, unsigned vertex_count)
+// FUNCTION: BFME2 0x001206D0 size=33 name=?Draw_Strip@DXWrapper@@SAXIIII@Z evidence=N:ledger tier=A
+void DXWrapper::Draw_Strip(unsigned start_index, unsigned index_count, unsigned min_vertex_index, unsigned vertex_count)
 {
 	unsigned vertexCount = vertex_count;
 	unsigned minVertexIndex = min_vertex_index;
@@ -1607,8 +1607,8 @@ void DX8Wrapper::Draw_Strip(unsigned start_index, unsigned index_count, unsigned
 	Draw(5, start_index, indexCount, minVertexIndex, vertexCount, true);
 }
 
-// FUNCTION: BFME2 0x00120700 size=29 name=?bfmeRva00120700@DX8Wrapper@@SAXII@Z evidence=N:ledger tier=A
-void DX8Wrapper::bfmeRva00120700(unsigned start_vertex, unsigned polygon_count)
+// FUNCTION: BFME2 0x00120700 size=29 name=?bfmeRva00120700@DXWrapper@@SAXII@Z evidence=N:ledger tier=A
+void DXWrapper::bfmeRva00120700(unsigned start_vertex, unsigned polygon_count)
 {
 	Draw(D3DPT_TRIANGLESTRIP, 0, polygon_count, start_vertex, polygon_count + 2, false);
 }
@@ -1617,13 +1617,13 @@ void DX8Wrapper::bfmeRva00120700(unsigned start_vertex, unsigned polygon_count)
 
 // FUNCTION: BFME2 0x001207B0 size=152 name=?Rva001207B0Init@@YAXPAX@Z evidence=?:placeholder tier=A
 
-// FUNCTION: BFME2 0x00120850 size=228 name=?Set_Render_Target_With_Z@DX8Wrapper@@SAXPAVTextureClass@@PAVZTextureClass@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00120850 size=228 name=?Set_Render_Target_With_Z@DXWrapper@@SAXPAVTextureClass@@PAVZTextureClass@@@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00120940 size=64 name=?Set_Render_Target@DX8Wrapper@@SAXPAUIDirect3DSwapChain8@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00120940 size=64 name=?Set_Render_Target@DXWrapper@@SAXPAUIDirect3DSwapChain8@@@Z evidence=N:ledger tier=A
 // The swap chain's GetBackBuffer is slot 5 (+0x14), Release slot 2.
 typedef HRESULT(__stdcall *DX8Wrapper_SwapChainGetBackBufferFn)(IDirect3DSwapChain8 *, UINT, UINT, void **);
 
-void DX8Wrapper::Set_Render_Target(IDirect3DSwapChain8 *swap_chain)
+void DXWrapper::Set_Render_Target(IDirect3DSwapChain8 *swap_chain)
 {
 	IDirect3DSurface8 *render_target = 0;
 	((*(DX8Wrapper_SwapChainGetBackBufferFn **)swap_chain)[5])(swap_chain, 0, 0, (void **)&render_target);
@@ -1634,10 +1634,10 @@ void DX8Wrapper::Set_Render_Target(IDirect3DSwapChain8 *swap_chain)
 	IsRenderToTexture = false;
 }
 
-// FUNCTION: BFME2 0x00120980 size=519 name=?Set_Gamma@DX8Wrapper@@SAXMMM_N0@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00120980 size=519 name=?Set_Gamma@DXWrapper@@SAXMMM_N0@Z evidence=N:ledger tier=A
 typedef HRESULT(__stdcall *DX8Wrapper_SetGammaRampFn)(IDirect3DDevice8 *, UINT, DWORD, const D3DGAMMARAMP *);	// slot 21 (+0x54)
 
-void DX8Wrapper::Set_Gamma(float gamma, float bright, float contrast, bool calibrate, bool uselimit)
+void DXWrapper::Set_Gamma(float gamma, float bright, float contrast, bool calibrate, bool uselimit)
 {
 	gamma = Bound(gamma, 0.6f, 6.0f);
 	bright = Bound(bright, -0.5f, 0.5f);
@@ -1682,8 +1682,8 @@ void DX8Wrapper::Set_Gamma(float gamma, float bright, float contrast, bool calib
 	}
 }
 
-// FUNCTION: BFME2 0x00120B90 size=268 name=?Get_DX8_Texture_Stage_State_Value_Name@DX8Wrapper@@SAXAAVStringClass@@KI@Z evidence=N:ledger tier=A
-void DX8Wrapper::Get_DX8_Texture_Stage_State_Value_Name(StringClass &name, unsigned long state, unsigned value)
+// FUNCTION: BFME2 0x00120B90 size=268 name=?Get_DX8_Texture_Stage_State_Value_Name@DXWrapper@@SAXAAVStringClass@@KI@Z evidence=N:ledger tier=A
+void DXWrapper::Get_DX8_Texture_Stage_State_Value_Name(StringClass &name, unsigned long state, unsigned value)
 {
 	switch (state) {
 	case D3DTSS_COLOROP:
@@ -1736,8 +1736,8 @@ void DX8Wrapper::Get_DX8_Texture_Stage_State_Value_Name(StringClass &name, unsig
 	}
 }
 
-// FUNCTION: BFME2 0x00120CD0 size=629 name=?Set_Projection_Transform_With_Z_Bias@DX8Wrapper@@SAXABVMatrix4@@MM@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Projection_Transform_With_Z_Bias(const Matrix4 &matrix, float znear, float zfar)
+// FUNCTION: BFME2 0x00120CD0 size=629 name=?Set_Projection_Transform_With_Z_Bias@DXWrapper@@SAXABVMatrix4x4@@MM@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Projection_Transform_With_Z_Bias(const Matrix4x4 &matrix, float znear, float zfar)
 {
 	ZFar = zfar;
 	ZNear = znear;
@@ -1797,15 +1797,15 @@ const StringClass &StringClass::operator+=(const char *string)
 
 // FUNCTION: BFME2 0x00121550 size=158 name=?add_resolution@BfmeEnumerationDesc@@QAEXHHH@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x001215F0 size=381 name=?Do_Onetime_Device_Dependent_Shutdowns@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x001215F0 size=381 name=?Do_Onetime_Device_Dependent_Shutdowns@DXWrapper@@SAXXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00121770 size=232 name=?Release_Device@DX8Wrapper@@KAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00121770 size=232 name=?Release_Device@DXWrapper@@KAXXZ evidence=N:ledger tier=A
 // The device's SetTexture is slot 65 (+0x104), SetStreamSource slot 100 (+0x190), SetIndices slot 104 (+0x1A0).
 typedef HRESULT(__stdcall *DX8Wrapper_SetTextureFn)(IDirect3DDevice8 *, DWORD, void *);
 typedef HRESULT(__stdcall *DX8Wrapper_SetStreamSourceFn)(IDirect3DDevice8 *, UINT, void *, UINT, UINT);
 typedef HRESULT(__stdcall *DX8Wrapper_SetIndicesFn)(IDirect3DDevice8 *, void *);
 
-void DX8Wrapper::Release_Device(void)
+void DXWrapper::Release_Device(void)
 {
 	if (D3DDevice) {
 		for (unsigned a = 0; a < MAX_TEXTURE_STAGES; ++a) {
@@ -1845,10 +1845,10 @@ void DX8Wrapper::Release_Device(void)
 	}
 }
 
-// FUNCTION: BFME2 0x00121860 size=195 name=?Get_Render_Target_Resolution@DX8Wrapper@@CAXAAH00AA_N@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00121860 size=195 name=?Get_Render_Target_Resolution@DXWrapper@@CAXAAH00AA_N@Z evidence=N:ledger tier=A
 typedef HRESULT(__stdcall *DX8Wrapper_SurfaceGetDescFn)(IDirect3DSurface8 *, D3DSURFACE_DESC *);
 
-void DX8Wrapper::Get_Render_Target_Resolution(int &set_w, int &set_h, int &set_bits, bool &set_windowed)
+void DXWrapper::Get_Render_Target_Resolution(int &set_w, int &set_h, int &set_bits, bool &set_windowed)
 {
 	if (CurrentRenderTarget != NULL) {
 		DX8DeviceLock guard;
@@ -1867,14 +1867,14 @@ void DX8Wrapper::Get_Render_Target_Resolution(int &set_w, int &set_h, int &set_b
 	}
 }
 
-// FUNCTION: BFME2 0x00121930 size=54 name=?Registry_Save_Render_Device@DX8Wrapper@@SA_NPBD@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Registry_Save_Render_Device(const char *sub_key)
+// FUNCTION: BFME2 0x00121930 size=54 name=?Registry_Save_Render_Device@DXWrapper@@SA_NPBD@Z evidence=N:ledger tier=A
+bool DXWrapper::Registry_Save_Render_Device(const char *sub_key)
 {
 	return Registry_Save_Render_Device(sub_key, CurRenderDevice, ResolutionWidth, ResolutionHeight, BitDepth, IsWindowed, TextureBitDepth);
 }
 
-// FUNCTION: BFME2 0x00121970 size=154 name=?Find_Color_And_Z_Mode@DX8Wrapper@@KA_NHHHPAW4_D3DFORMAT@@00@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Find_Color_And_Z_Mode(int resx, int resy, int bitdepth, D3DFORMAT *set_colorbuffer, D3DFORMAT *set_backbuffer, D3DFORMAT *set_zmode)
+// FUNCTION: BFME2 0x00121970 size=154 name=?Find_Color_And_Z_Mode@DXWrapper@@KA_NHHHPAW4_D3DFORMAT@@00@Z evidence=N:ledger tier=A
+bool DXWrapper::Find_Color_And_Z_Mode(int resx, int resy, int bitdepth, D3DFORMAT *set_colorbuffer, D3DFORMAT *set_backbuffer, D3DFORMAT *set_zmode)
 {
 	static D3DFORMAT _formats16[] = {
 		D3DFMT_R5G6B5,
@@ -1925,8 +1925,8 @@ bool DX8Wrapper::Find_Color_And_Z_Mode(int resx, int resy, int bitdepth, D3DFORM
 	return Find_Z_Mode(*set_colorbuffer, *set_backbuffer, set_zmode);
 }
 
-// FUNCTION: BFME2 0x00121A10 size=652 name=?Get_DX8_Render_State_Value_Name@DX8Wrapper@@SAXAAVStringClass@@KI@Z evidence=N:ledger tier=A
-void DX8Wrapper::Get_DX8_Render_State_Value_Name(StringClass &name, unsigned long state, unsigned value)
+// FUNCTION: BFME2 0x00121A10 size=652 name=?Get_DX8_Render_State_Value_Name@DXWrapper@@SAXAAVStringClass@@KI@Z evidence=N:ledger tier=A
+void DXWrapper::Get_DX8_Render_State_Value_Name(StringClass &name, unsigned long state, unsigned value)
 {
 	switch (state) {
 	case D3DRS_ZENABLE:
@@ -2067,14 +2067,14 @@ void DX8Wrapper::Get_DX8_Render_State_Value_Name(StringClass &name, unsigned lon
 	}
 }
 
-// FUNCTION: BFME2 0x00122510 size=232 name=?Set_Default_Global_Render_States@DX8Wrapper@@KAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00122510 size=232 name=?Set_Default_Global_Render_States@DXWrapper@@KAXXZ evidence=N:ledger tier=A
 // Zero Hour's F2DW: a float's bits as a DWORD for the state setters.
 static unsigned F2DW(float f)
 {
 	return *((unsigned *)&f);
 }
 
-void DX8Wrapper::Set_Default_Global_Render_States(void)
+void DXWrapper::Set_Default_Global_Render_States(void)
 {
 	const D3DCAPS8 &caps = Get_Current_Caps()->Get_DX8_Caps();
 
@@ -2092,10 +2092,10 @@ void DX8Wrapper::Set_Default_Global_Render_States(void)
 	Set_DX8_Texture_Stage_State(0, D3DTSS_BUMPENVMAT11, F2DW(1.0f));
 }
 
-// FUNCTION: BFME2 0x00122600 size=1111 name=?Reset_Device@DX8Wrapper@@SA_N_N@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00122600 size=1111 name=?Reset_Device@DXWrapper@@SA_N_N@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00122A60 size=96 name=?Set_Swap_Interval@DX8Wrapper@@KAXH@Z evidence=N:ledger tier=A
-void DX8Wrapper::Set_Swap_Interval(int swap)
+// FUNCTION: BFME2 0x00122A60 size=96 name=?Set_Swap_Interval@DXWrapper@@KAXH@Z evidence=N:ledger tier=A
+void DXWrapper::Set_Swap_Interval(int swap)
 {
 	switch (swap) {
 		case 0: _PresentParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE; break;
@@ -2108,8 +2108,8 @@ void DX8Wrapper::Set_Swap_Interval(int swap)
 	Reset_Device();
 }
 
-// FUNCTION: BFME2 0x00122AD0 size=267 name=?Set_Device_Resolution@DX8Wrapper@@KA_NHHHH_N@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Set_Device_Resolution(int width, int height, int bits, int windowed, bool resize_window)
+// FUNCTION: BFME2 0x00122AD0 size=267 name=?Set_Device_Resolution@DXWrapper@@KA_NHHHH_N@Z evidence=N:ledger tier=A
+bool DXWrapper::Set_Device_Resolution(int width, int height, int bits, int windowed, bool resize_window)
 {
 	if (D3DDevice != NULL) {
 		if (width != -1) {
@@ -2150,14 +2150,14 @@ bool DX8Wrapper::Set_Device_Resolution(int width, int height, int bits, int wind
 	}
 }
 
-// FUNCTION: BFME2 0x00122BE0 size=521 name=?End_Scene@DX8Wrapper@@SAX_N@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00122BE0 size=521 name=?End_Scene@DXWrapper@@SAX_N@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00122DF0 size=168 name=?Flip_To_Primary@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00122DF0 size=168 name=?Flip_To_Primary@DXWrapper@@SAXXZ evidence=N:ledger tier=A
 // The device's TestCooperativeLevel is slot 3 (+0x0C), Present slot 17 (+0x44).
 typedef HRESULT(__stdcall *DX8Wrapper_TestCooperativeLevelFn)(IDirect3DDevice8 *);
 typedef HRESULT(__stdcall *DX8Wrapper_PresentFn)(IDirect3DDevice8 *, const RECT *, const RECT *, HWND, const RGNDATA *);
 
-void DX8Wrapper::Flip_To_Primary(void)
+void DXWrapper::Flip_To_Primary(void)
 {
 	// If we are fullscreen and the current frame is odd then we need to force a page flip to ensure that the first
 	// buffer in the flipping chain is the one visible.
@@ -2197,18 +2197,18 @@ void DX8Wrapper::Flip_To_Primary(void)
 	}
 }
 
-// FUNCTION: BFME2 0x00122EA0 size=719 name=?Set_Light_Environment@DX8Wrapper@@SAXPAVLightEnvironmentClass@@@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00122EA0 size=719 name=?Set_Light_Environment@DXWrapper@@SAXPAVLightEnvironmentClass@@@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00123170 size=4600 name=?Apply_Default_State@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00123170 size=4600 name=?Apply_Default_State@DXWrapper@@SAXXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x001245A0 size=283 name=?Do_Onetime_Device_Dependent_Inits@DX8Wrapper@@SAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x001245A0 size=283 name=?Do_Onetime_Device_Dependent_Inits@DXWrapper@@SAXXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x001246C0 size=460 name=?Create_Device@DX8Wrapper@@KA_NXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x001246C0 size=460 name=?Create_Device@DXWrapper@@KA_NXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00124890 size=1860 name=?Enumerate_Devices@DX8Wrapper@@KAXXZ evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00124890 size=1860 name=?Enumerate_Devices@DXWrapper@@KAXXZ evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00124FF0 size=992 name=?Set_Render_Device@DX8Wrapper@@KA_NHHHHH_N00@Z evidence=N:ledger tier=A
-bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int windowed,
+// FUNCTION: BFME2 0x00124FF0 size=992 name=?Set_Render_Device@DXWrapper@@KA_NHHHHH_N00@Z evidence=N:ledger tier=A
+bool DXWrapper::Set_Render_Device(int dev, int width, int height, int bits, int windowed,
 	bool resize_window, bool reset_device, bool restore_assets)
 {
 	if (CurRenderDevice == -1 && dev == -1) {
@@ -2334,15 +2334,15 @@ bool DX8Wrapper::Set_Render_Device(int dev, int width, int height, int bits, int
 	return result;
 }
 
-// FUNCTION: BFME2 0x00125400 size=39 name=?Set_Next_Render_Device@DX8Wrapper@@KA_NXZ evidence=N:ledger tier=A
-bool DX8Wrapper::Set_Next_Render_Device(void)
+// FUNCTION: BFME2 0x00125400 size=39 name=?Set_Next_Render_Device@DXWrapper@@KA_NXZ evidence=N:ledger tier=A
+bool DXWrapper::Set_Next_Render_Device(void)
 {
 	int new_dev = (CurRenderDevice + 1) % _RenderDeviceNameTable.Count();
 	return Set_Render_Device(new_dev);
 }
 
 // FUNCTION: BFME2 0x00125430 size=38 name=?Rva00125430@@YAX_N@Z evidence=?:placeholder tier=A
-void DX8Wrapper::Set_Skip_Fixed_Function_State(bool skip)
+void DXWrapper::Set_Skip_Fixed_Function_State(bool skip)
 {
 	SkipFixedFunctionState = skip;
 	if (!skip) {
@@ -2352,10 +2352,10 @@ void DX8Wrapper::Set_Skip_Fixed_Function_State(bool skip)
 	}
 }
 
-// FUNCTION: BFME2 0x00125620 size=732 name=?Init@DX8Wrapper@@SA_NPAX_N@Z evidence=N:ledger tier=A
+// FUNCTION: BFME2 0x00125620 size=732 name=?Init@DXWrapper@@SA_NPAX_N@Z evidence=N:ledger tier=A
 
-// FUNCTION: BFME2 0x00125900 size=110 name=?Set_Any_Render_Device@DX8Wrapper@@KA_NXZ evidence=N:ledger tier=B hypothesis:K
-bool DX8Wrapper::Set_Any_Render_Device(void)
+// FUNCTION: BFME2 0x00125900 size=110 name=?Set_Any_Render_Device@DXWrapper@@KA_NXZ evidence=N:ledger tier=B hypothesis:K
+bool DXWrapper::Set_Any_Render_Device(void)
 {
 	int dev_number;
 
@@ -2376,8 +2376,8 @@ bool DX8Wrapper::Set_Any_Render_Device(void)
 	return false;
 }
 
-// FUNCTION: BFME2 0x00125970 size=257 name=?Set_Render_Device@DX8Wrapper@@KA_NPBDHHHH_N@Z evidence=N:ledger tier=B hypothesis:K
-bool DX8Wrapper::Set_Render_Device(const char *dev_name, int width, int height, int bits, int windowed, bool resize_window)
+// FUNCTION: BFME2 0x00125970 size=257 name=?Set_Render_Device@DXWrapper@@KA_NPBDHHHH_N@Z evidence=N:ledger tier=B hypothesis:K
+bool DXWrapper::Set_Render_Device(const char *dev_name, int width, int height, int bits, int windowed, bool resize_window)
 {
 	for (int dev_number = 0; dev_number < _RenderDeviceNameTable.Count(); dev_number++) {
 		if (strcmp(dev_name, _RenderDeviceNameTable[dev_number]) == 0) {
@@ -2390,8 +2390,8 @@ bool DX8Wrapper::Set_Render_Device(const char *dev_name, int width, int height, 
 	return false;
 }
 
-// FUNCTION: BFME2 0x00125A80 size=468 name=?Registry_Load_Render_Device@DX8Wrapper@@SA_NPBD_N@Z evidence=N:ledger tier=B hypothesis:K
-bool DX8Wrapper::Registry_Load_Render_Device(const char *sub_key, bool resize_window)
+// FUNCTION: BFME2 0x00125A80 size=468 name=?Registry_Load_Render_Device@DXWrapper@@SA_NPBD_N@Z evidence=N:ledger tier=B hypothesis:K
+bool DXWrapper::Registry_Load_Render_Device(const char *sub_key, bool resize_window)
 {
 	char name[200];
 	int width, height, depth, windowed;
@@ -2461,5 +2461,5 @@ bool DX8Wrapper::Registry_Load_Render_Device(const char *sub_key, bool resize_wi
 	return Set_Any_Render_Device();
 }
 
-// FUNCTION: BFME2 0x00125DC0 size=472 name=?Shutdown@DX8Wrapper@@SAXXZ evidence=N:ledger tier=B hypothesis:K
+// FUNCTION: BFME2 0x00125DC0 size=472 name=?Shutdown@DXWrapper@@SAXXZ evidence=N:ledger tier=B hypothesis:K
 

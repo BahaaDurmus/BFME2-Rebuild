@@ -1,9 +1,9 @@
-// IDirect3DDevice9.h: the Direct3D 9 device as the game calls it through DX8Wrapper's Direct3D 8 pointer.
-// The device behind DX8Wrapper::D3DDevice is a Direct3D 9 device with Direct3D 8's name (see DX8Wrapper.h): retail calls
+// IDirect3DDevice9.h: the Direct3D 9 device as the game calls it through DXWrapper's Direct3D 8 pointer.
+// The device behind DXWrapper::D3DDevice is a Direct3D 9 device with Direct3D 8's name (see dxwrapper.h): retail calls
 // SetTransform through slot 44, SetRenderState 57, DrawPrimitiveUP 83 and SetFVF 89, which is d3d9.h's order and not d3d8.h's.
 // d3d9.h cannot be included next to d3d8.h (both define the same enumerations), so this header (which must not share a unit with d3d9.h either) declares the slots by
 // position: the ones the tree calls have their signature, the others are numbered placeholders that only keep the
-// table in order. Nothing creates an object of this type; DX8Wrapper::_Get_D3D_Device9 reinterprets the device pointer,
+// table in order. Nothing creates an object of this type; DXWrapper::_Get_D3D_Device9 reinterprets the device pointer,
 // so a caller writes device->SetFVF(...) and gets the same indirect call a hand-indexed table call produces.
 #pragma once
 #ifndef BFME2_IDIRECT3DDEVICE9_H

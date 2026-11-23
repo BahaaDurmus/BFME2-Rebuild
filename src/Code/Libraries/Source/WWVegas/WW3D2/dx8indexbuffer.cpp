@@ -4,7 +4,7 @@
 #include <new>
 #include "WW3D2/IndexBufferClass.h"
 
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WW3D2/DX8Caps.h"
 
@@ -148,10 +148,10 @@ DX8IndexBufferClass::DX8IndexBufferClass(unsigned int index_count_, UsageType us
 		((usage & USAGE_DYNAMIC) ? D3DUSAGE_DYNAMIC : 0) |
 		((usage & USAGE_NPATCHES) ? D3DUSAGE_NPATCHES : 0) |
 		((usage & USAGE_SOFTWAREPROCESSING) ? D3DUSAGE_SOFTWAREPROCESSING : 0);
-	if (!DX8Wrapper::Get_Current_Caps()->Support_TnL()) {
+	if (!DXWrapper::Get_Current_Caps()->Support_TnL()) {
 		usage_flags |= D3DUSAGE_SOFTWAREPROCESSING;
 	}
-	IDirect3DDevice8 *device = DX8Wrapper::_Get_D3D_Device8();
+	IDirect3DDevice8 *device = DXWrapper::_Get_D3D_Device8();
 	HRESULT ret = ((*(IndexBuffer_CreateFn **)device)[27])(
 		device,
 		sizeof(unsigned short) * IndexCount,
@@ -165,7 +165,7 @@ DX8IndexBufferClass::DX8IndexBufferClass(unsigned int index_count_, UsageType us
 	}
 	// Creation failed: flush the mesh cache (BFME drops Zero Hour's texture sweep) and try again.
 	WW3D::_Invalidate_Mesh_Cache();
-	device = DX8Wrapper::_Get_D3D_Device8();
+	device = DXWrapper::_Get_D3D_Device8();
 	ret = ((*(IndexBuffer_CreateFn **)device)[27])(
 		device,
 		sizeof(unsigned short) * IndexCount,
@@ -312,7 +312,7 @@ void DynamicIBAccessClass::Allocate_DX8_Dynamic_Buffer()
 	// Create a new vb if one doesn't exist currently
 	if (!_DynamicDX8IndexBuffer) {
 		unsigned usage = DX8IndexBufferClass::USAGE_DYNAMIC;
-		if (DX8Wrapper::Get_Current_Caps()->Support_NPatches()) {
+		if (DXWrapper::Get_Current_Caps()->Support_NPatches()) {
 			usage |= DX8IndexBufferClass::USAGE_NPATCHES;
 		}
 		_DynamicDX8IndexBuffer = ::new DX8IndexBufferClass((unsigned)_DynamicDX8IndexBufferSize, (DX8IndexBufferClass::UsageType)usage);

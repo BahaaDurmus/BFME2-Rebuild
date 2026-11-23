@@ -9,7 +9,7 @@
 #include <vector>
 #include "sys_util/Synchronization.h"
 #include "WW3D2/DX8DeviceLock.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WW3D2/TextureAsset.h"
 #include "Common/File.h"
@@ -65,9 +65,9 @@ void TextureAsset::Impl::Apply(unsigned int stage)
 		Release_Device_Resources();
 
 	if (WW3D::Is_Texturing_Enabled() && D3DTexture)
-		DX8Wrapper::Set_Texture(stage, D3DTexture);
+		DXWrapper::Set_Texture(stage, D3DTexture);
 	else
-		DX8Wrapper::Set_Texture(stage, 0);
+		DXWrapper::Set_Texture(stage, 0);
 }
 
 // FUNCTION: BFME2 0x00131259 size=212 name=?PreLoad@Impl@TextureAsset@@QAEXPBD@Z evidence=N:ledger tier=B hypothesis:K

@@ -12,7 +12,7 @@
 #include <string.h>
 #include <d3d8.h>
 #include "WW3D2/VertexMaterialClass.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WW3D2/mapper.h"
 #include "WW3D2/w3d_file.h"
@@ -358,17 +358,17 @@ void VertexMaterialClass::Apply_Null(void)
 		1.0f							// power
 	};
 
-	DX8Wrapper::Set_DX8_Render_State(D3DRS_LIGHTING, FALSE);
-	DX8Wrapper::Set_DX8_Material(&default_settings);
+	DXWrapper::Set_DX8_Render_State(D3DRS_LIGHTING, FALSE);
+	DXWrapper::Set_DX8_Material(&default_settings);
 
-	DX8Wrapper::Set_DX8_Render_State(D3DRS_AMBIENTMATERIALSOURCE, D3DMCS_MATERIAL);
-	DX8Wrapper::Set_DX8_Render_State(D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_MATERIAL);
-	DX8Wrapper::Set_DX8_Render_State(D3DRS_EMISSIVEMATERIALSOURCE, D3DMCS_MATERIAL);
+	DXWrapper::Set_DX8_Render_State(D3DRS_AMBIENTMATERIALSOURCE, D3DMCS_MATERIAL);
+	DXWrapper::Set_DX8_Render_State(D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_MATERIAL);
+	DXWrapper::Set_DX8_Render_State(D3DRS_EMISSIVEMATERIALSOURCE, D3DMCS_MATERIAL);
 
 	// set to default values if no mappers
 	for (i = 0; i < MAX_STAGES; i++) {
-		DX8Wrapper::Set_DX8_Texture_Stage_State(i, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_PASSTHRU | i);
-		DX8Wrapper::Set_DX8_Texture_Stage_State(i, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_DISABLE);
+		DXWrapper::Set_DX8_Texture_Stage_State(i, D3DTSS_TEXCOORDINDEX, D3DTSS_TCI_PASSTHRU | i);
+		DXWrapper::Set_DX8_Texture_Stage_State(i, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_DISABLE);
 	}
 }
 

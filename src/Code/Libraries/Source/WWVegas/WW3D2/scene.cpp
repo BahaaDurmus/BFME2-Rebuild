@@ -6,7 +6,7 @@
 // Extent is a hypothesis; only Object VERIFIED establishes recovery.
 // Edges: left=unproven right=unknown-rows
 #include "WW3D2/SceneClass.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WW3D2/RenderObjClass.h"
 #include "WW3D2/RenderInfoClass.h"
@@ -160,7 +160,7 @@ void SceneClass::Render(RenderInfoClass &rinfo)
 	enum { EXTRA_PASS_DISABLE, EXTRA_PASS_LINE, EXTRA_PASS_CLEAR_LINE };
 
 	Pre_Render_Processing(rinfo);
-	DX8Wrapper::Set_Fog(FogEnabled, FogColor, FogStart, FogEnd);
+	DXWrapper::Set_Fog(FogEnabled, FogColor, FogStart, FogEnd);
 
 	if (ExtraPassPolyRenderMode == EXTRA_PASS_DISABLE) {
 		Customized_Render(rinfo);
@@ -172,14 +172,14 @@ void SceneClass::Render(RenderInfoClass &rinfo)
 		switch (ExtraPassPolyRenderMode) {
 		case EXTRA_PASS_LINE:
 			WW3D::Enable_Texturing(false);
-			DX8Wrapper::Set_DX8_Render_State(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+			DXWrapper::Set_DX8_Render_State(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 			bfmeSetProjectionDepthBias(7.0f);
 			Customized_Render(rinfo);
 			break;
 		case EXTRA_PASS_CLEAR_LINE:
-			DX8Wrapper::Clear(true, false, false, Vector3(0.0f, 0.0f, 0.0f));
+			DXWrapper::Clear(true, false, false, Vector3(0.0f, 0.0f, 0.0f));
 			WW3D::Enable_Texturing(false);
-			DX8Wrapper::Set_DX8_Render_State(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+			DXWrapper::Set_DX8_Render_State(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 			bfmeSetProjectionDepthBias(7.0f);
 			Customized_Render(rinfo);
 			break;

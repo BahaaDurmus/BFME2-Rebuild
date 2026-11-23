@@ -18,8 +18,8 @@
 //   transform and calls Set_View_Plane(50 degrees, -1).
 // - The getters Get_Near_Clip_Bounding_Box 0x00135950, Get_Projection_Matrix
 //   0x00134A60 and Get_View_Matrix 0x00134A70 call Update_Frustum 0x001340B0
-//   first and return +0x310 (OBBoxClass), +0x34C (Matrix4) and +0x3CC
-//   (Matrix3D); Set_Reflected_Projection_Matrix 0x00133DA0 copies a Matrix4 to
+//   first and return +0x310 (OBBoxClass), +0x34C (Matrix4x4) and +0x3CC
+//   (Matrix3D); Set_Reflected_Projection_Matrix 0x00133DA0 copies a Matrix4x4 to
 //   +0x38C. Clone allocates 0x3FC bytes. SIZE 0x3FC.
 #pragma once
 #ifndef BFME2_CAMERACLASS_H
@@ -102,13 +102,13 @@ public:
 	float Compute_Projected_Sphere_Radius(float dist, float radius);				// 0x00133E80
 
 	const OBBoxClass &Get_Near_Clip_Bounding_Box(void) const;					// 0x00135950
-	void Get_Projection_Matrix(Matrix4 *set_tm);							// 0x00134820
-	void Get_D3D_Projection_Matrix(Matrix4 *set_tm);						// 0x001348C0
-	void Get_D3D_View_Projection_Matrix(Matrix4 *set_tm);								// 0x00134A80 (the map's name: the D3D projection times the inverse camera transform)
+	void Get_Projection_Matrix(Matrix4x4 *set_tm);							// 0x00134820
+	void Get_D3D_Projection_Matrix(Matrix4x4 *set_tm);						// 0x001348C0
+	void Get_D3D_View_Projection_Matrix(Matrix4x4 *set_tm);								// 0x00134A80 (the map's name: the D3D projection times the inverse camera transform)
 	void Get_View_Matrix(Matrix3D *set_tm);								// 0x001349E0
-	const Matrix4 &Get_Projection_Matrix(void);							// 0x00134A60
+	const Matrix4x4 &Get_Projection_Matrix(void);							// 0x00134A60
 	const Matrix3D &Get_View_Matrix(void);								// 0x00134A70
-	void Set_Reflected_Projection_Matrix(const Matrix4 &tm);					// 0x00133DA0
+	void Set_Reflected_Projection_Matrix(const Matrix4x4 &tm);					// 0x00133DA0
 	void Apply(void);										// 0x00135A70
 
 	static void Convert_Old(Vector3 &pos);								// 0x00133E40
@@ -128,8 +128,8 @@ protected:
 	mutable FrustumClass Frustum;			// +0x100 world space
 	mutable FrustumClass ViewSpaceFrustum;		// +0x208
 	mutable OBBoxClass NearClipBBox;		// +0x310
-	mutable Matrix4 ProjectionTransform;		// +0x34C
-	Matrix4 ReflectedProjectionTransform;		// +0x38C
+	mutable Matrix4x4 ProjectionTransform;		// +0x34C
+	Matrix4x4 ReflectedProjectionTransform;		// +0x38C
 	mutable Matrix3D CameraInvTransform;		// +0x3CC
 };
 

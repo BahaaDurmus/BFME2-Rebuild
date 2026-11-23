@@ -12,7 +12,7 @@
       "name": "??1BfmeEnumerationCaps@@QAE@XZ",
       "name_evidence": "N:ledger",
       "confidence": "low",
-      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-LightClass|DX8Wrapper;N+O:special member placed in another class's object (implicit/inline)",
+      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-LightClass|DXWrapper;N+O:special member placed in another class's object (implicit/inline)",
       "object_id": "O0011CC60",
       "object_evidence": "X:closure",
       "parent_rvas": "",
@@ -59,7 +59,7 @@
       "role": "comdat",
       "parent_rva": "",
       "fold_group": "",
-      "name": "?Create_Render_Target@DX8Wrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z",
+      "name": "?Create_Render_Target@DXWrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z",
       "name_evidence": "N:ledger",
       "confidence": "high",
       "evidence": "N:template-instantiation",
@@ -72,7 +72,7 @@
       "parent": null,
       "object": "O0011CC60",
       "accepted_names": [
-        "?Create_Render_Target@DX8Wrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z"
+        "?Create_Render_Target@DXWrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -1262,7 +1262,7 @@
       "name": "??4BfmeEnumerationDesc@@QAEAAV0@ABV0@@Z",
       "name_evidence": "N:ledger",
       "confidence": "low",
-      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-DX8Wrapper;N+O:special member placed in another class's object (implicit/inline)",
+      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-DXWrapper;N+O:special member placed in another class's object (implicit/inline)",
       "object_id": "O0011CC60",
       "object_evidence": "X:closure",
       "parent_rvas": "",
@@ -1734,7 +1734,7 @@
       "role": "ehhandler",
       "parent_rva": "0x0011CE40",
       "fold_group": "",
-      "name": "__ehhandler$?Registry_Load_Render_Device@DX8Wrapper@@KA_NPBDPADHAAH2222@Z",
+      "name": "__ehhandler$?Registry_Load_Render_Device@DXWrapper@@KA_NPBDPADHAAH2222@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909230;X:parent-by-prologue",
@@ -1747,7 +1747,7 @@
       "parent": "0x0011CE40",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Registry_Load_Render_Device@DX8Wrapper@@KA_NPBDPADHAAH2222@Z"
+        "__ehhandler$?Registry_Load_Render_Device@DXWrapper@@KA_NPBDPADHAAH2222@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -1809,7 +1809,7 @@
       "role": "ehhandler",
       "parent_rva": "0x0011D710",
       "fold_group": "",
-      "name": "__ehhandler$?Draw_Sorting_IB_VB@DX8Wrapper@@CAXIIIII@Z",
+      "name": "__ehhandler$?Draw_Sorting_IB_VB@DXWrapper@@CAXIIIII@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x0090925C;X:parent-by-prologue",
@@ -1822,7 +1822,7 @@
       "parent": "0x0011D710",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Draw_Sorting_IB_VB@DX8Wrapper@@CAXIIIII@Z"
+        "__ehhandler$?Draw_Sorting_IB_VB@DXWrapper@@CAXIIIII@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -2009,7 +2009,7 @@
       "role": "ehhandler",
       "parent_rva": "0x0011E120",
       "fold_group": "",
-      "name": "__ehhandler$?Create_Render_Target@DX8Wrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z",
+      "name": "__ehhandler$?Create_Render_Target@DXWrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x009092D8;X:parent-by-prologue",
@@ -2022,7 +2022,7 @@
       "parent": "0x0011E120",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Create_Render_Target@DX8Wrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z"
+        "__ehhandler$?Create_Render_Target@DXWrapper@@SA?AV?$RefCountPtr@VTextureClass@@@@HHW4WW3DFormat@@@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -2184,7 +2184,7 @@
       "role": "ehhandler",
       "parent_rva": "",
       "fold_group": "H0076503B",
-      "name": "__ehhandler$?Registry_Save_Render_Device@DX8Wrapper@@KA_NPBDHHHH_NH@Z",
+      "name": "__ehhandler$?Registry_Save_Render_Device@DXWrapper@@KA_NPBDHHHH_NH@Z",
       "name_evidence": "?:placeholder",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x0090934C;X:parent-by-prologue;X:EH stub shared by 2 functions (ICF-folded handler and FuncInfo)",
@@ -2197,7 +2197,7 @@
       "parent": null,
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Registry_Save_Render_Device@DX8Wrapper@@KA_NPBDHHHH_NH@Z"
+        "__ehhandler$?Registry_Save_Render_Device@DXWrapper@@KA_NPBDHHHH_NH@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -2284,7 +2284,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00120850",
       "fold_group": "",
-      "name": "__ehhandler$?Set_Render_Target_With_Z@DX8Wrapper@@SAXPAVTextureClass@@PAVZTextureClass@@@Z",
+      "name": "__ehhandler$?Set_Render_Target_With_Z@DXWrapper@@SAXPAVTextureClass@@PAVZTextureClass@@@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909380;X:parent-by-prologue",
@@ -2297,7 +2297,7 @@
       "parent": "0x00120850",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Set_Render_Target_With_Z@DX8Wrapper@@SAXPAVTextureClass@@PAVZTextureClass@@@Z"
+        "__ehhandler$?Set_Render_Target_With_Z@DXWrapper@@SAXPAVTextureClass@@PAVZTextureClass@@@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -2434,7 +2434,7 @@
       "role": "ehhandler",
       "parent_rva": "0x001215F0",
       "fold_group": "",
-      "name": "__ehhandler$?Do_Onetime_Device_Dependent_Shutdowns@DX8Wrapper@@SAXXZ",
+      "name": "__ehhandler$?Do_Onetime_Device_Dependent_Shutdowns@DXWrapper@@SAXXZ",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x009093D8;X:parent-by-prologue",
@@ -2447,7 +2447,7 @@
       "parent": "0x001215F0",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Do_Onetime_Device_Dependent_Shutdowns@DX8Wrapper@@SAXXZ"
+        "__ehhandler$?Do_Onetime_Device_Dependent_Shutdowns@DXWrapper@@SAXXZ"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -2484,7 +2484,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00121860",
       "fold_group": "",
-      "name": "__ehhandler$?Get_Render_Target_Resolution@DX8Wrapper@@CAXAAH00AA_N@Z",
+      "name": "__ehhandler$?Get_Render_Target_Resolution@DXWrapper@@CAXAAH00AA_N@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x009093FC;X:parent-by-prologue",
@@ -2497,7 +2497,7 @@
       "parent": "0x00121860",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Get_Render_Target_Resolution@DX8Wrapper@@CAXAAH00AA_N@Z"
+        "__ehhandler$?Get_Render_Target_Resolution@DXWrapper@@CAXAAH00AA_N@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -3209,7 +3209,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00122600",
       "fold_group": "",
-      "name": "__ehhandler$?Reset_Device@DX8Wrapper@@SA_N_N@Z",
+      "name": "__ehhandler$?Reset_Device@DXWrapper@@SA_N_N@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909520;X:parent-by-prologue",
@@ -3222,7 +3222,7 @@
       "parent": "0x00122600",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Reset_Device@DX8Wrapper@@SA_N_N@Z"
+        "__ehhandler$?Reset_Device@DXWrapper@@SA_N_N@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -3259,7 +3259,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00122BE0",
       "fold_group": "",
-      "name": "__ehhandler$?End_Scene@DX8Wrapper@@SAX_N@Z",
+      "name": "__ehhandler$?End_Scene@DXWrapper@@SAX_N@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909544;X:parent-by-prologue",
@@ -3272,7 +3272,7 @@
       "parent": "0x00122BE0",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?End_Scene@DX8Wrapper@@SAX_N@Z"
+        "__ehhandler$?End_Scene@DXWrapper@@SAX_N@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -4009,7 +4009,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00123170",
       "fold_group": "",
-      "name": "__ehhandler$?Apply_Default_State@DX8Wrapper@@SAXXZ",
+      "name": "__ehhandler$?Apply_Default_State@DXWrapper@@SAXXZ",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909648;X:parent-by-prologue",
@@ -4022,7 +4022,7 @@
       "parent": "0x00123170",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Apply_Default_State@DX8Wrapper@@SAXXZ"
+        "__ehhandler$?Apply_Default_State@DXWrapper@@SAXXZ"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -4159,7 +4159,7 @@
       "role": "ehhandler",
       "parent_rva": "0x001245A0",
       "fold_group": "",
-      "name": "__ehhandler$?Do_Onetime_Device_Dependent_Inits@DX8Wrapper@@SAXXZ",
+      "name": "__ehhandler$?Do_Onetime_Device_Dependent_Inits@DXWrapper@@SAXXZ",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x009096A0;X:parent-by-prologue",
@@ -4172,7 +4172,7 @@
       "parent": "0x001245A0",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Do_Onetime_Device_Dependent_Inits@DX8Wrapper@@SAXXZ"
+        "__ehhandler$?Do_Onetime_Device_Dependent_Inits@DXWrapper@@SAXXZ"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -4334,7 +4334,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00124890",
       "fold_group": "",
-      "name": "__ehhandler$?Enumerate_Devices@DX8Wrapper@@KAXXZ",
+      "name": "__ehhandler$?Enumerate_Devices@DXWrapper@@KAXXZ",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x009096EC;X:parent-by-prologue",
@@ -4347,7 +4347,7 @@
       "parent": "0x00124890",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Enumerate_Devices@DX8Wrapper@@KAXXZ"
+        "__ehhandler$?Enumerate_Devices@DXWrapper@@KAXXZ"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -4409,7 +4409,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00124FF0",
       "fold_group": "",
-      "name": "__ehhandler$?Set_Render_Device@DX8Wrapper@@KA_NHHHHH_N00@Z",
+      "name": "__ehhandler$?Set_Render_Device@DXWrapper@@KA_NHHHHH_N00@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909718;X:parent-by-prologue",
@@ -4422,7 +4422,7 @@
       "parent": "0x00124FF0",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Set_Render_Device@DX8Wrapper@@KA_NHHHHH_N00@Z"
+        "__ehhandler$?Set_Render_Device@DXWrapper@@KA_NHHHHH_N00@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null
@@ -4534,7 +4534,7 @@
       "role": "ehhandler",
       "parent_rva": "0x00125620",
       "fold_group": "",
-      "name": "__ehhandler$?Init@DX8Wrapper@@SA_NPAX_N@Z",
+      "name": "__ehhandler$?Init@DXWrapper@@SA_NPAX_N@Z",
       "name_evidence": "X:parent-name",
       "confidence": "high",
       "evidence": "X:eh-stub FuncInfo=0x00909768;X:parent-by-prologue",
@@ -4547,7 +4547,7 @@
       "parent": "0x00125620",
       "object": "O0011CC60",
       "accepted_names": [
-        "__ehhandler$?Init@DX8Wrapper@@SA_NPAX_N@Z"
+        "__ehhandler$?Init@DXWrapper@@SA_NPAX_N@Z"
       ],
       "seed_tier": "A",
       "membership_hypothesis": null

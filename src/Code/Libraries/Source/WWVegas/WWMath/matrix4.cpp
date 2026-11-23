@@ -10,8 +10,8 @@
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=unknown-rows right=no-edge-evidence; proof_first=false
 // Hypothesis rules: hypothesis:Z, hypothesis:padding
-// FUNCTION: BFME2 0x00715550 size=916 name=?Multiply@Matrix4@@SAXABV1@0PAV1@@Z evidence=N:ledger tier=B hypothesis:Z
-void Matrix4::Multiply(const Matrix4 &a,const Matrix4 &b,Matrix4 * res)
+// FUNCTION: BFME2 0x00715550 size=916 name=?Multiply@Matrix4x4@@SAXABV1@0PAV1@@Z evidence=N:ledger tier=B hypothesis:Z
+void Matrix4x4::Multiply(const Matrix4x4 &a,const Matrix4x4 &b,Matrix4x4 * res)
 {
 	assert(res != &a);
 	assert(res != &b);
@@ -41,8 +41,8 @@ void Matrix4::Multiply(const Matrix4 &a,const Matrix4 &b,Matrix4 * res)
 	#undef PRODUCT
 }
 
-// FUNCTION: BFME2 0x007158F0 size=713 name=?Multiply@Matrix4@@SAXABVMatrix3D@@ABV1@PAV1@@Z evidence=N:ledger tier=B hypothesis:Z
-void Matrix4::Multiply(const Matrix3D &a,const Matrix4 &b,Matrix4 * res)
+// FUNCTION: BFME2 0x007158F0 size=713 name=?Multiply@Matrix4x4@@SAXABVMatrix3D@@ABV1@PAV1@@Z evidence=N:ledger tier=B hypothesis:Z
+void Matrix4x4::Multiply(const Matrix3D &a,const Matrix4x4 &b,Matrix4x4 * res)
 {
 	assert(res != &b);
 
@@ -71,8 +71,8 @@ void Matrix4::Multiply(const Matrix3D &a,const Matrix4 &b,Matrix4 * res)
 	#undef PRODUCT
 }
 
-// FUNCTION: BFME2 0x00715BC0 size=712 name=?Multiply@Matrix4@@SAXABV1@ABVMatrix3D@@PAV1@@Z evidence=N:ledger tier=B hypothesis:Z
-void Matrix4::Multiply(const Matrix4 & a,const Matrix3D & b,Matrix4 * res)
+// FUNCTION: BFME2 0x00715BC0 size=712 name=?Multiply@Matrix4x4@@SAXABV1@ABVMatrix3D@@PAV1@@Z evidence=N:ledger tier=B hypothesis:Z
+void Matrix4x4::Multiply(const Matrix4x4 & a,const Matrix3D & b,Matrix4x4 * res)
 {
 	assert(res != &a);
 	
@@ -106,12 +106,12 @@ void Matrix4::Multiply(const Matrix4 & a,const Matrix3D & b,Matrix4 * res)
 	#undef PRODUCT_W
 }
 
-// FUNCTION: BFME2 0x00715E90 size=19 name=?Get_Inverse@Matrix4@@QBEXAAV1@@Z evidence=N:ledger tier=A
-void Matrix4::Get_Inverse(Matrix4 &inv) const
+// FUNCTION: BFME2 0x00715E90 size=19 name=?Get_Inverse@Matrix4x4@@QBEXAAV1@@Z evidence=N:ledger tier=A
+void Matrix4x4::Get_Inverse(Matrix4x4 &inv) const
 {
 	float det;
 	D3DXMatrixInverse((D3DXMATRIX *)&inv, &det, (const D3DXMATRIX *)this);
 }
 
-// FUNCTION: BFME2 0x00715EB0 size=2071 name=?Inverse@Matrix4@@QBEXPAV1@@Z evidence=N:ledger tier=B hypothesis:Z
+// FUNCTION: BFME2 0x00715EB0 size=2071 name=?Inverse@Matrix4x4@@QBEXPAV1@@Z evidence=N:ledger tier=B hypothesis:Z
 

@@ -4,7 +4,7 @@
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=unknown-rows right=unknown-rows; proof_first=false
 // Hypothesis rules: hypothesis:Z, hypothesis:name:invented
-// FUNCTION: BFME2 0x00126082 size=250 name=?Clamp_Color@DX8Wrapper@@SAXAAVVector4@@@Z evidence=N:ledger tier=B hypothesis:name:invented
+// FUNCTION: BFME2 0x00126082 size=250 name=?Clamp_Color@DXWrapper@@SAXAAVVector4@@@Z evidence=N:ledger tier=B hypothesis:name:invented
 
-// FUNCTION: BFME2 0x0012617C size=399 name=?Convert_Color_Clamp@DX8Wrapper@@SAIVVector4@@@Z evidence=N:ledger tier=B hypothesis:Z
+// FUNCTION: BFME2 0x0012617C size=399 name=?Convert_Color_Clamp@DXWrapper@@SAIVVector4@@@Z evidence=N:ledger tier=B hypothesis:Z
 

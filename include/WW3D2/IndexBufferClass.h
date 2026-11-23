@@ -23,7 +23,7 @@
 #include "WWLib/RefCountClass.h"
 #include "WW3D2/DX8DeviceLock.h"
 
-class DX8Wrapper;
+class DXWrapper;
 class SortingRendererClass;
 struct IDirect3DIndexBuffer8;
 class DX8IndexBufferClass;
@@ -93,7 +93,7 @@ class DynamicIBAccessClass
 	unsigned short IndexBufferOffset;	// +0x06
 	IndexBufferClass *IndexBuffer;	// +0x08
 
-	friend class DX8Wrapper;
+	friend class DXWrapper;
 	friend class SortingRendererClass;
 
 public:

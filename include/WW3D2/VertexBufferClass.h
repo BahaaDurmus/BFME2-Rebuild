@@ -23,7 +23,7 @@
 #include "WW3D2/DX8DeviceLock.h"
 #include "WW3D2/FVFInfoClass.h"
 
-class DX8Wrapper;
+class DXWrapper;
 class SortingRendererClass;
 class Vector2;
 class Vector3;
@@ -132,7 +132,7 @@ class DynamicVBAccessClass
 	unsigned short VertexBufferOffset;	// +0x12
 	VertexBufferClass *VertexBuffer;	// +0x14
 
-	friend class DX8Wrapper;
+	friend class DXWrapper;
 	friend class SortingRendererClass;
 
 public:
@@ -169,7 +169,7 @@ class SortingVertexBufferClass : public VertexBufferClass
 {
 	VertexFormatXYZNDUV2 *VertexBuffer;			// +0x1C
 
-	friend class DX8Wrapper;
+	friend class DXWrapper;
 	friend class SortingRendererClass;
 	friend class VertexBufferClass::WriteLockClass;
 	friend class VertexBufferClass::AppendLockClass;

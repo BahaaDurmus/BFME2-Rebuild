@@ -14,8 +14,8 @@
 
 // FUNCTION: BFME2 0x000A6270 size=272 name=?copyRect@@YAHPAEHHHHH@Z evidence=N:ledger
 
-// FUNCTION: BFME2 0x000A638D size=199 name=??D@YA?AVVector4@@ABVMatrix4@@ABVVector3@@@Z evidence=N:ledger
-Vector4 operator*(const Matrix4 &a, const Vector3 &v)
+// FUNCTION: BFME2 0x000A638D size=199 name=??D@YA?AVVector4@@ABVMatrix4x4@@ABVVector3@@@Z evidence=N:ledger
+Vector4 operator*(const Matrix4x4 &a, const Vector3 &v)
 {
 	return Vector4(
 		a[0][0] * v.X + a[0][1] * v.Y + a[0][2] * v.Z + a[0][3],
@@ -28,7 +28,7 @@ Vector4 operator*(const Matrix4 &a, const Vector3 &v)
 
 // FUNCTION: BFME2 0x000A648C size=930 name=?testHardwareSupport@W3DSmudgeManager@@QAE_NXZ evidence=N:ledger
 
-// FUNCTION: BFME2 0x000A68A7 size=1349 name=?Set_Transform@DX8Wrapper@@SAXW4_D3DTRANSFORMSTATETYPE@@ABVMatrix4@@@Z evidence=N:ledger
+// FUNCTION: BFME2 0x000A68A7 size=1349 name=?Set_Transform@DXWrapper@@SAXW4_D3DTRANSFORMSTATETYPE@@ABVMatrix4x4@@@Z evidence=N:ledger
 
 // FUNCTION: BFME2 0x000A6E08 size=2447 name=?render@W3DSmudgeManager@@QAEXAAVRenderInfoClass@@@Z evidence=N:ledger
 

@@ -32,7 +32,7 @@
     "include/Apt/Assert.h": {
       "21115e3683f6a0bb903f1dc3d73dd0eaf035f192c73029f2ef5f7dc5928c223f": 1
     },
-    "include/WW3D2/DX8Wrapper.h": {
+    "include/WW3D2/dxwrapper.h": {
       "5d31f7e105ce61757a969b87844ff1cb40aa7061dce603d96815daa80a383c5c": 1
     },
     "include/WWMath/FloatToLong.h": {

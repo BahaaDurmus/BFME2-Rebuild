@@ -366,6 +366,20 @@ GRAPH_CHANGES += (CUT15_H5_VSLOT_GRAPH,) + tuple(
 )
 GRAPH_PATHS |= set(CUT15_H5_VSLOT_GRAPH)
 
+CUT16_GATES_DXWRAPPER_GRAPH = {
+    'tools/gates/config.json': ('b712b72efba3b027e6bc7d99a6da75c9decc100e78b28c9e385000082a64f2ce', '8efc59a0cd826377dc8b95515b6c7dfcbac9158e5bf7c03d3fa86a60f393c5c9'),
+    'tools/gates/test_public_delivery.py': ('5f74b7283f335e2f78bc5a74a669ab70f0aab051c9c1dbb4fa63d93741fcb30e', 'a820399cfb7dbb644d50685605146c9b3ef11e08a2664c1edc90bee6d1211788'),
+}
+GRAPH_CHANGES += (CUT16_GATES_DXWRAPPER_GRAPH,) + tuple(
+    advance_graph(previous, CUT16_GATES_DXWRAPPER_GRAPH)
+    for previous in GRAPH_CHANGES
+    if (previous.keys() & CUT16_GATES_DXWRAPPER_GRAPH.keys())
+    and all(previous[path][1] == CUT16_GATES_DXWRAPPER_GRAPH[path][0]
+            for path in previous.keys() & CUT16_GATES_DXWRAPPER_GRAPH.keys())
+)
+GRAPH_PATHS |= set(CUT16_GATES_DXWRAPPER_GRAPH)
+
+
 
 # Exact pinned TU-move migrations: carry untouched TUs across a maintainer TU relocation while
 # forcing every moved TU to be freshly compiled and verified at its new path.
@@ -402,7 +416,79 @@ CUT14_TOOLS_TU_MOVE = {
         'expected/unk/O00133510.cpp.neighbours.json': (None, '5fdfa6fe0f0c39187d25e2cf148b3243d574719fa862bb7bb5e3c21caecd257b'),
     },
 }
-TU_MOVE_MIGRATIONS = (CUT14_TOOLS_TU_MOVE,)
+CUT16_WB_RENAMES = {
+    "old_tus": frozenset(),
+    "new_tus": frozenset(),
+    "force_changed": frozenset({
+        'include/ww3d2/dx8wrapper.h',
+        'include/ww3d2/dxwrapper.h',
+        'src/code/gameenginedevice/source/milesaudiodevice/milesstreamhandlewrapperimplementation.cpp',
+        'src/code/gameenginedevice/source/w3ddevice/gameclient/baseheightmap.cpp',
+        'src/code/gameenginedevice/source/w3ddevice/gameclient/w3dshadermanager.cpp',
+        'src/code/gameenginedevice/source/w3ddevice/gameclient/w3dsmudge.cpp',
+        'src/code/gameenginedevice/source/w3ddevice/gameclient/w3dtreebuffer.cpp',
+        'src/code/libraries/source/wwvegas/ww3d2/camera.cpp',
+        'src/code/libraries/source/wwvegas/ww3d2/dxwrapper.cpp',
+        'src/code/libraries/source/wwvegas/ww3d2/fxshadernamespacesas.cpp',
+        'src/code/libraries/source/wwvegas/ww3d2/mapper.cpp',
+        'src/code/libraries/source/wwvegas/ww3d2/sortingrenderer.cpp',
+        'src/code/libraries/source/wwvegas/ww3d2/ww3d.cpp',
+        'src/code/libraries/source/wwvegas/wwmath/matrix4.cpp',
+        'src/code/libraries/source/wwvegas/wwmath/quat.cpp',
+        'src/code/libraries/source/wwvegas/wwmath/vp.cpp',
+        'src/unk/g00042f57.cpp',
+        'src/unk/g0006607a.cpp',
+        'src/unk/g0006e25e.cpp',
+        'src/unk/g00075295.cpp',
+        'src/unk/g00083b9e.cpp',
+        'src/unk/g001101d7.cpp',
+        'src/unk/g00133730.cpp',
+        'src/unk/g00714d80.cpp',
+        'src/unk/o0006615f.cpp',
+        'src/unk/o00066322.cpp',
+        'src/unk/o0006e18d.cpp',
+        'src/unk/o0006e1c0.cpp',
+        'src/unk/o00075343.cpp',
+        'src/unk/o00083b81.cpp',
+        'src/unk/o0010713a.cpp',
+        'src/unk/o0010737e.cpp',
+        'src/unk/o001100e8.cpp',
+        'src/unk/o0011c470.cpp',
+        'src/unk/o00126071.cpp',
+        'src/unk/o00126082.cpp',
+        'src/unk/o0012639e.cpp',
+        'src/unk/o0012d2b0.cpp',
+        'src/unk/o0012d2c0.cpp',
+        'src/unk/o0012e010.cpp',
+        'src/unk/o00133510.cpp',
+        'src/unk/o00139290.cpp',
+        'src/unk/o0013c930.cpp',
+        'src/unk/o007166d0.cpp',
+    }),
+    "files": {
+        'config/asm_allowlist.json': ('cfd34ee394cdaa83502fed0f0f37ed3cde92b710c7f6c0385d6c8e66b63b7ba2', 'f22c5c29215d721e88c3c0483a4e2c0d1d80c9f2cf3a64e7834aa6d70cc9a1dc'),
+        'config/demangled.json': ('3a40e3c7b5db9d2980037d89b541a4a292e0e60278f1289ad041226e0babf2ac', '25f6504bab2aa06472efbac9e9b46d194de564b6108ed5c0a57fe188be2785bf'),
+        'config/header_manifest.json': ('88f306fc21826a2192209354e6cf0cc6841446f842d60e5ae8b814e16ccec78c', 'e292e7871dd8b8eb6eb547aa063df79d39fe3d1c8e6f546b1b8f0a21daba3c80'),
+        'config/identity_overlays.json': ('ea6196242d98ffcd162acb0883db643e55b66b27bce85024e6c3c43db1cef18a', '2c106263c5cf7538d3573dd74736323582d53c1fe71909c4cf49ce125c400f4c'),
+        'config/map.json': ('7a8856757c5332f522873643d8fae134616dc39a918f0f6156144fa8d7831bd0', 'e4a674cf0243309b957b1b75d738b35c4c68f603d1fd50d6755fdfa8642aa3bb'),
+        'config/symbols.json': ('8cb23eb010238ed89bd2d05ebf98dccf84111f4fdbe4f0a858860573637319d9', 'd3580b3b46546f6c5f2e738d6c03edfd570d24f1b1289a2345597dfd3ac43b02'),
+        'expected/Code/GameEngineDevice/Source/MilesAudioDevice/MilesStreamHandleWrapperImplementation.cpp.json': ('0599e6022d546e57d1eb69be92a84293376e8a17d409e1e237cde2d98ab2fc83', 'a9b8efb817d7c36088e792f67153ef469ea620218dc9c994ea339f32736145fa'),
+        'expected/Code/GameEngineDevice/Source/W3DDevice/GameClient/BaseHeightMap.cpp.json': ('c5eb6a49b06dcdf62ce8bea5c9e0d636c3eb6e4b0511abcdb1f50a9d7d003c7d', 'ace5f5707c41798de084994847fe8bb9e7c687a380abf5369723f3a28de727dc'),
+        'expected/Code/GameEngineDevice/Source/W3DDevice/GameClient/W3DShaderManager.cpp.json': ('c211325388cf2abdecdf796acc6cdff028ee5223372f28770df04a3023c779ef', '99472e8be40100a1d7d3d356fac7165386a07859d413f9c3041d980d1ee699e8'),
+        'expected/Code/GameEngineDevice/Source/W3DDevice/GameClient/W3DSmudge.cpp.json': ('ac395e003017a8af4983fbfc756acb976fc929637af14a9ba7ce6b6b31c0f679', '10a0747df5106cd06bfa91e81525e1baf0b60cbd730bd64c0d0238e0255b237d'),
+        'expected/Code/Libraries/Source/WWVegas/WW3D2/dxwrapper.cpp.json': ('58820d6f5ca9c56795a6665fb92e7c8e8232a7a2c805035b8c81faa2eccdb36d', 'b17adf428e5aceff1eb1f2816e3fe850ca01f10379b2d9e1bd8848e8506a0e82'),
+        'expected/Code/Libraries/Source/WWVegas/WW3D2/fxshadernamespacesas.cpp.json': ('d1f855f6950b5f9a8e5fb92516caad6aac2b0d3fd22efd5af57baa4280fbea61', 'c83fe5010396ff62bb7e065546e5acaeda0c627f11c6e9044da700d119ebc2fb'),
+        'expected/Code/Libraries/Source/WWVegas/WW3D2/mapper.cpp.json': ('4201a8d46701bb085a7b30a958b8a87efa531becf8925c594a8ad2fddc079530', '81821a47d5ebe8444781ac287ccb1bfd108f94fe17a0481ed75dfc21cb067d42'),
+        'expected/Code/Libraries/Source/WWVegas/WW3D2/sortingrenderer.cpp.json': ('426e8806d137f0aca30d6e5dd271e014d627ee3b08b135b401cd4828a5b59013', '83720fb66a89b8f390f4ee45c793f013461803ad80ed833555ab4b240bbb0d62'),
+        'expected/Code/Libraries/Source/WWVegas/WW3D2/ww3d.cpp.json': ('9ee25f4e513244b5c026283eff741c3fb3a39881ea5feae97eccc765526ab84b', 'e5951b556268f920d9b53c0c4f65cf4fe00088b0011e8b0177489ef30c0a9079'),
+        'expected/unk/O0006615F.cpp.json': ('852c1c19ecf4d95224fff4bcb9a876530e0b90b5af17ccd44e21d72bb0383eed', 'dddbc583015da8d0c7b7b70d33ff6d37ae970a7aa26a9f03640a3c5658ac9572'),
+        'expected/unk/O0010737E.cpp.json': ('bdf349b1267503eb2e32fad3296f22c988626600b7364e6c7262f44528ba6352', '2f8a37cd7889a57770ef1d5d45d88ce2147cb384829717009788b306fecc57ce'),
+        'expected/unk/O0012639E.cpp.json': ('26ab688132c953a19fc1e133abdeb5fe2c5ba34d705dd10c847f900be3f6cb66', '913a2b27668cd454efba6abcc353eb020717b32263d753606da13033551822b1'),
+        'include/WW3D2/DX8Wrapper.h': ('c2af13615d3c69c24005e655c87d35bd78c19882e996db7d0b9e3f2e9c95ee0b', None),
+        'include/WW3D2/dxwrapper.h': (None, '30e51d9c3a92a2570a67af873da9a754c78c3e6dd88ecb75e9b57ab03a844053'),
+    },
+}
+TU_MOVE_MIGRATIONS = (CUT14_TOOLS_TU_MOVE, CUT16_WB_RENAMES)
 
 
 COMPACT_SCOPE = {"ci/managed-state/state_delta.py", "ci/managed-state/state_origin.py",
@@ -477,7 +563,7 @@ def source_changes(root, parent, main):
     move = tu_move_change(root, parent, main)
     move_files = move["files"] if move else {}
     move_new = move["new_tus"] if move else frozenset()
-    changed = set()
+    changed = set(move.get("force_changed", ())) if move else set()
     for meta, name in zip(parts[::2], parts[1::2], strict=True):
         file = name.decode("utf-8", "strict")
         info = meta.split()

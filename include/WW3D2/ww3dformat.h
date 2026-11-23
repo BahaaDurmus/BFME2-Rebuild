@@ -1,6 +1,6 @@
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
 // ww3dformat.h: WW3D2's surface format enum (Zero Hour's WWVegas/WW3D2/ww3dformat.h gives the names).
-// Target facts (retail game.dat): the values are NOT Zero Hour's 0..25. DX8Wrapper::_Create_DX8_Surface 0x0011DC60 hands its
+// Target facts (retail game.dat): the values are NOT Zero Hour's 0..25. DXWrapper::_Create_DX8_Surface 0x0011DC60 hands its
 // WW3DFormat to the device's CreateOffscreenPlainSurface (slot 36) unchanged, and DX8Caps::Check_Texture_Format_Support
 // 0x0012B210 walks a 123-entry table (SupportTextureFormat at +0x13E) asking the device about format i directly for i below
 // 118, and for the five tail entries about the compressed formats, with Check_Render_To_Texture_Support 0x0012B2A0 and

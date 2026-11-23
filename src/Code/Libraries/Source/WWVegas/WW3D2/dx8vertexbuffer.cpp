@@ -9,7 +9,7 @@
 #include "WWMath/Vector2.h"
 #include "WWMath/Vector3.h"
 #include "WWMath/Vector4.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WW3D2/DX8Caps.h"
 
@@ -227,13 +227,13 @@ void DX8VertexBufferClass::Create(unsigned usage)
 		((usage & USAGE_DYNAMIC) ? D3DUSAGE_DYNAMIC : 0) |
 		((usage & USAGE_NPATCHES) ? D3DUSAGE_NPATCHES : 0) |
 		((usage & USAGE_SOFTWAREPROCESSING) ? D3DUSAGE_SOFTWAREPROCESSING : 0);
-	if (!DX8Wrapper::Get_Current_Caps()->Support_TnL()) {
+	if (!DXWrapper::Get_Current_Caps()->Support_TnL()) {
 		usage_flags |= D3DUSAGE_SOFTWAREPROCESSING;
 	}
-	if (!DX8Wrapper::Get_Current_Caps()->Support_TnL()) {
+	if (!DXWrapper::Get_Current_Caps()->Support_TnL()) {
 		usage_flags |= D3DUSAGE_SOFTWAREPROCESSING;
 	}
-	IDirect3DDevice8 *device = DX8Wrapper::_Get_D3D_Device8();
+	IDirect3DDevice8 *device = DXWrapper::_Get_D3D_Device8();
 	HRESULT ret = ((*(VertexBuffer_CreateFn **)device)[26])(
 		device,
 		FVF_Info().Get_FVF_Size() * VertexCount,
@@ -248,7 +248,7 @@ void DX8VertexBufferClass::Create(unsigned usage)
 	// Creation failed: release what can be released and try again.
 	WW3D::_Invalidate_Mesh_Cache();
 	bfmeEvictManagedResources();
-	device = DX8Wrapper::_Get_D3D_Device8();
+	device = DXWrapper::_Get_D3D_Device8();
 	ret = ((*(VertexBuffer_CreateFn **)device)[26])(
 		device,
 		FVF_Info().Get_FVF_Size() * VertexCount,
@@ -389,7 +389,7 @@ void DX8VertexBufferClass::Copy(const Vector3 *loc, const Vector3 *norm, const V
 			verts[v].nz = (*norm++)[2];
 			verts[v].u1 = (*uv)[0];
 			verts[v].v1 = (*uv++)[1];
-			verts[v].diffuse = DX8Wrapper::Convert_Color(diffuse[v]);
+			verts[v].diffuse = DXWrapper::Convert_Color(diffuse[v]);
 		}
 	}
 	else {
@@ -404,7 +404,7 @@ void DX8VertexBufferClass::Copy(const Vector3 *loc, const Vector3 *norm, const V
 			verts[v].nz = (*norm++)[2];
 			verts[v].u1 = (*uv)[0];
 			verts[v].v1 = (*uv++)[1];
-			verts[v].diffuse = DX8Wrapper::Convert_Color(diffuse[v]);
+			verts[v].diffuse = DXWrapper::Convert_Color(diffuse[v]);
 		}
 	}
 }
@@ -422,7 +422,7 @@ void DX8VertexBufferClass::Copy(const Vector3 *loc, const Vector2 *uv, const Vec
 			verts[v].z = (*loc++)[2];
 			verts[v].u1 = (*uv)[0];
 			verts[v].v1 = (*uv++)[1];
-			verts[v].diffuse = DX8Wrapper::Convert_Color(diffuse[v]);
+			verts[v].diffuse = DXWrapper::Convert_Color(diffuse[v]);
 		}
 	}
 	else {
@@ -434,7 +434,7 @@ void DX8VertexBufferClass::Copy(const Vector3 *loc, const Vector2 *uv, const Vec
 			verts[v].z = (*loc++)[2];
 			verts[v].u1 = (*uv)[0];
 			verts[v].v1 = (*uv++)[1];
-			verts[v].diffuse = DX8Wrapper::Convert_Color(diffuse[v]);
+			verts[v].diffuse = DXWrapper::Convert_Color(diffuse[v]);
 		}
 	}
 }
@@ -653,7 +653,7 @@ void DynamicVBAccessClass::Allocate_DX8_Dynamic_Buffer()
 	// Create a new vb if one doesn't exist currently
 	if (!_DynamicDX8VertexBuffer[FVFIndex]) {
 		unsigned usage = DX8VertexBufferClass::USAGE_DYNAMIC;
-		if (DX8Wrapper::Get_Current_Caps()->Support_NPatches()) {
+		if (DXWrapper::Get_Current_Caps()->Support_NPatches()) {
 			usage |= DX8VertexBufferClass::USAGE_NPATCHES;
 		}
 		_DynamicDX8VertexBuffer[FVFIndex] = ::new DX8VertexBufferClass(

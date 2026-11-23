@@ -1,9 +1,9 @@
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
 // DX8WrapperRenderState.h: the inline assignment of the render state record (Zero Hour's RenderStateStruct::operator=,
 // a WWINLINE in dx8wrapper.h). It needs the buffer, material and texture classes complete, so it lives apart from
-// DX8Wrapper.h and a file includes it where the copy is expanded in place.
+// dxwrapper.h and a file includes it where the copy is expanded in place.
 //
-// Target facts (retail): DX8Wrapper::Get_Render_State 0x0012E010 is `state = render_state` with this assignment expanded
+// Target facts (retail): DXWrapper::Get_Render_State 0x0012E010 is `state = render_state` with this assignment expanded
 // in place (material first, then the two vertex buffers, the index buffer, the 16 texture slots, the four light-enable
 // bytes, then each light that is enabled in turn, the shader word, the world and view matrices, the buffer types and the
 // offsets); SortingRendererClass::Insert_Triangles 0x0012FE00 expands the same sequence.
@@ -11,7 +11,7 @@
 #ifndef BFME2_DX8WRAPPERRENDERSTATE_H
 #define BFME2_DX8WRAPPERRENDERSTATE_H
 
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/VertexBufferClass.h"
 #include "WW3D2/IndexBufferClass.h"
 #include "WW3D2/VertexMaterialClass.h"

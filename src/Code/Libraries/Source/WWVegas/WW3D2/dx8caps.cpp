@@ -3,7 +3,7 @@
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
 #include "WW3D2/DX8Caps.h"
 
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 
 #include <string.h>
 
@@ -291,7 +291,7 @@ DX8Caps::DeviceTypeIntel DX8Caps::Get_Intel_Device(unsigned device_id)
 // FUNCTION: BFME2 0x0012B160 size=51 name=?Init_Caps@DX8Caps@@AAEXPAUIDirect3DDevice8@@@Z evidence=N:ledger tier=B hypothesis:K
 void DX8Caps::Init_Caps(IDirect3DDevice8 *D3DDevice)
 {
-	DX8Wrapper::_Get_D3D_Device8()->GetDeviceCaps((D3DCAPS8 *)&Caps);
+	DXWrapper::_Get_D3D_Device8()->GetDeviceCaps((D3DCAPS8 *)&Caps);
 	number_of_DX8_calls++;
 
 	SupportTnL = ((Caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) == D3DDEVCAPS_HWTRANSFORMANDLIGHT);

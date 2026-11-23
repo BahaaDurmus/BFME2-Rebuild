@@ -59,10 +59,10 @@
       "role": "comdat",
       "parent_rva": "",
       "fold_group": "",
-      "name": "??0Matrix4@@QAE@_N@Z",
+      "name": "??0Matrix4x4@@QAE@_N@Z",
       "name_evidence": "N:ledger",
       "confidence": "low",
-      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-W3DSmudgeManager|DX8Wrapper;N+O:special member placed in another class's object (implicit/inline)",
+      "evidence": "?:no-compiler-generated-signal;N:special-member(may be implicit);O:placed-among-W3DSmudgeManager|DXWrapper;N+O:special member placed in another class's object (implicit/inline)",
       "object_id": "O000A60F0",
       "object_evidence": "X:closure",
       "parent_rvas": "",
@@ -72,7 +72,7 @@
       "parent": null,
       "object": "O000A60F0",
       "accepted_names": [
-        "??0Matrix4@@QAE@_N@Z"
+        "??0Matrix4x4@@QAE@_N@Z"
       ],
       "seed_tier": "B",
       "membership_hypothesis": "hypothesis:Z"

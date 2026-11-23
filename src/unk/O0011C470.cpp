@@ -1,7 +1,7 @@
 // cl: /O2 /G7 /arch:SSE
 // dxsdk
 // Portions derived from Command & Conquer Generals and Command & Conquer Generals Zero Hour, (c) Electronic Arts Inc., GPL-3.0-or-later; see LICENSE and NOTICE.
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/VertexBufferClass.h"
 #include "WW3D2/IndexBufferClass.h"
 #include "WW3D2/VertexMaterialClass.h"
@@ -12,12 +12,12 @@
 // Extents and edges are hypotheses; byte verification alone does not establish original TU boundaries.
 // Edges: left=unknown-rows right=unknown-rows; proof_first=false
 // Hypothesis rules: hypothesis:Z, hypothesis:name:invented, hypothesis:padding
-// FUNCTION: BFME2 0x0011C470 size=134 name=?Set_DX8_Light@DX8Wrapper@@SAXHPAU_D3DLIGHT8@@@Z evidence=N:ledger tier=B hypothesis:name:invented
+// FUNCTION: BFME2 0x0011C470 size=134 name=?Set_DX8_Light@DXWrapper@@SAXHPAU_D3DLIGHT8@@@Z evidence=N:ledger tier=B hypothesis:name:invented
 // The device is a Direct3D 9 device behind Direct3D 8's name: SetLight is slot 51 (+0xCC), LightEnable slot 53 (+0xD4).
 typedef HRESULT(__stdcall *DX8Wrapper_SetLightFn)(IDirect3DDevice8 *, DWORD, const D3DLIGHT8 *);
 typedef HRESULT(__stdcall *DX8Wrapper_LightEnableFn)(IDirect3DDevice8 *, DWORD, BOOL);
 
-void DX8Wrapper::Set_DX8_Light(int index, D3DLIGHT8 *light)
+void DXWrapper::Set_DX8_Light(int index, D3DLIGHT8 *light)
 {
 	if (light) {
 		light_changes++;
@@ -35,8 +35,8 @@ void DX8Wrapper::Set_DX8_Light(int index, D3DLIGHT8 *light)
 	}
 }
 
-// FUNCTION: BFME2 0x0011C500 size=180 name=?Release_Render_State@DX8Wrapper@@SAXXZ evidence=N:ledger tier=B hypothesis:Z
-void DX8Wrapper::Release_Render_State()
+// FUNCTION: BFME2 0x0011C500 size=180 name=?Release_Render_State@DXWrapper@@SAXXZ evidence=N:ledger tier=B hypothesis:Z
+void DXWrapper::Release_Render_State()
 {
 	int i;
 

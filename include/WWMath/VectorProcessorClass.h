@@ -10,13 +10,13 @@ class Vector2;
 class Vector3;
 class Vector4;
 class Matrix3D;
-class Matrix4;
+class Matrix4x4;
 
 class VectorProcessorClass
 {
 public:
 	static void Transform(Vector3 *dst, const Vector3 *src, const Matrix3D &matrix, const int count);			// 0x0071CE10
-	static void Transform(Vector4 *dst, const Vector3 *src, const Matrix4 &matrix, const int count);			// 0x0071CFA0
+	static void Transform(Vector4 *dst, const Vector3 *src, const Matrix4x4 &matrix, const int count);			// 0x0071CFA0
 	static void Copy(Vector2 *dst, const Vector2 *src, const int count);										// 0x0071D3E0
 	static void Copy(unsigned int *dst, const unsigned int *src, const int count);								// 0x0071D400
 	static void Copy(Vector3 *dst, const Vector3 *src, const int count);										// 0x0071D420

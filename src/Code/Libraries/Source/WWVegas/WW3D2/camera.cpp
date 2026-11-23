@@ -10,7 +10,7 @@
 #include <math.h>
 #include <d3d8.h>
 #include "WW3D2/CameraClass.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "WW3D2/dxwrapper.h"
 #include "WW3D2/WW3D.h"
 #include "WWMath/CollisionMath.h"
 #include "WWMath/colmathplane.h"
@@ -132,8 +132,8 @@ float CameraClass::Get_Aspect_Ratio(void) const
 	return AspectRatio;
 }
 
-// FUNCTION: BFME2 0x00133DA0 size=150 name=?Set_Reflected_Projection_Matrix@CameraClass@@QAEXABVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:Z
-void CameraClass::Set_Reflected_Projection_Matrix(const Matrix4 &tm)
+// FUNCTION: BFME2 0x00133DA0 size=150 name=?Set_Reflected_Projection_Matrix@CameraClass@@QAEXABVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:Z
+void CameraClass::Set_Reflected_Projection_Matrix(const Matrix4x4 &tm)
 {
 	ReflectedProjectionTransform = tm;
 }
@@ -205,14 +205,14 @@ void CameraClass::Device_To_World_Space(const Vector2 &device_coord, Vector3 *wo
 	Matrix3D::Transform_Vector(Transform, view_coord, world_coord);
 }
 
-// FUNCTION: BFME2 0x00134820 size=159 name=?Get_Projection_Matrix@CameraClass@@QAEXPAVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:K
-void CameraClass::Get_Projection_Matrix(Matrix4 *out_matrix)
+// FUNCTION: BFME2 0x00134820 size=159 name=?Get_Projection_Matrix@CameraClass@@QAEXPAVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:K
+void CameraClass::Get_Projection_Matrix(Matrix4x4 *out_matrix)
 {
 	Update_Frustum();
 	*out_matrix = ProjectionTransform;
 }
-// FUNCTION: BFME2 0x001348C0 size=285 name=?Get_D3D_Projection_Matrix@CameraClass@@QAEXPAVMatrix4@@@Z evidence=N:ledger tier=B hypothesis:K
-void CameraClass::Get_D3D_Projection_Matrix(Matrix4 *out_matrix)
+// FUNCTION: BFME2 0x001348C0 size=285 name=?Get_D3D_Projection_Matrix@CameraClass@@QAEXPAVMatrix4x4@@@Z evidence=N:ledger tier=B hypothesis:K
+void CameraClass::Get_D3D_Projection_Matrix(Matrix4x4 *out_matrix)
 {
 	Update_Frustum();
 	*out_matrix = ProjectionTransform;
@@ -236,8 +236,8 @@ void CameraClass::Get_View_Matrix(Matrix3D *out_matrix)
 	*out_matrix = CameraInvTransform;
 }
 
-// FUNCTION: BFME2 0x00134A60 size=16 name=?Get_Projection_Matrix@CameraClass@@QAEABVMatrix4@@XZ evidence=N:ledger tier=B hypothesis:K
-const Matrix4 &CameraClass::Get_Projection_Matrix(void)
+// FUNCTION: BFME2 0x00134A60 size=16 name=?Get_Projection_Matrix@CameraClass@@QAEABVMatrix4x4@@XZ evidence=N:ledger tier=B hypothesis:K
+const Matrix4x4 &CameraClass::Get_Projection_Matrix(void)
 {
 	Update_Frustum();
 	return ProjectionTransform;
@@ -250,12 +250,12 @@ const Matrix3D &CameraClass::Get_View_Matrix(void)
 	return CameraInvTransform;
 }
 
-// FUNCTION: BFME2 0x00134A80 size=48 name=?rva00134A80@CameraClass@@QAEXPAVMatrix4@@@Z evidence=?:placeholder tier=B hypothesis:K
-void CameraClass::Get_D3D_View_Projection_Matrix(Matrix4 *set_tm)
+// FUNCTION: BFME2 0x00134A80 size=48 name=?rva00134A80@CameraClass@@QAEXPAVMatrix4x4@@@Z evidence=?:placeholder tier=B hypothesis:K
+void CameraClass::Get_D3D_View_Projection_Matrix(Matrix4x4 *set_tm)
 {
-	Matrix4 projection;
+	Matrix4x4 projection;
 	Get_D3D_Projection_Matrix(&projection);
-	Matrix4::Multiply(projection, CameraInvTransform, set_tm);
+	Matrix4x4::Multiply(projection, CameraInvTransform, set_tm);
 }
 
 // FUNCTION: BFME2 0x00134AB0 size=409 name=??0CameraClass@@QAE@XZ evidence=N:ledger tier=B hypothesis:K
@@ -431,15 +431,15 @@ void CameraClass::Apply(void)
 	vp.Height = (DWORD)((Viewport.Max.Y - Viewport.Min.Y) * (float)height);
 	vp.MinZ = ZBufferMin;
 	vp.MaxZ = ZBufferMax;
-	DX8Wrapper::Set_Viewport(&vp);
+	DXWrapper::Set_Viewport(&vp);
 
-	Matrix4 d3dprojection;
+	Matrix4x4 d3dprojection;
 	if (bfmeCameraProjectionOverride) {
 		d3dprojection = ReflectedProjectionTransform.Transpose();
 	} else {
 		Get_D3D_Projection_Matrix(&d3dprojection);
 	}
-	DX8Wrapper::Set_Projection_Transform_With_Z_Bias(d3dprojection, ZNear, ZFar);
-	DX8Wrapper::Set_Transform(D3DTS_VIEW, Matrix4(CameraInvTransform));
+	DXWrapper::Set_Projection_Transform_With_Z_Bias(d3dprojection, ZNear, ZFar);
+	DXWrapper::Set_Transform(D3DTS_VIEW, Matrix4x4(CameraInvTransform));
 }
 

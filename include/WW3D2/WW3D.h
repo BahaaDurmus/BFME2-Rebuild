@@ -5,7 +5,7 @@
 // Retail differs from Zero Hour in these recorded ways: the render-device functions return bool where Zero Hour
 // returns WW3DErrorType (the map spells them SA_N...: Set_Any_Render_Device 0x00116F00, Set_Render_Device
 // 0x00116F10, Set_Next_Render_Device 0x00116F50, Set_Device_Resolution 0x00116FC0); each forwards to the
-// DX8Wrapper function of the same name (a friend of this class) and converts the result with `setne`.
+// DXWrapper function of the same name (a friend of this class) and converts the result with `setne`.
 // The data identities below are the data ledger's (?Name@WW3D@@0..., old-ledger names, unproven).
 #pragma once
 #ifndef BFME2_WW3D_H
