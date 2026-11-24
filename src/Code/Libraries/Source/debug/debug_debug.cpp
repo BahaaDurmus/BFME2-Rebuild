@@ -59,8 +59,16 @@ Debug::FrameHashEntry *Debug::LookupFrame(unsigned int addr)
 }
 
 // FUNCTION: BFME2 0x00038370 size=11 name=?rva00038370@@YAXXZ evidence=?:placeholder tier=B hypothesis:Z
+void DebugInstallExceptionHandler()
+{
+	theDebug->InstallExceptionHandler();
+}
 
 // FUNCTION: BFME2 0x00038380 size=11 name=?rva00038380@@YA_NXZ evidence=?:placeholder tier=B hypothesis:Z
+bool DebugSkipNext()
+{
+	return theDebug->SkipNext();
+}
 
 // FUNCTION: BFME2 0x00038390 size=27 name=?rva00038390@@YAXHHH@Z evidence=?:placeholder tier=B hypothesis:Z
 
@@ -152,6 +160,10 @@ void Debug::InstallExceptionHandler()
 }
 
 // FUNCTION: BFME2 0x00038780 size=13 name=?rva0038780@@YAXXZ evidence=?:placeholder tier=A
+void DebugDisableAssertDialog()
+{
+	theDebug->noAssertDialog = true;
+}
 
 // FUNCTION: BFME2 0x000387C0 size=12 name=?bfmeRva000387C0@@YA_NXZ evidence=N:ledger tier=A
 bool bfmeRva000387C0()
@@ -739,6 +751,10 @@ unsigned int Debug::ScheduleFrameCommand(int frame, const char *command)
 // FUNCTION: BFME2 0x000397D0 size=169 name=?bfmeProbeAAS@BfmeHostAAS@@QAE_NXZ evidence=N:ledger tier=A
 
 // FUNCTION: BFME2 0x00039880 size=25 name=?bfmeSetSign@Gen_0088A5D0@@QAEXE@Z evidence=N:ledger tier=A
+void Debug::SetWindowed(bool windowed)
+{
+	m_windowed = windowed ? 1 : -1;
+}
 
 // FUNCTION: BFME2 0x000398A0 size=80 name=__heap_abort evidence=N:ledger tier=A
 
