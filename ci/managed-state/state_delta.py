@@ -687,6 +687,22 @@ TU_MOVE_MIGRATIONS = (
 )
 
 
+GATES_RUNTIME_WORKAROUNDS_GRAPH = {
+    'tools/gates/README.md': ('cfe2a0d6068dd84a2eb81abc61d0822002d98305ec0dc01efc75a8b770e77007', '97a53c1d9e3437293ee52088beab184eea19f151c97f7b8023fcc420e7bea4f8'),
+    'tools/gates/config.json': ('8efc59a0cd826377dc8b95515b6c7dfcbac9158e5bf7c03d3fa86a60f393c5c9', '4104c5f067425f29c152610e52f6efc99a382cb2c90a4e7b656d265244e17667'),
+    'tools/gates/rules.py': ('6d404b8cea627498d7e36288f7c0f806b7debf1ec988eab1cec8d0f82e966459', '3914923d49f6beb8bd7bc778fce5ba6a61be63930d561260c106a06d4b1f4ec0'),
+    'tools/gates/source_report.py': ('0b75222bfba1d4364cf90923e76b0ba7f01bcd95ca134c785b6771351975a148', '82583c7952eea59d39e4aca4dab7eaa7c27630a872c202cea5f041d9dc170f51'),
+    'tools/gates/test_gate.py': ('d58da420612a4759917f742d7a8f9d97ff375e56594cf2d967ffce6c9806a8d0', '9260b4b952f5de58e8385a2ba733006ea9ab666db3d7f32a8b67b277d4f82a2a'),
+}
+GRAPH_CHANGES += (GATES_RUNTIME_WORKAROUNDS_GRAPH,) + tuple(
+    advance_graph(previous, GATES_RUNTIME_WORKAROUNDS_GRAPH)
+    for previous in GRAPH_CHANGES
+    if (previous.keys() & GATES_RUNTIME_WORKAROUNDS_GRAPH.keys())
+    and all(previous[path][1] == GATES_RUNTIME_WORKAROUNDS_GRAPH[path][0]
+            for path in previous.keys() & GATES_RUNTIME_WORKAROUNDS_GRAPH.keys())
+)
+GRAPH_PATHS |= set(GATES_RUNTIME_WORKAROUNDS_GRAPH)
+
 COMPACT_SCOPE = {"ci/managed-state/state_delta.py", "ci/managed-state/state_origin.py",
                  "ci/managed-state/bundle.sha256"}
 MAX_DIFF_BYTES = 4 * 1024**2

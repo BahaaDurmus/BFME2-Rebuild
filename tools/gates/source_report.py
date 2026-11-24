@@ -70,6 +70,22 @@ FORBIDDEN_FIXES = {
     "optimization pragma": "Remove the pragma and keep the file's existing compiler settings.",
     "token pasting that can form a forbidden compiler control":
         "Remove the token paste and express the operation directly in C or C++.",
+    "hand-written import declaration":
+        "Remove it. Include the SDK or runtime header that declares the function and call it by its own name. "
+        "If the file's // cl: line disables _CRTIMP and the original calls through the import table, "
+        "the file's setting is wrong: record it in docs/hard_rows.md or file a ledger request.",
+    "local body with a runtime name":
+        "Give the function the name its evidence supports. A local body cannot be the imported function.",
+    "import table reference":
+        "Call the function by its own name through its header; the compiler forms the import call.",
+    "runtime function declaration":
+        "Remove it and include the header that declares the function, such as <string.h>, <stdlib.h> or <windows.h>.",
+    "runtime function macro":
+        "Remove the macro and call the runtime function under its own name.",
+    "library configuration macro":
+        "Remove the macro. Runtime and STLport settings belong to the library profile; file a ledger request with the evidence.",
+    "repeated include": "Remove the second include of the same header.",
+    "nothrow declaration": "Remove __declspec(nothrow) and declare the function as the original header did.",
 }
 
 

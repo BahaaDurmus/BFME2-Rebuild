@@ -395,6 +395,86 @@ class Fixture(unittest.TestCase):
         hits = self.assert_gate('G3', 'fail', result)
         self.assertEqual(6, len(hits))
 
+    def test_g3_runtime_and_library_workarounds(self):
+        result = self.compare({SEED: ''},
+                              {SEED: '#define _CRTIMP\n'
+                                     '#undef _CRTIMP\n'
+                                     '#define _STLP_USE_MALLOC 1\n'
+                                     '#define _STLP_BFME_COPY_TRIVIAL_EXTERN\n'
+                                     '#define _strdup __bfme_strdup\n'
+                                     '#define IMPORT _declspec(dllimport)\n'
+                                     '#define SLOT __imp__atoi\n'
+                                     '#include <string.h>\n'
+                                     '#include "A.h"\n'
+                                     'namespace ArmorCRT { extern "C" __declspec(dllimport) int __cdecl\n'
+                                     '    _strcmpi(const char *, const char *); }\n'
+                                     'extern "C" unsigned char *_mbscpy(unsigned char *, const unsigned char *);\n'
+                                     'extern "C" int (__cdecl *__imp__atoi)(const char *);\n'
+                                     'int __cdecl atoi(const char *);\n'
+                                     'extern "C" DWORD __stdcall GetTickCount();\n'
+                                     'WINBASEAPI DWORD WINAPI TlsGetValue(DWORD);\n'
+                                     'extern "C" { double floor(double); }\n'
+                                     'void f() { extern int __cdecl atof(const char *); }\n'
+                                     '__declspec(nothrow) void g();\n'
+                                     'extern "C" void __cdecl free(void *p) { }\n'
+                                     '#define _INC_STDLIB\n'})
+        labels = sorted(f['message'] for f in self.assert_gate('G3', 'fail', result))
+        self.assertEqual(['Added hand-written import declaration.'] * 3
+                         + ['Added import table reference.'] * 2
+                         + ['Added library configuration macro.'] * 5
+                         + ['Added local body with a runtime name.']
+                         + ['Added nothrow declaration.']
+                         + ['Added runtime function declaration.'] * 7
+                         + ['Added runtime function macro.'], labels)
+
+    def test_g3_repeated_include_is_refused_wherever_the_copy_goes(self):
+        old = '#include "A.h"\nint x;\n'
+        for new in ('#include <a.h>\n' + old, old + '#include "A.h"\n',
+                    '#ifdef X\n#include "A.h"\n#endif\n' + old):
+            with self.subTest(new=new):
+                result = self.compare({SEED: old}, {SEED: new})
+                self.assertEqual(1, len(self.assert_gate('G3', 'fail', result)))
+
+    def test_g3_runtime_calls_members_and_ordinary_code_pass(self):
+        result = self.compare({SEED: ''},
+                              {SEED: '#ifndef BFME_VERSION_H\n#define BFME_VERSION_H\n#endif\n'
+                                     '#define BFME_MAX_PLAYERS 8\n'
+                                     '#include <string.h>\n#include <assert.h>\n#include <assert.h>\n'
+                                     '#ifdef A\n#include "a.h"\n#else\n#include "a.h"\n#endif\n'
+                                     '#if 0\n#include "b.h"\n#include "b.h"\n#endif\n'
+                                     'namespace Audio { int log(int channel); }\n'
+                                     'struct Pool { void free(void *p); static int abs(int); };\n'
+                                     'void Pool::free(void *p) { strcpy((char *)p, "x"); }\n'
+                                     'template class Table<int>;\n'
+                                     'int f(const char *s) {\n'
+                                     '    int n = abs(atoi(s));\n'
+                                     '    if (n) strcat((char *)s, "y");\n'
+                                     '    return atoi(s) * strlen(s);\n'
+                                     '}\n'})
+        self.assert_gate('G3', 'pass', result)
+
+    def test_g3_header_may_hold_the_library_wide_stlport_setting(self):
+        result = self.compare({'include/PreRTS.h': ''},
+                              {'include/PreRTS.h': '#define _STLP_USE_NEWALLOC 1\n'
+                                                   '#define malloc(s) DebugAlloc(s)\n'})
+        self.assert_gate('G3', 'pass', result)
+
+    def test_g3_existing_workaround_may_stay_but_not_be_copied(self):
+        old = '#define _CRTIMP\nint x;\n'
+        result = self.compare({SEED: old}, {SEED: old + 'int y;\n'})
+        self.assert_gate('G3', 'pass', result)
+        result = self.compare({SEED: old}, {SEED: old + '#define _CRTIMP\n'})
+        self.assertEqual(1, len(self.assert_gate('G3', 'fail', result)))
+
+    def test_g3_vendored_library_keeps_its_configuration_but_shims_do_not(self):
+        path = 'src/stlport-4.6/STLport-4.6/src/unit.cpp'
+        result = self.compare({path: 'int x;\n'},
+                              {path: '#define _STLP_NO_FORCE_INSTANTIATE\nint x;\n'})
+        self.assert_gate('G3', 'pass', result)
+        shim = 'include/upstream/gamespy-sdk/shims/windows.h'
+        result = self.compare({shim: ''}, {shim: '#define _CRTIMP\n'})
+        self.assert_gate('G3', 'fail', result)
+
     def test_g3_allowlist_is_exact_and_does_not_allow_a_second_copy(self):
         old = '__asm nop\n'
         cfg = deepcopy(CONFIG)

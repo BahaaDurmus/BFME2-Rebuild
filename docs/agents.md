@@ -119,6 +119,8 @@ The report names the rule. The full list is in [RULES.md](../RULES.md); these
 are the ones agents meet most:
 
 - Inline assembly, emitted bytes, or pragmas and casts used to force a match.
+- A hand-written runtime or SDK declaration, an `__imp_` name, a `_CRTIMP` or
+  STLport define, or a repeated include ([anti-patterns](anti-patterns.md)).
 - A `void *` or an integer standing in for a type the code shows.
 - A second definition of a class, struct or global that already exists.
 - A changed `// FUNCTION:` or `// cl:` line.

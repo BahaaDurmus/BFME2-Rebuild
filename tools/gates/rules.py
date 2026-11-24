@@ -67,6 +67,8 @@ class Policy:
         self.compiler_controls = re.compile(values['compiler_directive_pattern'])
         self.addable_controls = frozenset(values.get('compiler_directive_additions', ()))
         self.allowed_pragmas = {scope: frozenset(names) for scope, names in values['allowed_pragmas'].items()}
+        self.runtime_names = frozenset(values.get('runtime_function_names', ()))
+        self.platform_names = frozenset(values.get('platform_function_names', ()))
         self.approved = {path: Counter(allowances)
                          for path, allowances in values['approved_forbidden'].items()}
         self.address = re.compile('(?:' + '|'.join(values['address_identifiers']) + ')')
@@ -474,6 +476,172 @@ def unsafe_paste(source, start, end):
     return False
 
 
+# Workarounds for the C runtime, the SDK and STLport. The original was built
+# from the stock headers with one setting per library, so a source file never
+# needs to declare a runtime function, reach an import slot or reconfigure a
+# library header itself.
+LIBRARY_MACRO = re.compile(r'_CRTIMP\w*|_BFME_\w+|_STLP_BFME_\w+|BFME_PARTICLE_LIST_NODE_TAIL'
+                           r'|BFME_HASHTABLE_NEW_NODE_NOFORCEINLINE|_DLL|_MT|_STL|__STL_\w*|_INC_\w+'
+                           r'|dllimport|DECLSPEC_IMPORT'
+                           r'|WIN(?:BASE|USER|GDI|ADV|MM|OLE|SHELL)API')
+# STLport settings are refused in source files only. A shared header may hold the
+# library-wide setting, as Zero Hour's PreRTS.h does with _STLP_USE_NEWALLOC.
+SOURCE_ONLY_MACRO = re.compile(r'_STLP_\w+')
+IMPORT_MACROS = {'_CRTIMP', 'DECLSPEC_IMPORT', 'WINBASEAPI', 'WINUSERAPI', 'WINGDIAPI', 'WINADVAPI',
+                 'WINMMAPI', 'WINOLEAPI', 'WINSHELLAPI', 'WINSOCK_API_LINKAGE'}
+DECLSPEC = {'__declspec', '_declspec'}
+CALLING = {'__cdecl', '_cdecl', 'cdecl', '__stdcall', '_stdcall', 'WINAPI', 'APIENTRY', 'CALLBACK',
+           '__fastcall', 'PASCAL', 'WSAAPI', 'STDAPICALLTYPE'} | IMPORT_MACROS
+NOT_DECLARATOR = {'return', 'else', 'do', 'case', 'throw', 'new', 'delete', 'sizeof', 'goto'}
+REPEATABLE = {'assert.h', 'cassert'}
+
+
+def linkage_blocks(values):
+    """Per token: true inside an `extern "C" { ... }` block."""
+    stack, flags = [], []
+    for i, value in enumerate(values):
+        flags.append(any(stack))
+        if value == '{':
+            stack.append(i > 1 and values[i-1].startswith('"') and values[i-2] == 'extern')
+        elif value == '}' and stack:
+            stack.pop()
+    return flags
+
+
+def statement_start(values, i):
+    while i > 0 and values[i-1] not in (';', '{', '}'):
+        i -= 1
+    return i
+
+
+def condition_frames(source):
+    """Yield (directive start, end, branch path, inside #if 0) for each directive."""
+    values = source.ordered
+    stack, serial = [], 0
+    for start, end in source.directives():
+        word = values[start+1] if start + 1 < end else ''
+        if word in ('if', 'ifdef', 'ifndef'):
+            serial += 1
+            stack.append((serial, 0, values[start+1:end] == ('if', '0')))
+        elif word in ('elif', 'else') and stack:
+            serial_id, branch, _ = stack[-1]
+            stack[-1] = (serial_id, branch + 1, False)
+        elif word == 'endif' and stack:
+            stack.pop()
+        yield start, end, tuple(x[:2] for x in stack), any(x[2] for x in stack)
+
+
+def include_spelling(values):
+    """The header an include names, the same for "..." and <...>."""
+    if len(values) == 1 and values[0].startswith('"') and values[0].endswith('"'):
+        name = values[0][1:-1]
+    elif len(values) > 2 and values[0] == '<' and values[-1] == '>':
+        name = ''.join(values[1:-1])
+    else:
+        return None
+    return name.replace('\\', '/').lower()
+
+
+def import_at(values, i, end):
+    """An import declaration or import-slot name starting at values[i], before `end`."""
+    value = values[i]
+    if value.startswith(('__imp_', '_imp__')) and value.isidentifier():
+        return i, i + 1, 'import table reference'
+    if value in IMPORT_MACROS:
+        return i, i + 1, 'hand-written import declaration'
+    if value in DECLSPEC and values[i+1:i+2] == ('(',):
+        close = matching(values, i+1)
+        if close is not None and close < end:
+            args = values[i+2:close]
+            if 'dllimport' in args:
+                return i, close + 1, 'hand-written import declaration'
+            if 'nothrow' in args:
+                return i, close + 1, 'nothrow declaration'
+    return None
+
+
+def without_declspecs(values):
+    out, i = [], 0
+    while i < len(values):
+        if values[i] in DECLSPEC and values[i+1:i+2] == ('(',):
+            close = matching(values, i+1)
+            if close is not None:
+                i = close + 1
+                continue
+        out.append(values[i])
+        i += 1
+    return out
+
+
+def workaround_spans(source, policy, path):
+    """Yield (token start, end, kind) for runtime, SDK and library workarounds."""
+    if path.startswith(policy.vendored) and '/shims/' not in path:
+        return
+    is_source = policy.kind(path) == 'source'
+    values = source.ordered
+    includes = defaultdict(list)
+    previous = ()
+    directive_tokens = set()
+    for start, end, frame, dead in condition_frames(source):
+        directive_tokens.update(range(start, end))
+        words = values[start+1:end]
+        word = words[0] if words else ''
+        if word in ('define', 'undef') and len(words) > 1:
+            name = words[1]
+            guard = word == 'define' and len(words) == 2 and previous == ('ifndef', name)
+            if not guard and (LIBRARY_MACRO.fullmatch(name)
+                              or (is_source and SOURCE_ONLY_MACRO.fullmatch(name))):
+                yield start, end, 'library configuration macro'
+            elif is_source and name in policy.runtime_names:
+                yield start, end, 'runtime function macro'
+            else:
+                # A macro body can spell an import as well as a declaration can.
+                for i in range(start + 3, end):
+                    found = import_at(values, i, end)
+                    if found:
+                        yield found
+        elif word == 'include' and not dead:
+            spelling = include_spelling(words[1:])
+            if (spelling and spelling.endswith(('.h', '.hpp', '.hh'))
+                    and spelling.rsplit('/', 1)[-1] not in REPEATABLE):
+                includes[spelling].append((start, end, frame))
+        previous = tuple(words[:2])
+    # Every copy of a header included twice on one branch path is reported, so the
+    # copy a change adds is refused wherever it is placed.
+    for sites in includes.values():
+        for start, end, frame in sites:
+            if any(other is not start and (frame[:len(path_)] == path_ or path_[:len(frame)] == frame)
+                   for other, _, path_ in sites):
+                yield start, end, 'repeated include'
+
+    names = policy.runtime_names | policy.platform_names
+    in_linkage = linkage_blocks(values)
+    for i, value in enumerate(values):
+        if i in directive_tokens:
+            continue
+        found = import_at(values, i, len(values))
+        if found:
+            yield found
+            continue
+        if value not in names or values[i+1:i+2] != ('(',):
+            continue
+        close = matching(values, i+1)
+        after = values[close+1:close+2] if close is not None else ()
+        if after not in ((';',), ('throw',), ('{',)):
+            continue
+        head = without_declspecs(values[statement_start(values, i):i])
+        before = values[i-1] if i else ''
+        declarator = before in CALLING or before in ('*', '&') or (
+            before.isidentifier() and before not in NOT_DECLARATOR)
+        # A runtime or SDK name is only taken as a hand declaration when the
+        # statement also asks for C linkage, a calling convention or an import.
+        marked = in_linkage[i] or 'extern' in head or any(x in CALLING for x in head)
+        if declarator and marked and '=' not in head and '(' not in head:
+            # A local body cannot be the imported function of the same name.
+            yield i, close + 1, ('local body with a runtime name' if after == ('{',)
+                                 else 'runtime function declaration')
+
+
 def forbidden(source, policy, path):
     """Yield (physical start, end, construct kind, exact lexical fingerprint)."""
     values = source.ordered
@@ -539,6 +707,9 @@ def forbidden(source, policy, path):
             close = matching(values, i)
             if close is not None and ALIAS.intersection(values[i+2:close]):
                 yield occurrence(i, close + 1, 'symbol alias')
+
+    for start, end, kind in workaround_spans(source, policy, path):
+        yield occurrence(start, end, kind)
 
 
 def g3(ctx):
