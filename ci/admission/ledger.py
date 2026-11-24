@@ -47,8 +47,8 @@ def days(clock=None):
 
 def _get(api, path):
     code, payload = api._send("GET", path, None)
-    if code not in (200, 404):
-        raise LedgerError(f"Expected HTTP 200 or 404 from the ledger. Found HTTP {code}.")
+    if code not in (200, 403, 404):
+        raise LedgerError(f"Expected HTTP 200, 403 or 404 from the ledger. Found HTTP {code}.")
     return code, payload
 
 
@@ -75,18 +75,50 @@ def _read(api):
     if code == 404:
         return {"version": 2, "days": {}, "reservations": []}, None
     try:
-        data = json.loads(base64.b64decode(payload["content"]))
+        if code == 403:
+            sha = _tree_blob_sha(api)
+            if not sha:
+                raise ValueError
+            raw = _blob(api, sha)
+        else:
+            content = payload.get("content") or ""
+            encoding = payload.get("encoding", "base64")
+            sha = payload.get("sha")
+            if content and encoding == "base64":
+                raw = base64.b64decode(content)
+            elif sha:
+                raw = _blob(api, sha)
+            else:
+                raise ValueError
+        data = json.loads(raw)
         if data.get("version") != 2 or not isinstance(data.get("days"), dict) \
                 or not isinstance(data.get("reservations"), list):
             raise ValueError
-        return data, payload["sha"]
+        return data, sha
     except (KeyError, TypeError, ValueError):
         raise LedgerError("Expected a readable ledger.json. Found an unreadable one.") from None
 
 
+def _blob(api, sha):
+    code, payload = _get(api, f"git/blobs/{sha}")
+    if code != 200:
+        raise LedgerError(f"Expected HTTP 200 from the blob API. Found HTTP {code}.")
+    return base64.b64decode(payload["content"])
+
+
+def _tree_blob_sha(api):
+    code, payload = _get(api, f"git/trees/{LEDGER_BRANCH}")
+    if code != 200:
+        return None
+    for entry in payload.get("tree", []):
+        if entry.get("path") == LEDGER_FILE and entry.get("type") == "blob":
+            return entry.get("sha")
+    return None
+
+
 def _write(api, data, sha, message):
     body = {"message": message, "branch": LEDGER_BRANCH,
-            "content": base64.b64encode((json.dumps(data, sort_keys=True, indent=1) + "\n").encode()).decode()}
+            "content": base64.b64encode((json.dumps(data, sort_keys=True, separators=(",", ":")) + "\n").encode()).decode()}
     if sha:
         body["sha"] = sha
     code, _ = api.write("PUT", f"contents/{LEDGER_FILE}", body)
@@ -110,6 +142,7 @@ def _prune(data, yesterday, base):
                             if item.get("day", "") >= yesterday or item.get("base") == base]
 
 
+
 def reserve(api, limits, author, number, head, base, run, attempt, clock=None, tree=None, kind="narrow"):
     """'reserved', 'already' (this exact tuple is in the ledger, any day) or 'over-budget'."""
     if kind not in ("narrow", "wide", "trusted-narrow", "trusted-wide"):
@@ -129,6 +162,9 @@ def reserve(api, limits, author, number, head, base, run, attempt, clock=None, t
             and r.get("author") == author
             for r in data["reservations"]
         )
+        if not already_paid_today:
+            paid = data["days"].get(today, {}).get("paid", [])
+            already_paid_today = [number, head, kind, author] in paid
         if kind not in ("trusted-narrow", "trusted-wide") and not already_paid_today:
             counts = data["days"].setdefault(today, {"total": 0, "authors": {}, "wide_total": 0, "wide_authors": {}})
             key = str(author)
