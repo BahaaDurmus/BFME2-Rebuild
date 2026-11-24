@@ -703,6 +703,18 @@ GRAPH_CHANGES += (GATES_RUNTIME_WORKAROUNDS_GRAPH,) + tuple(
 )
 GRAPH_PATHS |= set(GATES_RUNTIME_WORKAROUNDS_GRAPH)
 
+GATES_POLICY_DIGEST_TEST_GRAPH = {
+    'tools/gates/test_public_delivery.py': ('88ba4d31b1a852140d889cb90859032e145eadf082cc56597e38456deb2f919a', 'd31813480912510404819a87bc9f2db13cd33c29c0fb5687ac9747f3963512b9'),
+}
+GRAPH_CHANGES += (GATES_POLICY_DIGEST_TEST_GRAPH,) + tuple(
+    advance_graph(previous, GATES_POLICY_DIGEST_TEST_GRAPH)
+    for previous in GRAPH_CHANGES
+    if (previous.keys() & GATES_POLICY_DIGEST_TEST_GRAPH.keys())
+    and all(previous[path][1] == GATES_POLICY_DIGEST_TEST_GRAPH[path][0]
+            for path in previous.keys() & GATES_POLICY_DIGEST_TEST_GRAPH.keys())
+)
+GRAPH_PATHS |= set(GATES_POLICY_DIGEST_TEST_GRAPH)
+
 COMPACT_SCOPE = {"ci/managed-state/state_delta.py", "ci/managed-state/state_origin.py",
                  "ci/managed-state/bundle.sha256"}
 MAX_DIFF_BYTES = 4 * 1024**2
