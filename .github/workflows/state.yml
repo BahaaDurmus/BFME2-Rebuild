@@ -84,7 +84,7 @@ jobs:
         id: plan
         env:
           STATE_BUDGET: '${{ vars.BFME_STATE_BUDGET_JOBS }}'
-          STATE_SEED_BUDGET: '${{ vars.BFME_STATE_SEED_BUDGET_JOBS }}'
+          STATE_SEED_BUDGET: '${{ vars.BFME_STATE_SEED_BUDGET_JOBS || ''64'' }}'
           BFME_READ_TOKEN: '${{ github.token }}'
         run: |
           set -Eeuo pipefail
