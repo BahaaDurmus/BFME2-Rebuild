@@ -44,6 +44,12 @@ class AutoSeedMigrationTest(unittest.TestCase):
         import hashlib
         pair = state_delta.AUTO_SEED_MIGRATION
         self.assertIn(pair, state_delta.STATE_FLOW_MIGRATIONS)
+        self.assertEqual(pair[1], state_delta.STATE_RUNNER_MIGRATION[0])
+
+    def test_state_runner_migration_matches_the_workflow(self):
+        import hashlib
+        pair = state_delta.STATE_RUNNER_MIGRATION
+        self.assertIn(pair, state_delta.STATE_FLOW_MIGRATIONS)
         text = (Path(__file__).resolve().parents[3] / ".github/workflows/state.yml").read_bytes()
         self.assertEqual(hashlib.sha256(text).hexdigest(), pair[1])
 

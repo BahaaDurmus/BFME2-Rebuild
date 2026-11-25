@@ -24,7 +24,10 @@ HYDRATION_MIGRATION = ("c5495ba4c03861220f77ddc48cd6533617fde93b869d51a0accf479f
 OVERCAP_EXIT_MIGRATION = ("ec1ec3a1489c459a4513cfef8937101998a740667c0662d15e4df00f102bce61", "ad0a65303832e04fc813d9a49d875b645f47e6d70b3422ba50d141914487e62d")
 # The seed run's default cap (717cbe22) is measured by that seed; this step only adds the automatic seed start.
 AUTO_SEED_MIGRATION = ("cf1c93deac7c4d2665d753f9847ad0a6380fca1e3dab49188f9168403902e10a", "348fd37762dd358d3af7f9070d42843be2f2bc6b0d38f42537b7b3e00e3eee95")
-STATE_FLOW_MIGRATIONS = {RESUME_MIGRATION, HYDRATION_MIGRATION, OVERCAP_EXIT_MIGRATION, AUTO_SEED_MIGRATION}
+# Main is measured on the pull request compiler runner (vars.BFME_PR_RUNNER), so both use one image pin.
+STATE_RUNNER_MIGRATION = ("348fd37762dd358d3af7f9070d42843be2f2bc6b0d38f42537b7b3e00e3eee95", "63b75ea948a6d5ff29a3dedeab12551f4ef7793f50b43ede48480f5f04b4b256")
+STATE_FLOW_MIGRATIONS = {RESUME_MIGRATION, HYDRATION_MIGRATION, OVERCAP_EXIT_MIGRATION, AUTO_SEED_MIGRATION,
+                         STATE_RUNNER_MIGRATION}
 # The one-shot PR orchestration change leaves every comparison input intact.
 COMPACT_GRAPH = {
     "ci/managed-check/landing_read.py": (
